@@ -10,6 +10,10 @@ public class InvalidNumberException extends IOException {
 		this.number = number;
 	}
 	
+	public int getSource() {
+		return number;
+	}
+	
 	@Override
 	public String toString() {
 		return number + " est un nombre invalide";

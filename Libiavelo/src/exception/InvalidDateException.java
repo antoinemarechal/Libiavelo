@@ -11,7 +11,15 @@ public class InvalidDateException extends IOException {
 		this.dateBefore = dateBefore;
 		this.dateAfter = dateAfter;
 	}
-	
+		
+	public Date getDateBefore() {
+		return dateBefore;
+	}
+
+	public Date getDateAfter() {
+		return dateAfter;
+	}
+
 	@Override
 	public String toString() {
 		return dateBefore + " est avant " + dateAfter;
