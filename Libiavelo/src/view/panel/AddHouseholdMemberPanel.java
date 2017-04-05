@@ -1,4 +1,4 @@
-package view;
+package view.panel;
 
 public class AddHouseholdMemberPanel {
 

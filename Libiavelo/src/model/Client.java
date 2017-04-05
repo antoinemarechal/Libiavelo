@@ -83,6 +83,7 @@ public class Client extends Person {
 	public Date getLatestHouseholdRenewal() {
 		return lastHouseholdRenewal;
 	}
+	
 	/*************************************************************************************************
 	 SETTERS
 	 *************************************************************************************************/

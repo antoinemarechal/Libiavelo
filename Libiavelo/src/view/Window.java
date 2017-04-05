@@ -9,7 +9,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import view.panels.AddClient;
+import view.observer.CustomWindowListener;
+import view.panel.AddClient;
 
 public class Window extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
