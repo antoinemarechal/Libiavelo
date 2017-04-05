@@ -1,6 +1,8 @@
 package exception;
 
-public class InvalidNumberException extends Exception {
+import java.io.IOException;
+
+public class InvalidNumberException extends IOException {
 	private static final long serialVersionUID = 1L;
 	private int number;
 	
@@ -10,6 +12,6 @@ public class InvalidNumberException extends Exception {
 	
 	@Override
 	public String toString() {
-		return number + " est un nombre invalide pour ce champ";
+		return number + " est un nombre invalide";
 	}
 }

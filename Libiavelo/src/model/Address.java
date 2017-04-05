@@ -1,19 +1,26 @@
 package model;
 
 import exception.InvalidNumberException;
+import exception.EmptyStringException;
 
 public class Address {
 	private int number, postalCode;
 	
 	private String street, city;
 	
-	public Address(String street, String city, int number, int postalCode) throws InvalidNumberException {
+	/*************************************************************************************************
+	 CONSTRUCTORS
+	 *************************************************************************************************/
+	public Address(String street, String city, int number, int postalCode) throws InvalidNumberException, EmptyStringException {
 		this.setStreet(street);
 		this.setCity(city);
 		this.setNumber(number);
 		this.setPostalCode(postalCode);
 	}
 
+	/*************************************************************************************************
+	 GETTERS
+	 *************************************************************************************************/
 	public String getStreet() {
 		return street;
 	}
@@ -30,12 +37,21 @@ public class Address {
 		return postalCode;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
+	/*************************************************************************************************
+	 SETTERS
+	 *************************************************************************************************/
+	public void setStreet(String street) throws EmptyStringException {
+		if (street.length() == 0)
+			throw new EmptyStringException(street);
+		else
+			this.street = street;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setCity(String city) throws EmptyStringException {
+		if (city.length() == 0)
+			throw new EmptyStringException(city);
+		else
+			this.city = city;
 	}
 
 	public void setNumber(int number) throws InvalidNumberException{
