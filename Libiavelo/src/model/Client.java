@@ -23,13 +23,13 @@ public class Client extends Person {
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public Client (int nationalNumber) throws InvalidNumberException {
+	public Client(int nationalNumber) throws InvalidNumberException {
 		clientNumber = idGenerator;
 		idGenerator++;
 		this.setNationalNumber(nationalNumber);
 	}
 	
-	public Client(int nationalNumber,String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, boolean subsriptionValidation, double depositAmount, Address address, Date lastHouseholdRenewal, Date demand, Date expiry) throws InvalidNumberException, EmptyStringException {
+	public Client(int nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, boolean subsriptionValidation, double depositAmount, Address address, Date lastHouseholdRenewal, Date demand, Date expiry) throws InvalidNumberException, EmptyStringException {
 		clientNumber = idGenerator;
 		idGenerator++;
 		

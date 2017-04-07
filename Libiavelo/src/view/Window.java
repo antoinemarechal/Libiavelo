@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 
 import view.observer.CustomWindowListener;
 import view.panel.AddClient;
+import view.panel.AddHouseholdMember;
 
 public class Window extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -19,8 +20,6 @@ public class Window extends JFrame implements ActionListener {
 	private JMenu menuApplication , menuForms, menuInfos, menuResearch;
 	private JMenuItem jMenuItemQuit, jMenuItemAddClient, jMenuItemAddHouseholdMember, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
 	private Container container;
-	
-	private AddClient formPanel;
 	
 	public Window(){
 		super("MainWindow");
@@ -44,7 +43,7 @@ public class Window extends JFrame implements ActionListener {
 		jMenuItemAddClient.addActionListener(this);
 		
 		jMenuItemAddHouseholdMember = new JMenuItem("Nouveau membre de famille");
-		jMenuItemAddClient.addActionListener(this); 
+		jMenuItemAddHouseholdMember.addActionListener(this); 
 		
 		
 		jMenuItemHelp = new JMenuItem("Aide");
@@ -83,6 +82,7 @@ public class Window extends JFrame implements ActionListener {
 		container.setLayout(null);
 		
 		setVisible(true);
+		
 	}
 	
 	@Override
@@ -93,14 +93,17 @@ public class Window extends JFrame implements ActionListener {
 			System.exit(0);
 		
 		else if(object.equals(jMenuItemAddClient)) {
-			formPanel = new AddClient();
+			AddClient formPanel = new AddClient();
 			container.add(formPanel);
 			container.setSize(500, 500);
 			setVisible(true);
 		}
 		
 		else if(object.equals(jMenuItemAddHouseholdMember)) {
-			
+			AddHouseholdMember formPanel = new AddHouseholdMember();
+			container.add(formPanel);
+			container.setSize(500, 500);
+			setVisible(true);
 		}
 		
 		else if(object.equals(jMenuItemHelp)) {
