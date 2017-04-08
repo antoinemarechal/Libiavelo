@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import exception.EmptyStringException;
 import exception.NotANumberException;
 import view.button.ConfirmationButton;
-import view.button.ConfirmationButtonListener;
+import view.observer.ConfirmationButtonListener;
 
 public class AddClient extends JPanel{
 	private static final long serialVersionUID = 1L;
