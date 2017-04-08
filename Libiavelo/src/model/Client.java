@@ -6,9 +6,7 @@ import java.util.Date;
 import exception.InvalidNumberException;
 import exception.EmptyStringException;
 
-public class Client extends Person {
-	private static int idGenerator = 0;
-	
+public class Client extends Person {	
 	private int clientNumber;
 	private boolean subsriptionValidated;
 	private double depositAmount;
@@ -24,15 +22,10 @@ public class Client extends Person {
 	 CONSTRUCTORS
 	 *************************************************************************************************/
 	public Client(int nationalNumber) throws InvalidNumberException {
-		clientNumber = idGenerator;
-		idGenerator++;
 		this.setNationalNumber(nationalNumber);
 	}
 	
 	public Client(int nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, boolean subsriptionValidation, double depositAmount, Address address, Date lastHouseholdRenewal, Date demand, Date expiry) throws InvalidNumberException, EmptyStringException {
-		clientNumber = idGenerator;
-		idGenerator++;
-		
 		this.setNationalNumber(nationalNumber);
 		this.setHomeNumber(homeNumber);
 		this.setPhoneNumber(phoneNumber);

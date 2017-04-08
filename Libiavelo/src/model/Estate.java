@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Premises {
+public abstract class Estate {
 	private int id;
 	private static int idGenerator = -1;
 	

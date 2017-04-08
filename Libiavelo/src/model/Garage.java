@@ -1,16 +1,16 @@
 package model;
 
-public class Garage extends Premises{
+public class Garage extends Estate{
 
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
 	public Garage() {
-		super.setId(Premises.generateNextId());
+		super.setId(Estate.generateNextId());
 	}
 	
 	public Garage(String description) {
-		super.setId(Premises.generateNextId());
+		super.setId(Estate.generateNextId());
 		super.setDescription(description);
 	}
 }

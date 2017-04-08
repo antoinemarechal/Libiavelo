@@ -1,8 +1,6 @@
 package exception;
 
-import java.io.IOException;
-
-public class InvalidNumberException extends IOException {
+public class InvalidNumberException extends Exception {
 	private static final long serialVersionUID = 1L;
 	private int number;
 	

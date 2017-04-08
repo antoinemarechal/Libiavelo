@@ -1,8 +1,6 @@
 package exception;
 
-import java.io.IOException;
-
-public class NotANumberException extends IOException {
+public class NotANumberException extends Exception {
 	private static final long serialVersionUID = 1L;
 	private String source;
 	

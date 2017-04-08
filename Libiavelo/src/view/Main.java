@@ -2,7 +2,8 @@ package view;
 
 public class Main {
 	
+	public static Window mainWindow;
 	public static void main(String[] args) {
-		new Window();
+		mainWindow = new Window();
 	}
 }

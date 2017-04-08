@@ -9,12 +9,12 @@ public class TransportationOrder {
 	private Date execution;
 	private ArrayList<Bike> bikes;
 	
-	private Premises source, destination;
+	private Estate source, destination;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public TransportationOrder(boolean exceptionnal, Date date, ArrayList<Bike> bikes, Premises source, Premises destination) {
+	public TransportationOrder(boolean exceptionnal, Date date, ArrayList<Bike> bikes, Estate source, Estate destination) {
 		this.setExceptionnal(exceptionnal);
 		this.setExecution(date);
 		this.setBikes(bikes);
@@ -37,11 +37,11 @@ public class TransportationOrder {
 		return bikes;
 	}
 
-	public Premises getSource() {
+	public Estate getSource() {
 		return source;
 	}
 
-	public Premises getDestination() {
+	public Estate getDestination() {
 		return destination;
 	}
 	
@@ -60,11 +60,11 @@ public class TransportationOrder {
 		this.bikes = bikes;
 	}
 	
-	public void setSource(Premises source) {
+	public void setSource(Estate source) {
 		this.source = source;
 	}
 
-	public void setDestination(Premises destination) {
+	public void setDestination(Estate destination) {
 		this.destination = destination;
 	}
 }

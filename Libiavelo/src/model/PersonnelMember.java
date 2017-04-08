@@ -2,21 +2,13 @@ package model;
 
 public class PersonnelMember extends Person {
 	private int id;
-	private static int idGenerator = 0;
 	
 	private WorkType function;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
-	 *************************************************************************************************/
-	public PersonnelMember(int id) {
-		id = idGenerator;
-		idGenerator++;
-	}
-	
-	public PersonnelMember(int id, WorkType function) {
-		id = idGenerator;
-		idGenerator++;
+	 *************************************************************************************************/	
+	public PersonnelMember(WorkType function) {
 		this.setFunction(function);
 	}
 	
@@ -38,4 +30,7 @@ public class PersonnelMember extends Person {
 		this.function = function;
 	}
 	
+	public void setID(int id) {
+		this.id = id;
+	}
 }

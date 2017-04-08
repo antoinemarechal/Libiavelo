@@ -1,9 +1,8 @@
 package exception;
 
-import java.io.IOException;
 import java.util.Date;
 
-public class InvalidDateException extends IOException {
+public class InvalidDateException extends Exception {
 	private static final long serialVersionUID = 1L;
 	private Date dateBefore, dateAfter;
 	

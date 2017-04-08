@@ -4,12 +4,12 @@ public class Localisation {
 	private boolean available;
 	
 	private Bike bike;
-	private Premises premises;
+	private Estate premises;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public Localisation(boolean available, Bike bike, Premises premises) {
+	public Localisation(boolean available, Bike bike, Estate premises) {
 		this.setAvailable(available);
 		this.setBike(bike);
 		this.setPremises(premises);
@@ -26,7 +26,7 @@ public class Localisation {
 		return bike;
 	}
 	
-	public Premises getPremises() {
+	public Estate getPremises() {
 		return premises;
 	}
 	
@@ -41,7 +41,7 @@ public class Localisation {
 		this.bike = bike;
 	}
 	
-	public void setPremises(Premises premises) {
+	public void setPremises(Estate premises) {
 		this.premises = premises;
 	}
 	

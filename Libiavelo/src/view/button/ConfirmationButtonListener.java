@@ -1,5 +1,9 @@
 package view.button;
 
+import view.Main;
+import view.Window;
+
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
@@ -35,6 +39,16 @@ public class ConfirmationButtonListener implements ActionListener {
 				String[] firstNames = panel.getFirstnames();
 						
 				ConfirmationButtonService.addClient(nationalNumber, homeNumber, phoneNumber, surname, firstNames, false, 0, null, null, null, null);
+				
+				Container container = container = new Container();
+				AddHouseholdMember formPanel = new AddHouseholdMember();
+				
+				container.add(formPanel);
+				container.setSize(500, 500);
+				Main.mainWindow.setContentPane(container);
+			
+				
+				
 				
 			} catch (InvalidNumberException | EmptyStringException | NotANumberException e) {
 				JOptionPane.showMessageDialog(null, e.toString());
