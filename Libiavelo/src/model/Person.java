@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 import exception.InvalidNumberException;
-import exception.EmptyStringException;
+import exception.NoDataException;
 
 public abstract class Person {
 	private int nationalNumber;
@@ -31,9 +31,9 @@ public abstract class Person {
 	/*************************************************************************************************
 	 SETTERS
 	 *************************************************************************************************/
-	public void setSurname(String surname) throws EmptyStringException {
+	public void setSurname(String surname) throws NoDataException {
 		if (surname.length() == 0)
-			throw new EmptyStringException(surname);
+			throw new NoDataException();
 		else
 			this.surname = surname;
 	}
@@ -42,7 +42,6 @@ public abstract class Person {
 		this.firstNames = firstNames;
 	}
 	
-	// visibilité pack
 	void setNationalNumber(int nationalNumber) throws InvalidNumberException {
 		if (nationalNumber < 0) 
 			throw new InvalidNumberException(nationalNumber);

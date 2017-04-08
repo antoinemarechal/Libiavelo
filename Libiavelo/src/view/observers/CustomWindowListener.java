@@ -1,4 +1,4 @@
-package view.observer;
+package view.observers;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

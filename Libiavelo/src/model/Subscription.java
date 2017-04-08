@@ -8,13 +8,15 @@ public class Subscription {
 	private Date demand;
 	private Date expiry;
 
+	private SubscriptionType subscriptionType;
 	/*************************************************************************************************
 	 CONSTRUCTOR
 	 *************************************************************************************************/
-	public Subscription(double amountToPay, Date demand, Date expiry) {
+	public Subscription(double amountToPay, Date demand, Date expiry, int subscriptionDuration, String description) {
 		this.setAmountToPay(amountToPay);
 		this.setDemand(demand);
 		this.setExpiry(expiry);
+		this.setSubscriptionType(new SubscriptionType(subscriptionDuration, description));
 	}
 	
 	/*************************************************************************************************
@@ -30,6 +32,10 @@ public class Subscription {
 		return expiry;
 	}
 	
+	public SubscriptionType getSubscriptionType() {
+		return subscriptionType;
+	}
+	
 	/*************************************************************************************************
 	 SETTERS
 	 *************************************************************************************************/
@@ -43,5 +49,7 @@ public class Subscription {
 		this.expiry = expiry;
 	}
 
-	
+	public void setSubscriptionType(SubscriptionType subscriptionType) {
+		this.subscriptionType = subscriptionType;
+	}	
 }

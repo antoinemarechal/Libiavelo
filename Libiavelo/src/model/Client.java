@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import exception.InvalidNumberException;
-import exception.EmptyStringException;
+import exception.NoDataException;
 
 public class Client extends Person {	
 	private int clientNumber;
@@ -25,7 +25,7 @@ public class Client extends Person {
 		this.setNationalNumber(nationalNumber);
 	}
 	
-	public Client(int nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, boolean subsriptionValidation, double depositAmount, Address address, Date lastHouseholdRenewal, Date demand, Date expiry) throws InvalidNumberException, EmptyStringException {
+	public Client(int nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, boolean subsriptionValidation, double depositAmount, Address address, Date lastHouseholdRenewal, Date demand, Date expiry) throws InvalidNumberException, NoDataException {
 		this.setNationalNumber(nationalNumber);
 		this.setHomeNumber(homeNumber);
 		this.setPhoneNumber(phoneNumber);
@@ -35,7 +35,10 @@ public class Client extends Person {
 		this.setDepositAmount(depositAmount);
 		this.setAddress(address);
 		this.setLatestHouseholdRenewal(lastHouseholdRenewal);
-		this.setSubscription(new Subscription(1, demand, expiry));
+		
+		int subscriptioDuration = 12; // TODO : de-troll me
+		String description = "az";
+		this.setSubscription(new Subscription(1, demand, expiry, subscriptioDuration, description));
 		}
 
 	/*************************************************************************************************

@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-import exception.EmptyStringException;
+import exception.NoDataException;
 import exception.InvalidDateException;
 
 public class Repair {
@@ -56,9 +56,9 @@ public class Repair {
 	/*************************************************************************************************
 	 SETTERS
 	 *************************************************************************************************/
-	public void setDescription(String description) throws EmptyStringException {
+	public void setDescription(String description) throws NoDataException {
 		if (description.length() == 0) 
-			throw new EmptyStringException(description);
+			throw new NoDataException();
 		else
 			this.description = description;
 	}

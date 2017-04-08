@@ -1,4 +1,4 @@
-package view.panel;
+package view.panels;
 
 public enum PanelType {
 	ADDCLIENT,

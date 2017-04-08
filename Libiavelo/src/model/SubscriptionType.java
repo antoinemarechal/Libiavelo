@@ -8,6 +8,10 @@ public class SubscriptionType {
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
+	public SubscriptionType(int subscriptionDuration, String description) {
+		this.cost = subscriptionDuration * 10.95; //TODO de-troll me
+		this.description = description;
+	}
 	
 	/*************************************************************************************************
 	 GETTERS
@@ -15,7 +19,7 @@ public class SubscriptionType {
 	public int getId() {
 		return id;
 	}
-	public double getYearlyCost() {
+	public double getTotalCost() {
 		return cost;
 	}
 	
@@ -28,7 +32,7 @@ public class SubscriptionType {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public void setYearlyCost(double cost) {
+	public void setTotalCost(double cost) {
 		this.cost = cost;
 	}	
 	

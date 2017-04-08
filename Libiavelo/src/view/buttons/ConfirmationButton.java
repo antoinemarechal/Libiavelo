@@ -1,9 +1,9 @@
-package view.button;
+package view.buttons;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import view.panel.PanelType;
+import view.panels.PanelType;
 
 public class ConfirmationButton extends JButton {
 	private static final long serialVersionUID = 1L;

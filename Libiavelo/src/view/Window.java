@@ -9,9 +9,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import view.observer.CustomWindowListener;
-import view.panel.AddClient;
-import view.panel.AddHouseholdMember;
+import view.observers.CustomWindowListener;
+import view.panels.NewClient;
+import view.panels.NewHouseholdMember;
 
 public class Window extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -80,7 +80,7 @@ public class Window extends JFrame implements ActionListener {
 	
 		container = getContentPane();
 		container.setLayout(null);
-		
+		container.setSize(500, 500);
 		setVisible(true);
 		
 	}
@@ -93,14 +93,14 @@ public class Window extends JFrame implements ActionListener {
 			System.exit(0);
 		
 		else if(object.equals(jMenuItemAddClient)) {
-			AddClient formPanel = new AddClient();
+			NewClient formPanel = new NewClient();
+			container.removeAll();
 			container.add(formPanel);
-			container.setSize(500, 500);
-			setVisible(true);
+			Main.mainWindow.repaint();
 		}
 		
 		else if(object.equals(jMenuItemAddHouseholdMember)) {
-			AddHouseholdMember formPanel = new AddHouseholdMember();
+			NewHouseholdMember formPanel = new NewHouseholdMember();
 			container.add(formPanel);
 			container.setSize(500, 500);
 			setVisible(true);
