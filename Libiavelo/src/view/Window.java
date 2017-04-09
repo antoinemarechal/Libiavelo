@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import view.observers.CustomWindowListener;
+import view.panels.FormPanel;
 import view.panels.NewClient;
 import view.panels.NewHouseholdMember;
 
@@ -19,17 +22,16 @@ public class Window extends JFrame implements ActionListener {
 	private JMenuBar menuBar;
 	private JMenu menuApplication , menuForms, menuInfos, menuResearch;
 	private JMenuItem jMenuItemQuit, jMenuItemAddClient, jMenuItemAddHouseholdMember, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
-	private Container container;
 	
 	public Window(){
 		super("MainWindow");
-		setBounds(100, 100, 500, 500);
+		
+		this.setPreferredSize(new Dimension(500, 500));
 		
 		CustomWindowListener mainWindowListener = new CustomWindowListener();
 		this.addWindowListener(mainWindowListener);
 		
 		menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
 		
 		menuApplication = new JMenu("Application");
 		menuForms = new JMenu("Formulaires");
@@ -78,11 +80,12 @@ public class Window extends JFrame implements ActionListener {
 		menuBar.add(menuResearch);
 		menuBar.add(menuInfos);
 	
-		container = getContentPane();
-		container.setLayout(null);
-		container.setSize(500, 500);
-		setVisible(true);
+		Container container = this.getContentPane();
+		container.setLayout(new BorderLayout());
 		
+		this.setJMenuBar(menuBar);
+		
+		this.pack();		
 	}
 	
 	@Override
@@ -93,17 +96,14 @@ public class Window extends JFrame implements ActionListener {
 			System.exit(0);
 		
 		else if(object.equals(jMenuItemAddClient)) {
-			NewClient formPanel = new NewClient();
-			container.removeAll();
-			container.add(formPanel);
-			Main.mainWindow.repaint();
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new FormPanel(new NewClient(), this), BorderLayout.CENTER);
+			this.getContentPane().repaint();
+			this.setVisible(true);			
 		}
 		
 		else if(object.equals(jMenuItemAddHouseholdMember)) {
-			NewHouseholdMember formPanel = new NewHouseholdMember();
-			container.add(formPanel);
-			container.setSize(500, 500);
-			setVisible(true);
+			changeToHouseholdMemberForm();
 		}
 		
 		else if(object.equals(jMenuItemHelp)) {
@@ -125,5 +125,20 @@ public class Window extends JFrame implements ActionListener {
 		else if (object.equals(jMenuItemSearch3)) {
 	
 		}
+	}
+
+	public void returnToMainMenu() 
+	{
+		this.getContentPane().removeAll();
+		this.getContentPane().repaint();
+		this.setVisible(true);
+	}
+
+	public void changeToHouseholdMemberForm() 
+	{
+		this.getContentPane().removeAll();
+		this.getContentPane().add(new FormPanel(new NewHouseholdMember(), this), BorderLayout.CENTER);
+		this.getContentPane().repaint();
+		this.setVisible(true);		
 	}
 }
