@@ -23,7 +23,7 @@ public class NewClient extends Form {
 				BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 		this.setLayout(new GridLayout(9, 2, 15, 5));
 				
-		formType = PanelType.ADD_CLIENT;
+		super.setFormType(PanelType.ADD_CLIENT);
 		
 		surnameLabel = new JLabel("Nom : ");
 		surnameLabel.setLabelFor(surnameTextField);
@@ -32,56 +32,56 @@ public class NewClient extends Form {
 		this.add(surnameLabel);
 		this.add(surnameTextField);
 				
-		name1Label = new JLabel("Premier prï¿½nom :");
+		name1Label = new JLabel("Premier prénom :");
 		name1Label.setLabelFor(name1TextField);
 		name1Label.setHorizontalAlignment(JLabel.RIGHT);
 		name1TextField = new JTextField("", 20);
 		this.add(name1Label);
 		this.add(name1TextField);
 		
-		name2Label = new JLabel("Deuxiï¿½me prï¿½nom :");
+		name2Label = new JLabel("Deuxième prénom :");
 		name2Label.setLabelFor(name2TextField);
 		name2Label.setHorizontalAlignment(JLabel.RIGHT);
 		name2TextField = new JTextField("", 20);
 		this.add(name2Label);
 		this.add(name2TextField);
 			
-		name3Label = new JLabel("Troisiï¿½me prï¿½nom :");
+		name3Label = new JLabel("Troisième prénom :");
 		name3Label.setLabelFor(name3TextField);
 		name3Label.setHorizontalAlignment(JLabel.RIGHT);
 		name3TextField = new JTextField("", 20);
 		this.add(name3Label);
 		this.add(name3TextField);
 		
-		name4Label = new JLabel("Quatriï¿½me prï¿½nom :");
+		name4Label = new JLabel("Quatrième prénom :");
 		name4Label.setLabelFor(name4TextField);
 		name4Label.setHorizontalAlignment(JLabel.RIGHT);
 		name4TextField = new JTextField("", 20);
 		this.add(name4Label);
 		this.add(name4TextField);
 		
-		name5Label = new JLabel("Cinquiï¿½me prï¿½nom :");
+		name5Label = new JLabel("Cinquième prénom :");
 		name5Label.setLabelFor(name5TextField);
 		name5Label.setHorizontalAlignment(JLabel.RIGHT);
 		name5TextField = new JTextField("", 20);
 		this.add(name5Label);
 		this.add(name5TextField);
 		
-		nationalNumberLabel = new JLabel("Numï¿½ro national :");
+		nationalNumberLabel = new JLabel("Numéro national :");
 		nationalNumberLabel.setLabelFor(nationalNumberTextField);
 		nationalNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nationalNumberTextField = new JTextField("", 20);
 		this.add(nationalNumberLabel);
 		this.add(nationalNumberTextField);
 		
-		homeNumberLabel = new JLabel("Numï¿½ro de fixe :");
+		homeNumberLabel = new JLabel("Numéro de fixe :");
 		homeNumberLabel.setLabelFor(homeNumberTextField);
 		homeNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
 		homeNumberTextField = new JTextField("", 20);
 		this.add(homeNumberLabel);
 		this.add(homeNumberTextField);
 		
-		phoneNumberLabel = new JLabel("Numï¿½ro de portable :");
+		phoneNumberLabel = new JLabel("Numéro de portable :");
 		phoneNumberLabel.setLabelFor(phoneNumberTextField);
 		phoneNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
 		phoneNumberTextField = new JTextField("", 20);

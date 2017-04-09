@@ -25,7 +25,7 @@ public class NewHouseholdMember extends Form {
 				BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 		this.setLayout(new GridLayout(7, 2, 15, 5));
 		
-		this.formType = PanelType.ADD_HOUSEHOLD_MEMBER;
+		super.setFormType(PanelType.ADD_HOUSEHOLD_MEMBER);
 				
 		surnameLabel = new JLabel("Nom : ");
 		surnameLabel.setLabelFor(surnameTextField);
@@ -33,37 +33,37 @@ public class NewHouseholdMember extends Form {
 		this.add(surnameLabel);
 		this.add(surnameTextField);
 		
-		name1Label = new JLabel("Premier prï¿½nom : ");
+		name1Label = new JLabel("Premier prénom : ");
 		name1Label.setLabelFor(name1TextField);
 		name1TextField = new JTextField("", 20);
 		this.add(name1Label);
 		this.add(name1TextField);
 		
-		name2Label = new JLabel("Deuxiï¿½me prï¿½nom : ");
+		name2Label = new JLabel("Deuxièe prénom : ");
 		name2Label.setLabelFor(name2TextField);
 		name2TextField = new JTextField("", 20);
 		this.add(name2Label);
 		this.add(name2TextField);
 				
-		name3Label = new JLabel("Troisiï¿½me prï¿½nom : ");
+		name3Label = new JLabel("Troisième prénom : ");
 		name3Label.setLabelFor(name3TextField);
 		name3TextField = new JTextField("", 20);
 		this.add(name3Label);
 		this.add(name3TextField);
 		
-		name4Label = new JLabel("Quatriï¿½me prï¿½nom : ");
+		name4Label = new JLabel("Quatrième prénom : ");
 		name4Label.setLabelFor(name4TextField);
 		name4TextField = new JTextField("", 20);
 		this.add(name4Label);
 		this.add(name4TextField);
 		
-		name5Label = new JLabel("Cinquiï¿½me prï¿½nom : ");
+		name5Label = new JLabel("Cinquième prénom : ");
 		name5Label.setLabelFor(name5TextField);
 		name5TextField = new JTextField("", 20);
 		this.add(name5Label);
 		this.add(name5TextField);
 		
-		nationalNumberLabel = new JLabel("Numï¿½ro national : ");
+		nationalNumberLabel = new JLabel("Numéro national : ");
 		nationalNumberLabel.setLabelFor(nationalNumberTextField);
 		nationalNumberTextField = new JTextField("");
 		this.add(nationalNumberLabel);

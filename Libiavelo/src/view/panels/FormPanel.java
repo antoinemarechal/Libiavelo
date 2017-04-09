@@ -17,8 +17,7 @@ import exception.NoDataException;
 import exception.NotANumberException;
 
 @SuppressWarnings("serial")
-public class FormPanel extends JPanel implements ActionListener
-{
+public class FormPanel extends JPanel implements ActionListener {
 	private Component parent;
 	
 	private JButton backButton;
@@ -27,8 +26,7 @@ public class FormPanel extends JPanel implements ActionListener
 	
 	private Form form;
 	
-	public FormPanel(Form form, Component parent)
-	{
+	public FormPanel(Form form, Component parent) {
 		super();
 		
 		this.parent = parent;
@@ -44,7 +42,7 @@ public class FormPanel extends JPanel implements ActionListener
 			validateButton = new JButton("Valider");
 			validateButton.addActionListener(this);
 			
-			resetButton = new JButton("Réinitialiser");
+			resetButton = new JButton("R�initialiser");
 			resetButton.addActionListener(this);
 	
 			buttonsPanel.add(backButton);
@@ -56,22 +54,15 @@ public class FormPanel extends JPanel implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent event) 
-	{
-		if(event.getSource() == backButton)
-		{
+	public void actionPerformed(ActionEvent event) {
+		if(event.getSource() == backButton) 
 			if(parent != null && parent instanceof Window)
-			{
 				((Window) parent).returnToMainMenu();
-			}
-		}
-		else if(event.getSource() == validateButton)
-		{
-			switch (form.getFormType()) // TODO : indiquer le champ d'où vient l'erreur dans le popup
-			{
+		
+		else if(event.getSource() == validateButton) {
+			switch (form.getFormType()) {// TODO : indiquer le champ d'où vient l'erreur dans le popup
 				case ADD_CLIENT :
-					try 
-					{
+					try  {
 						NewClient panel = (NewClient) form;
 						
 						int nationalNumber = panel.getNationalNumber();
@@ -83,19 +74,16 @@ public class FormPanel extends JPanel implements ActionListener
 						ConfirmationButtonService.addClient(nationalNumber, homeNumber, phoneNumber, surname, firstNames, false, 0, null, null, null, null);
 						
 						if(parent != null && parent instanceof Window)
-						{
 							((Window) parent).changeToHouseholdMemberForm();
-						}						
+										
 					} 
-					catch (InvalidNumberException | NoDataException | NotANumberException e) 
-					{
+					catch (InvalidNumberException | NoDataException | NotANumberException e) {
 						JOptionPane.showMessageDialog(parent, e.toString());
-					}
+					}					
 					break;
 					
 				case ADD_HOUSEHOLD_MEMBER :
-					try 
-					{
+					try {
 						NewHouseholdMember panel = (NewHouseholdMember) form;
 					
 						Date birthDate = panel.getBirthDate();	
@@ -104,8 +92,7 @@ public class FormPanel extends JPanel implements ActionListener
 						int nationalNumber = panel.getNationalNumber();
 						ConfirmationButtonService.addHouseholdMember(birthDate, firstNames, nationalNumber, clientSurname);
 					} 
-					catch (InvalidNumberException | NoDataException | NotANumberException e1) 
-					{
+					catch (InvalidNumberException | NoDataException | NotANumberException e1) {
 						JOptionPane.showMessageDialog(parent, e1.toString());
 					}
 					break;
@@ -124,9 +111,7 @@ public class FormPanel extends JPanel implements ActionListener
 			}
 		}
 		else if(event.getSource() == resetButton)
-		{
 			form.reset();
-		}
 	}
 }
 
