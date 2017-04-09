@@ -60,7 +60,7 @@ public class FormPanel extends JPanel implements ActionListener {
 				((Window) parent).returnToMainMenu();
 		
 		else if(event.getSource() == validateButton) {
-			switch (form.getFormType()) {// TODO : indiquer le champ d'oÃ¹ vient l'erreur dans le popup
+			switch (form.getFormType()) {// TODO : indiquer le champ d'où vient l'erreur dans le popup
 				case ADD_CLIENT :
 					try  {
 						NewClient panel = (NewClient) form;
@@ -114,4 +114,3 @@ public class FormPanel extends JPanel implements ActionListener {
 			form.reset();
 	}
 }
-
