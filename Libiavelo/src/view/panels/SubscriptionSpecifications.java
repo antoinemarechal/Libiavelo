@@ -8,13 +8,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SubscriptionSpecificationsSettings extends JPanel {
+public class SubscriptionSpecifications extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JLabel expiryDateLabel;
 	private TextField expiryDateTextField;
 	
-	public SubscriptionSpecificationsSettings() {
+	public SubscriptionSpecifications() {
 		super();
 		this.setVisible(true);
 		this.setBorder(BorderFactory.createLineBorder(Color.BLACK));

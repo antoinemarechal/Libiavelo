@@ -11,10 +11,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.Window;
-import controller.ConfirmationButtonService;
+import controller.ApplicationController;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 import exception.NotANumberException;
+import model.Client;
+import model.HouseholdMember;
 
 @SuppressWarnings("serial")
 public class FormPanel extends JPanel implements ActionListener {
@@ -55,9 +57,10 @@ public class FormPanel extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getSource() == backButton) 
+		if(event.getSource() == backButton) {
 			if(parent != null && parent instanceof Window)
 				((Window) parent).returnToMainMenu();
+		}
 		
 		else if(event.getSource() == validateButton) {
 			switch (form.getFormType()) {// TODO : indiquer le champ d'où vient l'erreur dans le popup
@@ -69,13 +72,23 @@ public class FormPanel extends JPanel implements ActionListener {
 						String homeNumber = panel.getHomeNumber();
 						String phoneNumber = panel.getPhoneNumber();
 						String surname = panel.getSurname();
-						String[] firstNames = panel.getFirstnames();
-								
-						ConfirmationButtonService.addClient(nationalNumber, homeNumber, phoneNumber, surname, firstNames, false, 0, null, null, null, null);
 						
-						if(parent != null && parent instanceof Window)
+						String[] firstNames = panel.getFirstnames();
+						Client client = new Client(nationalNumber);
+								
+						ApplicationController appController = new ApplicationController();
+						appController.addClient(client);
+
+						int addMember = JOptionPane.showConfirmDialog(parent, "Souhaiez-vous ajouter quelqu'un à cette abonnement ?", "Ajouter du monde", JOptionPane.YES_NO_OPTION);
+						if (addMember == JOptionPane.OK_OPTION) {
+							if (parent != null && parent instanceof Window) 
 							((Window) parent).changeToHouseholdMemberForm();
-										
+						}
+							
+						else if (addMember == JOptionPane.NO_OPTION) {
+							// TODO		
+						}
+								
 					} 
 					catch (InvalidNumberException | NoDataException | NotANumberException e) {
 						JOptionPane.showMessageDialog(parent, e.toString());
@@ -90,7 +103,21 @@ public class FormPanel extends JPanel implements ActionListener {
 						String clientSurname = panel.getSurname();
 						String[] firstNames = panel.getFirstnames();
 						int nationalNumber = panel.getNationalNumber();
-						ConfirmationButtonService.addHouseholdMember(birthDate, firstNames, nationalNumber, clientSurname);
+						Client client = null;
+						HouseholdMember householdmember = new HouseholdMember(nationalNumber);
+						
+						ApplicationController appController = new ApplicationController();
+						appController.addHouseholdMember(householdmember, client);
+						
+						int addMember = JOptionPane.showConfirmDialog(parent, "Souhaiez-vous ajouter quelqu'un à cette abonnement ?", "Ajouter du monde", JOptionPane.YES_NO_OPTION);
+						if (addMember == JOptionPane.OK_OPTION) {
+							if (parent != null && parent instanceof Window) 
+							((Window) parent).changeToHouseholdMemberForm();
+						}
+							
+						else if (addMember == JOptionPane.NO_OPTION) {
+							// TODO		
+						}
 					} 
 					catch (InvalidNumberException | NoDataException | NotANumberException e1) {
 						JOptionPane.showMessageDialog(parent, e1.toString());

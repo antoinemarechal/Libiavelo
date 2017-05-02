@@ -33,13 +33,13 @@ public class NewHouseholdMember extends Form {
 		this.add(surnameLabel);
 		this.add(surnameTextField);
 		
-		name1Label = new JLabel("Premier prénom : ");
+		name1Label = new JLabel("Prénom : ");
 		name1Label.setLabelFor(name1TextField);
 		name1TextField = new JTextField("", 20);
 		this.add(name1Label);
 		this.add(name1TextField);
 		
-		name2Label = new JLabel("Deuxièe prénom : ");
+		name2Label = new JLabel("Deuxième prénom : ");
 		name2Label.setLabelFor(name2TextField);
 		name2TextField = new JTextField("", 20);
 		this.add(name2Label);
@@ -65,7 +65,7 @@ public class NewHouseholdMember extends Form {
 		
 		nationalNumberLabel = new JLabel("Numéro national : ");
 		nationalNumberLabel.setLabelFor(nationalNumberTextField);
-		nationalNumberTextField = new JTextField("");
+		nationalNumberTextField = new JTextField("", 10);
 		this.add(nationalNumberLabel);
 		this.add(nationalNumberTextField);
 	}
@@ -86,7 +86,7 @@ public class NewHouseholdMember extends Form {
 	public String getSurname() throws NoDataException {
 		String surname = surnameTextField.getText();
 		if(surname.length() == 0)
-			throw new NoDataException();
+			throw new NoDataException("Nom");
 		else
 			return surname;
 	}
@@ -104,7 +104,7 @@ public class NewHouseholdMember extends Form {
 		firstNames[4] = name5TextField.getText();
 		
 		if (firstNames[0].length() == 0)
-			throw new NoDataException();
+			throw new NoDataException("Prénom");
 		else
 			return firstNames;
 	}
@@ -120,7 +120,7 @@ public class NewHouseholdMember extends Form {
 		String textFieldContent = nationalNumberTextField.getText();
 		try {
 			if (textFieldContent.length() == 0)
-				throw new NoDataException();
+				throw new NoDataException("Numéro national");
 			nationalNumber = Integer.parseInt(textFieldContent);
 		} catch (NumberFormatException numberFormatException) {
 			throw new NotANumberException(textFieldContent);

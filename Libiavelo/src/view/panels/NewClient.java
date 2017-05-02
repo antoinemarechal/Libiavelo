@@ -32,7 +32,7 @@ public class NewClient extends Form {
 		this.add(surnameLabel);
 		this.add(surnameTextField);
 				
-		name1Label = new JLabel("Premier prénom :");
+		name1Label = new JLabel("Prénom :");
 		name1Label.setLabelFor(name1TextField);
 		name1Label.setHorizontalAlignment(JLabel.RIGHT);
 		name1TextField = new JTextField("", 20);
@@ -70,21 +70,21 @@ public class NewClient extends Form {
 		nationalNumberLabel = new JLabel("Numéro national :");
 		nationalNumberLabel.setLabelFor(nationalNumberTextField);
 		nationalNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nationalNumberTextField = new JTextField("", 20);
+		nationalNumberTextField = new JTextField("", 10);
 		this.add(nationalNumberLabel);
 		this.add(nationalNumberTextField);
 		
 		homeNumberLabel = new JLabel("Numéro de fixe :");
 		homeNumberLabel.setLabelFor(homeNumberTextField);
 		homeNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
-		homeNumberTextField = new JTextField("", 20);
+		homeNumberTextField = new JTextField("", 10);
 		this.add(homeNumberLabel);
 		this.add(homeNumberTextField);
 		
 		phoneNumberLabel = new JLabel("Numéro de portable :");
 		phoneNumberLabel.setLabelFor(phoneNumberTextField);
 		phoneNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
-		phoneNumberTextField = new JTextField("", 20);
+		phoneNumberTextField = new JTextField("", 10);
 		this.add(phoneNumberLabel);
 		this.add(phoneNumberTextField);
 	}
@@ -97,7 +97,7 @@ public class NewClient extends Form {
 	public String getSurname() throws NoDataException {
 		String surname = surnameTextField.getText();
 		if(surname.length() == 0)
-			throw new NoDataException();
+			throw new NoDataException("Nom");
 		else
 			return surname;
 	}
@@ -115,7 +115,7 @@ public class NewClient extends Form {
 		firstNames[4] = name5TextField.getText();
 		
 		if (firstNames[0].length() == 0)
-			throw new NoDataException();
+			throw new NoDataException("Prénom");
 		else
 			return firstNames;
 	}
@@ -131,7 +131,7 @@ public class NewClient extends Form {
 		String textFieldContent = nationalNumberTextField.getText();
 		try {
 			if (textFieldContent.length() == 0)
-				throw new NoDataException();
+				throw new NoDataException("Numéro national");
 			nationalNumber = Integer.parseInt(textFieldContent);
 		} catch (NumberFormatException numberFormatException) {
 			throw new NotANumberException(textFieldContent);
@@ -149,7 +149,7 @@ public class NewClient extends Form {
 		String homeNumber = homeNumberTextField.getText();
 		try {
 			if (homeNumber.length() == 0)
-				throw new NoDataException();
+				throw new NoDataException("Numéro de fixe");
 			Integer.parseInt(homeNumber);
 		} catch (NumberFormatException numberFormatException) {
 			throw new NotANumberException(homeNumber);
@@ -167,7 +167,7 @@ public class NewClient extends Form {
 		String phoneNumber = phoneNumberTextField.getText();
 		try {
 			if (phoneNumber.length() == 0)
-				throw new NoDataException();
+				throw new NoDataException("Numéro de téléphone");
 			Integer.parseInt(phoneNumber);
 		} catch (NumberFormatException numberFormatException) {
 			throw new NotANumberException(phoneNumber);
