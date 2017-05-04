@@ -1,47 +1,39 @@
-package business;
+package dao.derby;
 
 import java.util.ArrayList;
 
-import dao.derby.BikeDerbyDataAccess;
-import model.Bike;
-import model.Client;
+import model.Subscription;
 
-public class BikeManager {
-	BikeDerbyDataAccess bikeDataAccess;
-	
-	public BikeManager() {
-		bikeDataAccess = new BikeDerbyDataAccess();
+public class SubscriptionDerbyDataAccess {
+	public SubscriptionDerbyDataAccess() {
+		// TODO
 	}
 	
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addBike(Bike bike) {
-		bikeDataAccess.addBike(bike);		
+	public void addSubscription(Subscription subsription) {
 	}
 	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Client getBike(int bikeID ){
-		return bikeDataAccess.getBike(bikeID);
+	public Subscription getSubscription(Subscription subscription) {
+		return null;
 	}
-	
-	public ArrayList<Client> getAllBikes() {
-		return bikeDataAccess.getAllBikes();
+	public ArrayList<Subscription> getAllSubscriptions() {
+		return null;
 	}
 	
 	/*************************************************************************************************
 	 UPDATE
 	 *************************************************************************************************/
-	public void updateBike(Bike bike){
-		
+	public void updateSubscription(Subscription subscription) {
 	}
 	
 	/*************************************************************************************************
 	 DELETE
 	 *************************************************************************************************/
-	public void removeBike(Bike bike){
-		
+	public void removeSubscription(Subscription subscription) {
 	}
 }

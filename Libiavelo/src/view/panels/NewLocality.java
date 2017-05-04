@@ -23,14 +23,14 @@ public class NewLocality extends Form {
 		this.setLayout(new GridLayout(9, 2, 15, 5));
 				
 		
-		cityNameLabel = new JLabel("Ville:");
+		cityNameLabel = new JLabel("Ville :");
 		cityNameLabel.setLabelFor(cityNameTextField);
 		cityNameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		cityNameTextField = new JTextField("", 20);
 		this.add(cityNameLabel);
 		this.add(cityNameTextField);
 		
-		postalCodeLabel = new JLabel("Code postal:");
+		postalCodeLabel = new JLabel("Code postal :");
 		postalCodeLabel.setLabelFor(postalCodeTextField);
 		postalCodeLabel.setHorizontalAlignment(JLabel.RIGHT);
 		postalCodeTextField = new JTextField("", 20);

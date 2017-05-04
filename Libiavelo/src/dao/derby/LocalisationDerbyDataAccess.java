@@ -1,47 +1,39 @@
-package business;
+package dao.derby;
 
 import java.util.ArrayList;
 
-import dao.derby.BikeDerbyDataAccess;
-import model.Bike;
-import model.Client;
+import model.Localisation;
 
-public class BikeManager {
-	BikeDerbyDataAccess bikeDataAccess;
-	
-	public BikeManager() {
-		bikeDataAccess = new BikeDerbyDataAccess();
+public class LocalisationDerbyDataAccess {
+	public LocalisationDerbyDataAccess() {
+		// TODO
 	}
 	
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addBike(Bike bike) {
-		bikeDataAccess.addBike(bike);		
+	public void addLocalisation() {
 	}
 	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Client getBike(int bikeID ){
-		return bikeDataAccess.getBike(bikeID);
+	public Localisation getLocalisation() {
+		return null;
 	}
-	
-	public ArrayList<Client> getAllBikes() {
-		return bikeDataAccess.getAllBikes();
+	public ArrayList<Localisation> getAllLocalisation() {
+		return null;
 	}
 	
 	/*************************************************************************************************
 	 UPDATE
 	 *************************************************************************************************/
-	public void updateBike(Bike bike){
-		
+	public void updateLocalisation(Localisation localisation) {
 	}
 	
 	/*************************************************************************************************
 	 DELETE
 	 *************************************************************************************************/
-	public void removeBike(Bike bike){
-		
+	public void removeLocalisation() {
 	}
 }

@@ -1,47 +1,50 @@
-package business;
+package dao.derby;
 
 import java.util.ArrayList;
 
-import dao.derby.BikeDerbyDataAccess;
-import model.Bike;
+import model.Address;
 import model.Client;
+import model.Estate;
 
-public class BikeManager {
-	BikeDerbyDataAccess bikeDataAccess;
-	
-	public BikeManager() {
-		bikeDataAccess = new BikeDerbyDataAccess();
+public class AddressDerbyDataAccess {
+	public AddressDerbyDataAccess() {
+		// TODO
 	}
 	
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addBike(Bike bike) {
-		bikeDataAccess.addBike(bike);		
+	public void addAddress(Address address) {
+	}
+	public void addEstateAddress(Estate estate, Address address) {
+	}
+	public void addClientAddress(Client client, Address address) {
 	}
 	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Client getBike(int bikeID ){
-		return bikeDataAccess.getBike(bikeID);
+	public ArrayList<Address> getAllAddresses() {
+		return null;
 	}
-	
-	public ArrayList<Client> getAllBikes() {
-		return bikeDataAccess.getAllBikes();
+	public Address getClientAddress(Client client) {
+		return null;
+	}
+	public Address getEstateAddress(Estate estate) {
+		return null;
 	}
 	
 	/*************************************************************************************************
 	 UPDATE
 	 *************************************************************************************************/
-	public void updateBike(Bike bike){
-		
+	public void updateClientAddress(Client client, Address address) {
+	}
+	public void updateEstateAddress(Estate estate, Address address) {
 	}
 	
 	/*************************************************************************************************
 	 DELETE
 	 *************************************************************************************************/
-	public void removeBike(Bike bike){
-		
+	public void removeAddress(Client client, Address address) {
 	}
 }
