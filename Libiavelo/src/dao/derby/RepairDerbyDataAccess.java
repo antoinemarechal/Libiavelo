@@ -6,7 +6,6 @@ import model.Repair;
 
 public class RepairDerbyDataAccess {
 	public RepairDerbyDataAccess() {
-		// TODO
 	}
 	/*************************************************************************************************
 	 CREATE

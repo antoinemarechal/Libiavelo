@@ -6,7 +6,6 @@ import model.BikeStation;
 
 public class BikeStationDerbyDataAccess {
 	public BikeStationDerbyDataAccess() {
-		// TODO
 	}
 	
 	/*************************************************************************************************

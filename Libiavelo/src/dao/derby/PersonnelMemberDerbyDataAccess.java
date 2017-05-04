@@ -6,7 +6,6 @@ import model.PersonnelMember;
 
 public class PersonnelMemberDerbyDataAccess {
 	public PersonnelMemberDerbyDataAccess() {
-		// TODO
 	}
 	/*************************************************************************************************
 	 CREATE

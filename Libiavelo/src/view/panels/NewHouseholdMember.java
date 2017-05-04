@@ -70,9 +70,9 @@ public class NewHouseholdMember extends Form {
 		this.add(nationalNumberTextField);
 	}
 
-	/** TODO
+	/** 
 	 * 
-	 * @return
+	 * @return la date entrée par l'utilisateur
 	 */
 	public Date getBirthDate() {
 		return null;

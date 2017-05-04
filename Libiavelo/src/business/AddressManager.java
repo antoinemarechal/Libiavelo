@@ -21,34 +21,42 @@ public class AddressManager {
 		addressDataAccess.addAddress(address);
 	}
 	public void addEstateAddress(Estate estate, Address address) {
+		addressDataAccess.addEstateAddress(estate, address);
 	}
 	public void addClientAddress(Client client, Address address) {
+		addressDataAccess.addClientAddress(client, address);
 	}
 	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
 	public ArrayList<Address> getAllAddresses() {
-		return null;
+		return addressDataAccess.getAllAddresses();
 	}
+	
 	public Address getClientAddress(Client client) {
-		return null;
+		return addressDataAccess.getClientAddress(client);
 	}
+	
 	public Address getEstateAddress(Estate estate) {
-		return null;
+		return addressDataAccess.getEstateAddress(estate);
 	}
 	
 	/*************************************************************************************************
 	 UPDATE
 	 *************************************************************************************************/
 	public void updateClientAddress(Client client, Address address) {
+		addressDataAccess.updateClientAddress(client, address);
 	}
+	
 	public void updateEstateAddress(Estate estate, Address address) {
+		addressDataAccess.updateEstateAddress(estate, address);
 	}
 	
 	/*************************************************************************************************
 	 DELETE
 	 *************************************************************************************************/
 	public void removeAddress(Client client, Address address) {
+		addressDataAccess.removeAddress(client, address);
 	}
 }

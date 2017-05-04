@@ -6,7 +6,6 @@ import model.Localisation;
 
 public class LocalisationDerbyDataAccess {
 	public LocalisationDerbyDataAccess() {
-		// TODO
 	}
 	
 	/*************************************************************************************************

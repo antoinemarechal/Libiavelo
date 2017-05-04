@@ -86,7 +86,7 @@ public class FormPanel extends JPanel implements ActionListener {
 						}
 							
 						else if (addMember == JOptionPane.NO_OPTION) {
-							// TODO		
+							// TODO	: décider de l'affichage et afficher
 						}
 								
 					} 
@@ -116,7 +116,7 @@ public class FormPanel extends JPanel implements ActionListener {
 						}
 							
 						else if (addMember == JOptionPane.NO_OPTION) {
-							// TODO		
+							// TODO	: décider de la réaction et réagir
 						}
 					} 
 					catch (InvalidNumberException | NoDataException | NotANumberException e1) {

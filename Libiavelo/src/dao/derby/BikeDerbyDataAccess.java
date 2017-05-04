@@ -7,7 +7,6 @@ import model.Client;
 
 public class BikeDerbyDataAccess {
 	public BikeDerbyDataAccess() {
-		// TODO
 	}
 
 	/*************************************************************************************************

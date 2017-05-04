@@ -6,7 +6,6 @@ import model.TransportationOrder;
 
 public class TransportationOrderDerbyDataAccess {
 	public TransportationOrderDerbyDataAccess() {
-		// TODO
 	}
 	/*************************************************************************************************
 	 CREATE

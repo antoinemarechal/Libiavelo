@@ -35,13 +35,13 @@ public class BikeManager {
 	 UPDATE
 	 *************************************************************************************************/
 	public void updateBike(Bike bike){
-		
+		bikeDataAccess.updateBike(bike);
 	}
 	
 	/*************************************************************************************************
 	 DELETE
 	 *************************************************************************************************/
 	public void removeBike(Bike bike){
-		
+		bikeDataAccess.removeBike(bike);
 	}
 }

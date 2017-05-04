@@ -7,7 +7,6 @@ import model.HouseholdMember;
 
 public class HouseholdMemberDerbyDataAccess {
 	public HouseholdMemberDerbyDataAccess() {
-		// TODO
 	}
 	/*************************************************************************************************
 	 CREATE

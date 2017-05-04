@@ -6,7 +6,6 @@ import model.Subscription;
 
 public class SubscriptionDerbyDataAccess {
 	public SubscriptionDerbyDataAccess() {
-		// TODO
 	}
 	
 	/*************************************************************************************************

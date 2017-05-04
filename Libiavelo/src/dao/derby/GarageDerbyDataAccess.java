@@ -6,7 +6,6 @@ import model.Garage;
 
 public class GarageDerbyDataAccess {
 	public GarageDerbyDataAccess() {
-		// TODO
 	}
 	/*************************************************************************************************
 	 CREATE
