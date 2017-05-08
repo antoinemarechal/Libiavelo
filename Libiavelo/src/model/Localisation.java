@@ -1,7 +1,7 @@
 package model;
 
 public class Localisation {
-	private boolean available;
+	private Boolean available;
 	
 	private Bike bike;
 	private Estate premises;

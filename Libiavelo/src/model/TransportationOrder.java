@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class TransportationOrder {
-	private boolean exceptionnal;
+	private Boolean exceptionnal;
 	
 	private Date execution;
 	private ArrayList<Bike> bikes;
@@ -33,7 +33,7 @@ public class TransportationOrder {
 		return execution;
 	}
 
-	private ArrayList<Bike> getBikes() {
+	public ArrayList<Bike> getBikes() {
 		return bikes;
 	}
 

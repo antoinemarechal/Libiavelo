@@ -3,14 +3,14 @@ package model;
 import exception.InvalidNumberException;
 
 public class BikeStation extends Estate {
-	private int lowerBikeSoftLimit, lowerBikeHardLimit;
-	private int upperBikeSoftLimit, upperBikeHardLimit;
+	private Integer lowerBikeSoftLimit, lowerBikeHardLimit;
+	private Integer upperBikeSoftLimit, upperBikeHardLimit;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/	
 	public BikeStation(int lowerBikeSoftLimit, int lowerBikeHardLimit, int upperBikeSoftLimit, int upperBikeHardLimit) throws InvalidNumberException {
-		super.setId(Estate.generateNextId());
+		super();
 		this.setLowerBikeSoftLimit(lowerBikeSoftLimit);
 		this.setLowerBikeHardLimit(lowerBikeHardLimit);
 		this.setUpperBikeSoftLimit(upperBikeSoftLimit);

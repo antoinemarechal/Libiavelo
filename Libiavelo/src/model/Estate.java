@@ -1,8 +1,7 @@
 package model;
 
 public abstract class Estate {
-	private int id;
-	private static int idGenerator = -1;
+	private Integer id;
 	
 	private String description;
 
@@ -26,13 +25,5 @@ public abstract class Estate {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/*************************************************************************************************
-	 OTHERS
-	 *************************************************************************************************/
-	public static int generateNextId() {
-		idGenerator++;
-		return idGenerator;
 	}
 }

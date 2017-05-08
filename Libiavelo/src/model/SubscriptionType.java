@@ -1,8 +1,8 @@
 package model;
 
 public class SubscriptionType {
-	private int id;
-	private double cost;
+	private Integer id;
+	private Double cost;
 	
 	private String description;	
 	/*************************************************************************************************

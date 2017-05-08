@@ -4,7 +4,7 @@ import exception.InvalidNumberException;
 import exception.NoDataException;
 
 public class Address {
-	private int number, postalCode;
+	private Integer number, postalCode;
 	
 	private String street, city;
 	

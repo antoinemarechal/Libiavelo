@@ -7,9 +7,9 @@ import exception.InvalidNumberException;
 import exception.NoDataException;
 
 public class Client extends Person {	
-	private int clientNumber;
-	private boolean subsriptionValidated;
-	private double depositAmount;
+	private Integer clientNumber;
+	private Boolean subsriptionValidated;
+	private Double depositAmount;
 	
 	private String homeNumber, phoneNumber;
 	private Date lastHouseholdRenewal;

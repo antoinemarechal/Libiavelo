@@ -6,7 +6,7 @@ import exception.InvalidNumberException;
 import exception.NoDataException;
 
 public abstract class Person {
-	private int nationalNumber;
+	private Integer nationalNumber;
 	
 	private String surname;
 	private String[] firstNames;

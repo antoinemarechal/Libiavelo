@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 public class Subscription {
-	private double amountToPay;
+	private Double amountToPay;
 	
 	private Date demand;
 	private Date expiry;

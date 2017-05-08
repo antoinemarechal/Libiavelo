@@ -1,7 +1,9 @@
 package model;
 
+import model.enumerations.WorkType;
+
 public class PersonnelMember extends Person {
-	private int id;
+	private Integer id;
 	
 	private WorkType function;
 	

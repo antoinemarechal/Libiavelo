@@ -6,11 +6,11 @@ public class Garage extends Estate{
 	 CONSTRUCTORS
 	 *************************************************************************************************/
 	public Garage() {
-		super.setId(Estate.generateNextId());
+		super();
 	}
 	
 	public Garage(String description) {
-		super.setId(Estate.generateNextId());
+		super();
 		super.setDescription(description);
 	}
 }

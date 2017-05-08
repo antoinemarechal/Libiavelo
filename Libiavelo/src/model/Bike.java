@@ -1,18 +1,16 @@
 package model;
 
+import model.enumerations.BikeState;
+
 public class Bike {
-	private int id;
-	private static int idGenerator = 0;
-	
+	private Integer id;
+		
 	private BikeState state;
 
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public Bike() {
-		this.id = idGenerator;
-		idGenerator++;
-		
+	public Bike() {		
 		state = BikeState.WORKING;
 	}
 	
