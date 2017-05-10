@@ -41,24 +41,29 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			preparedStatement.setInt(1,clientID);
 			ResultSet queryResult = preparedStatement.executeQuery();
 
-			String surname = queryResult.getString(1);
-			String firstNames[] = new String[5];
-			firstNames[1] = queryResult.getString(1);
-			firstNames[2] = queryResult.getString(2);
-			firstNames[3] = queryResult.getString(3);
-			firstNames[4] = queryResult.getString(4);
-			firstNames[5] = queryResult.getString(5);
-			int nationalNumber = queryResult.getInt(6);
-			String street = queryResult.getString(7);
-			int streetNumber = queryResult.getInt(8);
-			int homNumber = queryResult.getInt(9);
-			int phoneNumber = queryResult.getInt(10);
-			Date subscriptionDate = queryResult.getDate(11);
-			boolean subscritpionValidated = queryResult.getBoolean(12);
+			String clientSurname = queryResult.getString("NomDemandeur");
+			String clientFirstNames[] = new String[5];
+			clientFirstNames[1] = queryResult.getString("Prenom1");
+			clientFirstNames[2] = queryResult.getString("Prenom2");
+			clientFirstNames[3] = queryResult.getString("Prenom3");
+			clientFirstNames[4] = queryResult.getString("Prenom4");
+			clientFirstNames[5] = queryResult.getString("Prenom5");
+			int nationalNumber = queryResult.getInt("NumeroNational");
+			String street = queryResult.getString("NomRue");
+			String streetNumber = queryResult.getString("Numero");
+			String homeNumber = queryResult.getString("NumeroTel");
+			String phoneNumber = queryResult.getString("Gsm ");
+			Date subscriptionDate = queryResult.getDate("DateInscription");
+			boolean subscriptionValidated = queryResult.getBoolean("InscriptionValidee");
+			Double depositAmount = queryResult.getDouble("MontantCaution ");
 			
-			client = new Client(nationalNumber);
-			client.setSurname(surname);
-			client.setFirstNames(firstNames);
+			Date lastHouseholdRenewal = new Date(); // FIX ME
+			Date demand = new Date();
+			Date expiry = new Date();
+			
+			
+			Address address = null; // new Address(streetNumber, city, number, postalCode); TODO : fix me
+			client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, address, lastHouseholdRenewal, demand, expiry);
 			// use label
 			// add while pour rows dans les cas ou result set.size > 1
 		} catch (SQLException e) {

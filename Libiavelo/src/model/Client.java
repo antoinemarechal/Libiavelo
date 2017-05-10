@@ -25,13 +25,13 @@ public class Client extends Person {
 		this.setNationalNumber(nationalNumber);
 	}
 	
-	public Client(int nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, boolean subsriptionValidation, double depositAmount, Address address, Date lastHouseholdRenewal, Date demand, Date expiry) throws InvalidNumberException, NoDataException {
+	public Client(int nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, boolean subscriptionValidated, double depositAmount, Address address, Date lastHouseholdRenewal, Date demand, Date expiry) throws InvalidNumberException, NoDataException {
 		this.setNationalNumber(nationalNumber);
 		this.setHomeNumber(homeNumber);
 		this.setPhoneNumber(phoneNumber);
 		this.setSurname(clientSurname);
 		this.setFirstNames(clientFirstNames);
-		this.setSubsriptionValidated(subsriptionValidation);
+		this.setSubsriptionValidated(subscriptionValidated);
 		this.setDepositAmount(depositAmount);
 		this.setAddress(address);
 		this.setLatestHouseholdRenewal(lastHouseholdRenewal);
