@@ -2,12 +2,13 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.HouseholdMemberDataAccess;
 import dao.derby.HouseholdMemberDerbyDataAccess;
 import model.Client;
 import model.HouseholdMember;
 
 public class HouseholdMemberManager {
-	HouseholdMemberDerbyDataAccess householdMemberDataAccess;
+	HouseholdMemberDataAccess householdMemberDataAccess;
 	
 	public HouseholdMemberManager () {
 		householdMemberDataAccess = new HouseholdMemberDerbyDataAccess();

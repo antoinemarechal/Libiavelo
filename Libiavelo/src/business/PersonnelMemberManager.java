@@ -2,11 +2,12 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.PersonnelMemberDataAcces;
 import dao.derby.PersonnelMemberDerbyDataAccess;
 import model.PersonnelMember;
 
 public class PersonnelMemberManager {
-	PersonnelMemberDerbyDataAccess personnelMemberDataAccess;
+	PersonnelMemberDataAcces personnelMemberDataAccess;
 	
 	public PersonnelMemberManager() {
 		personnelMemberDataAccess = new PersonnelMemberDerbyDataAccess();

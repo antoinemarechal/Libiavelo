@@ -2,10 +2,11 @@ package dao.derby;
 
 import java.util.ArrayList;
 
+import dao.HouseholdMemberDataAccess;
 import model.Client;
 import model.HouseholdMember;
 
-public class HouseholdMemberDerbyDataAccess {
+public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess {
 	public HouseholdMemberDerbyDataAccess() {
 	}
 	/*************************************************************************************************

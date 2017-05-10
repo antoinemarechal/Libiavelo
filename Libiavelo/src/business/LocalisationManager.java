@@ -2,11 +2,12 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.LocalisationDataAccess;
 import dao.derby.LocalisationDerbyDataAccess;
 import model.Localisation;
 
 public class LocalisationManager {
-	LocalisationDerbyDataAccess localisationDataAccess;
+	LocalisationDataAccess localisationDataAccess;
 	
 	public LocalisationManager() {
 		localisationDataAccess = new LocalisationDerbyDataAccess();

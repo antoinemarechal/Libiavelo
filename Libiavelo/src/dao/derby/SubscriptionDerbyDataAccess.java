@@ -2,9 +2,10 @@ package dao.derby;
 
 import java.util.ArrayList;
 
+import dao.SubscriptionDataAccess;
 import model.Subscription;
 
-public class SubscriptionDerbyDataAccess {
+public class SubscriptionDerbyDataAccess implements SubscriptionDataAccess {
 	public SubscriptionDerbyDataAccess() {
 	}
 	

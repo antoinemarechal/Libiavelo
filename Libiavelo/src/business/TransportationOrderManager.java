@@ -2,11 +2,12 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.TransportationOrderDataAccess;
 import dao.derby.TransportationOrderDerbyDataAccess;
 import model.TransportationOrder;
 
 public class TransportationOrderManager {
-	TransportationOrderDerbyDataAccess transportationOrderDataAccess;
+	TransportationOrderDataAccess transportationOrderDataAccess;
 	
 	public TransportationOrderManager() {
 		transportationOrderDataAccess = new TransportationOrderDerbyDataAccess();

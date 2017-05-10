@@ -2,9 +2,10 @@ package dao.derby;
 
 import java.util.ArrayList;
 
+import dao.LocalisationDataAccess;
 import model.Localisation;
 
-public class LocalisationDerbyDataAccess {
+public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 	public LocalisationDerbyDataAccess() {
 	}
 	
