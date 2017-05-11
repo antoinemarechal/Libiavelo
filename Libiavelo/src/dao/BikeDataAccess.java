@@ -2,8 +2,8 @@ package dao;
 
 import java.util.ArrayList;
 
+
 import model.Bike;
-import model.Client;
 
 public interface BikeDataAccess {
 	/*************************************************************************************************
@@ -14,8 +14,8 @@ public interface BikeDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Client getBike(int bikeID);
-	public ArrayList<Client> getAllBikes();
+	public Bike getBike(int bikeID);
+	public ArrayList<Bike> getAllBikes();
 	
 	/*************************************************************************************************
 	 UPDATE

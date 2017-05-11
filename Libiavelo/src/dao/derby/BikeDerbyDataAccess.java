@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import dao.BikeDataAccess;
 import model.Bike;
-import model.Client;
 
 public class BikeDerbyDataAccess implements BikeDataAccess {
 	public BikeDerbyDataAccess() {
@@ -20,11 +19,13 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Client getBike(int bikeID) {
+	public Bike getBike(int bikeID) {
+		
+		// NumeroVelo INTEGER  Etat  VARCHAR
 		return null;
 	}
 	
-	public ArrayList<Client> getAllBikes() {
+	public ArrayList<Bike> getAllBikes() {
 		return null;
 	}
 	

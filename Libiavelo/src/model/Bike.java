@@ -31,4 +31,8 @@ public class Bike {
 	public void setState(BikeState state) {
 		this.state = state;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 }

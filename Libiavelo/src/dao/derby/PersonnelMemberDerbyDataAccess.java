@@ -20,6 +20,7 @@ public class PersonnelMemberDerbyDataAccess implements PersonnelMemberDataAccess
 	public PersonnelMember getPersonnelMember(String matricule) {
 		return null;
 	}
+	
 	public ArrayList<PersonnelMember> getAllPersonnelMembers() {
 		return null;
 	}

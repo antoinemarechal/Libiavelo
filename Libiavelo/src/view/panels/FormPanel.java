@@ -74,7 +74,7 @@ public class FormPanel extends JPanel implements ActionListener {
 						String clientSurname = panel.getSurname();
 						String[] clientFirstNames = panel.getFirstnames();
 						Boolean subscriptionValidated = false;
-						Double depositAmount = 50.0; // TODO : fix value, see dossier
+						Integer depositAmount = 50; // TODO : fix value, see dossier
 						String streetNumber = panel.getStreetNumber();
 						String streetName = panel.getStreetName();
 						Date subscriptionDate = new Date(System.currentTimeMillis()); // TODO : optionnel : faire façon cours avec greg calendar
@@ -109,19 +109,19 @@ public class FormPanel extends JPanel implements ActionListener {
 						String[] firstNames = panel.getFirstnames();
 						int nationalNumber = panel.getNationalNumber();
 						Client client = null; // TODO : Quid de l'ajout du membre de ménage à quoi comment et où ?
-						HouseholdMember householdmember = new HouseholdMember(nationalNumber);
-						
+						HouseholdMember householdmember = new HouseholdMember(birthDate, firstNames, nationalNumber, clientSurname);
 						ApplicationController appController = new ApplicationController();
-						appController.addHouseholdMember(householdmember, client);
+						appController.addHouseholdMember(householdmember, client.getClientNumber()); // TODO 'bout this ?
 						
 						int addMember = JOptionPane.showConfirmDialog(parent, "Souhaiez-vous ajouter quelqu'un à cette abonnement ?", "Ajouter du monde", JOptionPane.YES_NO_OPTION);
 						if (addMember == JOptionPane.OK_OPTION) {
 							if (parent != null && parent instanceof Window) 
-							((Window) parent).changeToHouseholdMemberForm();
+								((Window) parent).changeToHouseholdMemberForm();
 						}
 							
 						else if (addMember == JOptionPane.NO_OPTION) {
-							// TODO	: décider de la réaction et réagir
+							if (parent != null && parent instanceof Window) 
+								((Window) parent).returnToMainMenu();
 						}
 					} 
 					catch (InvalidNumberException | NoDataException | NotANumberException e1) {

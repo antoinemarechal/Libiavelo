@@ -2,19 +2,18 @@ package dao;
 
 import java.util.ArrayList;
 
-import model.Client;
 import model.HouseholdMember;
 
 public interface HouseholdMemberDataAccess {
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addHouseholdMember(HouseholdMember householdMember, Client client);
+	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID);
 	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public HouseholdMember getHouseholdMember(int clientID);
+	public HouseholdMember getHouseholdMember(Integer clientID);
 	public ArrayList<HouseholdMember> getAllHouseholdMembers();
 	
 	/*************************************************************************************************

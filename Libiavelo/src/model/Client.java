@@ -9,7 +9,7 @@ import exception.NoDataException;
 public class Client extends Person {	
 	private Integer clientNumber;
 	private Boolean subsriptionValidated;
-	private Double depositAmount;
+	private int depositAmount;
 	
 	private String streetName, streetNumber;
 	private String homeNumber, phoneNumber;
@@ -25,7 +25,7 @@ public class Client extends Person {
 		this.setNationalNumber(nationalNumber);
 	}
 	
-	public Client(Integer nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Double depositAmount, String streetNumber, String streetName, Date subscriptionDate) throws InvalidNumberException, NoDataException {
+	public Client(Integer nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Integer depositAmount, String streetNumber, String streetName, Date subscriptionDate) throws InvalidNumberException, NoDataException {
 		this.setNationalNumber(nationalNumber);
 		this.setHomeNumber(homeNumber);
 		this.setPhoneNumber(phoneNumber);
@@ -53,7 +53,7 @@ public class Client extends Person {
 		return phoneNumber;
 	}
 
-	public Double getDepositAmount() {
+	public int getDepositAmount() {
 		return depositAmount;
 	}
 	
@@ -71,6 +71,11 @@ public class Client extends Person {
 
 	public ArrayList<HouseholdMember> getHousehold() {
 		return household;
+	}
+	
+	public int getLocality() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	public Boolean isSubsriptionValidated() {
@@ -98,7 +103,7 @@ public class Client extends Person {
 	}
 
 	// exception si depositAmount<0 ? ou pas pour remboursement ?
-	public void setDepositAmount(Double depositAmount) {
+	public void setDepositAmount(Integer depositAmount) {
 		this.depositAmount = depositAmount;
 	}
 
@@ -127,6 +132,5 @@ public class Client extends Person {
 	
 	public void removeHouseholdMember(HouseholdMember householdMember) {
 		household.remove(householdMember);
-	}
-	
+	}	
 }
