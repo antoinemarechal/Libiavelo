@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import dao.HouseholdMemberDataAccess;
 import dao.derby.HouseholdMemberDerbyDataAccess;
-import model.Client;
 import model.HouseholdMember;
 
 public class HouseholdMemberManager {
@@ -17,8 +16,8 @@ public class HouseholdMemberManager {
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addHouseholdMember(HouseholdMember householdMember, Client client) {
-		householdMemberDataAccess.addHouseholdMember(householdMember, client);
+	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
+		householdMemberDataAccess.addHouseholdMember(householdMember, clientID);
 	}
 	
 	/*************************************************************************************************

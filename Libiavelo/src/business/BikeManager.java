@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import dao.BikeDataAccess;
 import dao.derby.BikeDerbyDataAccess;
 import model.Bike;
-import model.Client;
 
 public class BikeManager {
 	BikeDataAccess bikeDataAccess;
@@ -24,11 +23,11 @@ public class BikeManager {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Client getBike(int bikeID ){
+	public Bike getBike(int bikeID ){
 		return bikeDataAccess.getBike(bikeID);
 	}
 	
-	public ArrayList<Client> getAllBikes() {
+	public ArrayList<Bike> getAllBikes() {
 		return bikeDataAccess.getAllBikes();
 	}
 	

@@ -162,7 +162,7 @@ public class NewClient extends Form {
 	public String getHomeNumber() throws NotANumberException {
 		String homeNumber = homeNumberTextField.getText();
 		if (homeNumber.length() == 0) {
-			return "";			
+			return null;			
 		}
 		else {
 			try {
@@ -183,7 +183,7 @@ public class NewClient extends Form {
 	public String getPhoneNumber() throws NotANumberException {
 		String phoneNumber = phoneNumberTextField.getText();
 		if (phoneNumber.length() == 0) {
-			return "";
+			return null;
 		}
 		else {
 			try {

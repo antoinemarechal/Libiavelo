@@ -15,9 +15,9 @@ public class ApplicationController {
 		clientManager.addClient(client);
 	}
 	
-	public void addHouseholdMember(HouseholdMember householdMember, Client client) {
+	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
 		householdMemberManager = new HouseholdMemberManager();
-		householdMemberManager.addHouseholdMember(householdMember, client);
+		householdMemberManager.addHouseholdMember(householdMember, clientID);
 	}
 	
 	
