@@ -16,7 +16,7 @@ public class PersonnelMemberDerbyDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public PersonnelMember getPersonnelMember(int personnelMemberID) {
+	public PersonnelMember getPersonnelMember(String matricule) {
 		return null;
 	}
 	public ArrayList<PersonnelMember> getAllPersonnelMembers() {

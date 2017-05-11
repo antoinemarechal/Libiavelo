@@ -2,14 +2,15 @@ package business;
 
 import java.util.ArrayList;
 
-import dao.derby.PersonnelMemberDerbyDataAccess;
+import dao.PersonnelMemberDataAccess;
+import dao.mysql.PersonnelMemberMySQLDataAccess;
 import model.PersonnelMember;
 
 public class PersonnelMemberManager {
-	PersonnelMemberDerbyDataAccess personnelMemberDataAccess;
+	PersonnelMemberDataAccess personnelMemberDataAccess;
 	
 	public PersonnelMemberManager() {
-		personnelMemberDataAccess = new PersonnelMemberDerbyDataAccess();
+		personnelMemberDataAccess = new PersonnelMemberMySQLDataAccess();
 	}
 	
 	/*************************************************************************************************
@@ -22,8 +23,8 @@ public class PersonnelMemberManager {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public PersonnelMember getPersonnelMember(int personnelMemberID) {
-		return personnelMemberDataAccess.getPersonnelMember(personnelMemberID);
+	public PersonnelMember getPersonnelMember(String matricule) {
+		return personnelMemberDataAccess.getPersonnelMember(matricule);
 	}
 	
 	public ArrayList<PersonnelMember> getAllPersonnelMembers() {

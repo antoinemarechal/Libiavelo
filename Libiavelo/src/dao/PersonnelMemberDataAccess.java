@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import model.PersonnelMember;
 
-public interface PersonnelMemberDataAcces {
+public interface PersonnelMemberDataAccess {
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
@@ -13,7 +13,7 @@ public interface PersonnelMemberDataAcces {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public PersonnelMember getPersonnelMember(int personnelMemberID);
+	public PersonnelMember getPersonnelMember(String matricule);
 	public ArrayList<PersonnelMember> getAllPersonnelMembers();
 	
 	/*************************************************************************************************

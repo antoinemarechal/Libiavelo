@@ -3,8 +3,10 @@ package controller;
 
 import business.ClientManager;
 import business.HouseholdMemberManager;
+import business.PersonnelMemberManager;
 import model.Client;
 import model.HouseholdMember;
+import model.PersonnelMember;
 
 public class ApplicationController {
 	ClientManager clientManager;
@@ -20,5 +22,10 @@ public class ApplicationController {
 		householdMemberManager.addHouseholdMember(householdMember, client);
 	}
 	
+	
+	public PersonnelMember getPersonnelMember(String matricule)
+	{
+		return new PersonnelMemberManager().getPersonnelMember(matricule);
+	}
 	
 }

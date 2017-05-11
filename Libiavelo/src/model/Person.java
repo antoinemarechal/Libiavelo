@@ -5,7 +5,7 @@ import java.util.Date;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 
-public abstract class Person {
+public abstract class Person { // FIXME : pas de date de naissance dans membre de personnel ni de numero national
 	private Integer nationalNumber;
 	
 	private String surname;

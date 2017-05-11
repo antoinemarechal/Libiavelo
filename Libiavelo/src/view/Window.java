@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import model.PersonnelMember;
 import view.observers.CustomWindowListener;
 import view.panels.FormPanel;
 import view.panels.NewClient;
@@ -23,7 +24,7 @@ public class Window extends JFrame implements ActionListener {
 	private JMenu menuApplication , menuForms, menuInfos, menuResearch;
 	private JMenuItem jMenuItemQuit, jMenuItemAddClient, jMenuItemAddHouseholdMember, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
 	
-	public Window(){
+	public Window() {
 		super("MainWindow");
 		
 		this.setPreferredSize(new Dimension(500, 500));
@@ -88,6 +89,12 @@ public class Window extends JFrame implements ActionListener {
 		this.pack();		
 	}
 	
+	public void showConnectionPopup()
+	{
+		ConnectionDialog dialog = new ConnectionDialog(this, "Veuillez entrez vos informations de connexion :");
+		dialog.setVisible(true);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object object = arg0.getSource();	
@@ -140,5 +147,13 @@ public class Window extends JFrame implements ActionListener {
 		this.getContentPane().add(new FormPanel(new NewHouseholdMember(), this), BorderLayout.CENTER);
 		this.getContentPane().repaint();
 		this.setVisible(true);		
+	}
+
+	public void onConnectionSet(PersonnelMember member) {
+		// TODO :
+	}
+
+	public void onDialogClosed() {
+		System.exit(0);		
 	}
 }
