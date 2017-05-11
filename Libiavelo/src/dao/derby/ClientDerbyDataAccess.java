@@ -11,7 +11,6 @@ import dao.ClientDataAccess;
 import dao.ConnectionSingleton;
 import exception.InvalidNumberException;
 import exception.NoDataException;
-import model.Address;
 import model.Client;
 
 public class ClientDerbyDataAccess implements ClientDataAccess {
@@ -20,7 +19,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	 CREATE
 	 *************************************************************************************************/
 	public void addClient(Client client) {
-		Connection connexion = (Connection)  ( ConnectionSingleton.getInstance());
+		Connection connexion = (Connection)  (ConnectionSingleton.getInstance());
 		
 		try {
 			PreparedStatement preparedStatement = connexion.prepareStatement("Insert into Client values (10,'TEN'),(20,'TWENTY'),(30,'THIRTY') ");
@@ -41,29 +40,27 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			preparedStatement.setInt(1,clientID);
 			ResultSet queryResult = preparedStatement.executeQuery();
 
-			String clientSurname = queryResult.getString("NomDemandeur");
-			String clientFirstNames[] = new String[5];
-			clientFirstNames[1] = queryResult.getString("Prenom1");
-			clientFirstNames[2] = queryResult.getString("Prenom2");
-			clientFirstNames[3] = queryResult.getString("Prenom3");
-			clientFirstNames[4] = queryResult.getString("Prenom4");
-			clientFirstNames[5] = queryResult.getString("Prenom5");
-			int nationalNumber = queryResult.getInt("NumeroNational");
-			String street = queryResult.getString("NomRue");
-			String streetNumber = queryResult.getString("Numero");
-			String homeNumber = queryResult.getString("NumeroTel");
-			String phoneNumber = queryResult.getString("Gsm ");
-			Date subscriptionDate = queryResult.getDate("DateInscription");
-			boolean subscriptionValidated = queryResult.getBoolean("InscriptionValidee");
-			Double depositAmount = queryResult.getDouble("MontantCaution ");
-			
-			Date lastHouseholdRenewal = new Date(); // FIX ME
-			Date demand = new Date();
-			Date expiry = new Date();
-			
-			
-			Address address = null; // new Address(streetNumber, city, number, postalCode); TODO : fix me
-			client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, address, lastHouseholdRenewal, demand, expiry);
+			while(queryResult.next()) {
+				String clientSurname = queryResult.getString("NomDemandeur");
+				String clientFirstNames[] = new String[5];
+				clientFirstNames[1] = queryResult.getString("Prenom1");
+				clientFirstNames[2] = queryResult.getString("Prenom2");
+				clientFirstNames[3] = queryResult.getString("Prenom3");
+				clientFirstNames[4] = queryResult.getString("Prenom4");
+				clientFirstNames[5] = queryResult.getString("Prenom5");
+				Integer nationalNumber = queryResult.getInt("NumeroNational");
+				String streetName = queryResult.getString("NomRue");
+				String streetNumber = queryResult.getString("Numero");
+				String homeNumber = queryResult.getString("NumeroTel");
+				String phoneNumber = queryResult.getString("Gsm ");
+				Date subscriptionDate = queryResult.getDate("DateInscription");
+				Boolean subscriptionValidated = queryResult.getBoolean("InscriptionValidee");
+				Double depositAmount = queryResult.getDouble("MontantCaution ");
+				
+				client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, streetNumber, streetName, subscriptionDate);
+			}
+				
+							
 			// use label
 			// add while pour rows dans les cas ou result set.size > 1
 		} catch (SQLException e) {

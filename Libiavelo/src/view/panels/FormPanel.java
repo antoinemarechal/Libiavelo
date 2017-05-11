@@ -68,13 +68,18 @@ public class FormPanel extends JPanel implements ActionListener {
 					try  {
 						NewClient panel = (NewClient) form;
 						
-						int nationalNumber = panel.getNationalNumber();
+						Integer nationalNumber = panel.getNationalNumber();
 						String homeNumber = panel.getHomeNumber();
 						String phoneNumber = panel.getPhoneNumber();
-						String surname = panel.getSurname();
-						
-						String[] firstNames = panel.getFirstnames();
-						Client client = new Client(nationalNumber);
+						String clientSurname = panel.getSurname();
+						String[] clientFirstNames = panel.getFirstnames();
+						Boolean subscriptionValidated = false;
+						Double depositAmount = 50.0; // TODO : fix value, see dossier
+						String streetNumber = panel.getStreetNumber();
+						String streetName = panel.getStreetName();
+						Date subscriptionDate = new Date(System.currentTimeMillis()); // TODO : optionnel : faire façon cours avec greg calendar
+												
+						Client client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, streetNumber, streetName, subscriptionDate);
 								
 						ApplicationController appController = new ApplicationController();
 						appController.addClient(client);
@@ -103,7 +108,7 @@ public class FormPanel extends JPanel implements ActionListener {
 						String clientSurname = panel.getSurname();
 						String[] firstNames = panel.getFirstnames();
 						int nationalNumber = panel.getNationalNumber();
-						Client client = null;
+						Client client = null; // TODO : Quid de l'ajout du membre de ménage à quoi comment et où ?
 						HouseholdMember householdmember = new HouseholdMember(nationalNumber);
 						
 						ApplicationController appController = new ApplicationController();

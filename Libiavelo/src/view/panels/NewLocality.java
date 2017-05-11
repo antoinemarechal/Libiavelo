@@ -58,7 +58,7 @@ public class NewLocality extends Form {
 				throw new NoDataException("Code postal");
 			Integer.parseInt(postalCode);
 		} catch (NumberFormatException numberFormatException) {
-			throw new NotANumberException(postalCode);
+			throw new NotANumberException("Code postal", postalCode);
 		}
 		return postalCode;
 	}

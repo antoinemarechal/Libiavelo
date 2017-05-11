@@ -123,7 +123,7 @@ public class NewHouseholdMember extends Form {
 				throw new NoDataException("Numéro national");
 			nationalNumber = Integer.parseInt(textFieldContent);
 		} catch (NumberFormatException numberFormatException) {
-			throw new NotANumberException(textFieldContent);
+			throw new NotANumberException("Numéro national", textFieldContent);
 		}
 		return nationalNumber;
 	}
