@@ -2,9 +2,10 @@ package dao.derby;
 
 import java.util.ArrayList;
 
+import dao.BikeStationDataAccess;
 import model.BikeStation;
 
-public class BikeStationDerbyDataAccess {
+public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 	public BikeStationDerbyDataAccess() {
 	}
 	

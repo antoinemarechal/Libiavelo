@@ -2,9 +2,10 @@ package dao.derby;
 
 import java.util.ArrayList;
 
+import dao.PersonnelMemberDataAccess;
 import model.PersonnelMember;
 
-public class PersonnelMemberDerbyDataAccess {
+public class PersonnelMemberDerbyDataAccess implements PersonnelMemberDataAccess {
 	public PersonnelMemberDerbyDataAccess() {
 	}
 	/*************************************************************************************************

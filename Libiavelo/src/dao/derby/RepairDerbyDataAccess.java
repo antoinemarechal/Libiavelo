@@ -2,9 +2,10 @@ package dao.derby;
 
 import java.util.ArrayList;
 
+import dao.RepairDataAccess;
 import model.Repair;
 
-public class RepairDerbyDataAccess {
+public class RepairDerbyDataAccess implements RepairDataAccess {
 	public RepairDerbyDataAccess() {
 	}
 	/*************************************************************************************************

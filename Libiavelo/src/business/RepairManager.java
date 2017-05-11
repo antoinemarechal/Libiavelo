@@ -2,11 +2,12 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.RepairDataAccess;
 import dao.derby.RepairDerbyDataAccess;
 import model.Repair;
 
 public class RepairManager {
-	RepairDerbyDataAccess repairDerbyDataAccess;
+	RepairDataAccess repairDerbyDataAccess;
 	
 	public RepairManager() {
 		repairDerbyDataAccess = new RepairDerbyDataAccess();

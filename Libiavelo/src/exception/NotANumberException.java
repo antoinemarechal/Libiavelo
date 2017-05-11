@@ -3,8 +3,10 @@ package exception;
 public class NotANumberException extends Exception {
 	private static final long serialVersionUID = 1L;
 	private String source;
+	private String error;
 	
-	public NotANumberException(String source) {
+	public NotANumberException(String source, String error) {
+		this.error = error;
 		this.source = source;
 	}
 	
@@ -12,8 +14,12 @@ public class NotANumberException extends Exception {
 		return source;
 	}
 	
+	public String getError() {
+		return error;
+	}
+	
 	@Override
 	public String toString() {
-		return source + " n'est pas un nombre";
+		return "Le champ " + source + " requiert un nombre, la valeur " + error + " est incorrect";
 	}
 }

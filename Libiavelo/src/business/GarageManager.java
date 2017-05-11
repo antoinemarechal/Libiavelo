@@ -2,11 +2,12 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.GarageDataAccess;
 import dao.derby.GarageDerbyDataAccess;
 import model.Garage;
 
 public class GarageManager {
-	GarageDerbyDataAccess garageDataAccess;
+	GarageDataAccess garageDataAccess;
 	
 	public GarageManager() {
 		garageDataAccess = new GarageDerbyDataAccess();

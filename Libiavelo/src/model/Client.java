@@ -11,40 +11,37 @@ public class Client extends Person {
 	private Boolean subsriptionValidated;
 	private Double depositAmount;
 	
+	private String streetName, streetNumber;
 	private String homeNumber, phoneNumber;
-	private Date lastHouseholdRenewal;
+	private Date subscriptionDate;
 	private ArrayList<HouseholdMember> household;
 	
-	private Address address;
 	private Subscription subscription;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public Client(int nationalNumber) throws InvalidNumberException {
+	public Client(Integer nationalNumber) throws InvalidNumberException {
 		this.setNationalNumber(nationalNumber);
 	}
 	
-	public Client(int nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, boolean subsriptionValidation, double depositAmount, Address address, Date lastHouseholdRenewal, Date demand, Date expiry) throws InvalidNumberException, NoDataException {
+	public Client(Integer nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Double depositAmount, String streetNumber, String streetName, Date subscriptionDate) throws InvalidNumberException, NoDataException {
 		this.setNationalNumber(nationalNumber);
 		this.setHomeNumber(homeNumber);
 		this.setPhoneNumber(phoneNumber);
 		this.setSurname(clientSurname);
 		this.setFirstNames(clientFirstNames);
-		this.setSubsriptionValidated(subsriptionValidation);
+		this.setSubsriptionValidated(subscriptionValidated);
 		this.setDepositAmount(depositAmount);
-		this.setAddress(address);
-		this.setLatestHouseholdRenewal(lastHouseholdRenewal);
-		
-		int subscriptioDuration = 12; // TODO : de-troll me
-		String description = "az";
-		this.setSubscription(new Subscription(1, demand, expiry, subscriptioDuration, description));
+		this.setStreetName(streetName);
+		this.setStreetNumber(streetNumber);
+		this.setSubscriptionDate(subscriptionDate);
 		}
 
 	/*************************************************************************************************
 	 GETTERS
 	 *************************************************************************************************/
-	public int getClientNumber() {
+	public Integer getClientNumber() {
 		return clientNumber;
 	}
 
@@ -56,12 +53,16 @@ public class Client extends Person {
 		return phoneNumber;
 	}
 
-	public double getDepositAmount() {
+	public Double getDepositAmount() {
 		return depositAmount;
 	}
 	
-	public Address getAddress() {
-		return address;
+	public String getStreetNumber() {
+		return streetNumber;
+	}
+	
+	public String getStreetName() {
+		return streetName;
 	}
 
 	public Subscription getSubscription() {
@@ -72,46 +73,49 @@ public class Client extends Person {
 		return household;
 	}
 	
-	public boolean isSubsriptionValidated() {
+	public Boolean isSubsriptionValidated() {
 		return subsriptionValidated;
 	}
 	
-	public Date getLatestHouseholdRenewal() {
-		return lastHouseholdRenewal;
+	public Date getSubscriptionDate() {
+		return subscriptionDate;
 	}
 	
 	/*************************************************************************************************
 	 SETTERS
 	 *************************************************************************************************/
-	// int or not int ?
 	public void setHomeNumber(String homeNumber) {
 		this.homeNumber = homeNumber;
 	}
 	
-	// int or not int ?
+	
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public void setSubsriptionValidated(boolean subsriptionValidated) {
+	public void setSubsriptionValidated(Boolean subsriptionValidated) {
 		this.subsriptionValidated = subsriptionValidated;
 	}
 
 	// exception si depositAmount<0 ? ou pas pour remboursement ?
-	public void setDepositAmount(double depositAmount) {
+	public void setDepositAmount(Double depositAmount) {
 		this.depositAmount = depositAmount;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
+	}
+	
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 	
 	public void setSubscription(Subscription subscription) {
 		this.subscription = subscription;
 	}
 	
-	private void setLatestHouseholdRenewal(Date lastHouseholdRenewal) {
-		this.lastHouseholdRenewal = lastHouseholdRenewal;
+	private void setSubscriptionDate(Date lastHouseholdRenewal) {
+		this.subscriptionDate = lastHouseholdRenewal;
 		
 	}
 	/***********************************************************************************************

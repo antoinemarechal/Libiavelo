@@ -12,8 +12,8 @@ import exception.NotANumberException;
 public class NewClient extends Form {
 	private static final long serialVersionUID = 1L;
 	
-	private JLabel surnameLabel, name1Label, name2Label, name3Label, name4Label, name5Label, nationalNumberLabel, homeNumberLabel, phoneNumberLabel;
-	private JTextField surnameTextField, name1TextField, name2TextField, name3TextField, name4TextField, name5TextField, nationalNumberTextField, homeNumberTextField, phoneNumberTextField;
+	private JLabel surnameLabel, name1Label, name2Label, name3Label, name4Label, name5Label, nationalNumberLabel, homeNumberLabel, phoneNumberLabel, streetNameLabel, streetNumberLabel;
+	private JTextField surnameTextField, name1TextField, name2TextField, name3TextField, name4TextField, name5TextField, nationalNumberTextField, homeNumberTextField, phoneNumberTextField, streetNameTextField, streetNumberTextField;
 	
 	public NewClient() {
 		super();
@@ -21,7 +21,7 @@ public class NewClient extends Form {
 		this.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder(" Nouveau client : "), 
 				BorderFactory.createEmptyBorder(5, 10, 5, 10)));
-		this.setLayout(new GridLayout(9, 2, 15, 5));
+		this.setLayout(new GridLayout(11, 2, 15, 5));
 				
 		super.setFormType(PanelType.ADD_CLIENT);
 		
@@ -87,6 +87,20 @@ public class NewClient extends Form {
 		phoneNumberTextField = new JTextField("", 10);
 		this.add(phoneNumberLabel);
 		this.add(phoneNumberTextField);
+		
+		streetNumberLabel = new JLabel("Numéro de rue :");
+		streetNumberLabel.setLabelFor(streetNumberTextField);
+		streetNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
+		streetNumberTextField = new JTextField("", 10);
+		this.add(streetNumberLabel);
+		this.add(streetNumberTextField);
+		
+		streetNameLabel = new JLabel("Nom de rue :");
+		streetNameLabel.setLabelFor(streetNameTextField);
+		streetNameLabel.setHorizontalAlignment(JLabel.RIGHT);
+		streetNameTextField = new JTextField("", 10);
+		this.add(streetNameLabel);
+		this.add(streetNameTextField);
 	}
 	
 	/**
@@ -134,7 +148,7 @@ public class NewClient extends Form {
 				throw new NoDataException("Numéro national");
 			nationalNumber = Integer.parseInt(textFieldContent);
 		} catch (NumberFormatException numberFormatException) {
-			throw new NotANumberException(textFieldContent);
+			throw new NotANumberException("Numéro national", textFieldContent);
 		}
 		return nationalNumber;
 	}
@@ -145,16 +159,19 @@ public class NewClient extends Form {
 	 * @throws NotANumberException si cette chaï¿½ne de caractï¿½re contient autre chose de des nombres
 	 * @throws NoDataException 
 	 */
-	public String getHomeNumber() throws NotANumberException, NoDataException {
+	public String getHomeNumber() throws NotANumberException {
 		String homeNumber = homeNumberTextField.getText();
-		try {
-			if (homeNumber.length() == 0)
-				throw new NoDataException("Numéro de fixe");
-			Integer.parseInt(homeNumber);
-		} catch (NumberFormatException numberFormatException) {
-			throw new NotANumberException(homeNumber);
+		if (homeNumber.length() == 0) {
+			return "";			
 		}
-		return homeNumber;
+		else {
+			try {
+				Integer.parseInt(homeNumber);
+			} catch (NumberFormatException numberFormatException) {
+					throw new NotANumberException("Numéro de fixe", homeNumber);
+			}
+			return homeNumber;
+		}		
 	}
 	
 	/**
@@ -163,18 +180,49 @@ public class NewClient extends Form {
 	 * @throws NotANumberException si cette chaï¿½ne de caractï¿½re contient autre chose de des nombres
 	 * @throws NoDataException 
 	 */
-	public String getPhoneNumber() throws NotANumberException, NoDataException {
+	public String getPhoneNumber() throws NotANumberException {
 		String phoneNumber = phoneNumberTextField.getText();
-		try {
-			if (phoneNumber.length() == 0)
-				throw new NoDataException("Numéro de téléphone");
-			Integer.parseInt(phoneNumber);
-		} catch (NumberFormatException numberFormatException) {
-			throw new NotANumberException(phoneNumber);
+		if (phoneNumber.length() == 0) {
+			return "";
 		}
-		return phoneNumber;
+		else {
+			try {
+				Integer.parseInt(phoneNumber);
+			} catch (NumberFormatException numberFormatException) {
+					throw new NotANumberException("Numéro de portable", phoneNumber);
+			}
+			return phoneNumber;
+		}	
 	}
-
+	
+	
+	/**
+	 * 
+	 * @return une chaï¿½ne de caractï¿½re contenant le nom entrï¿½ par l'utilisateur
+	 * @throws NoDataException si la chaï¿½ne de caractï¿½re est vide
+	 */
+	public String getStreetNumber() throws NoDataException {
+		String streetNumber = streetNumberTextField.getText();
+		if(streetNumber.length() == 0)
+			throw new NoDataException("Numéro de rue");
+		else
+			return streetNumber;
+	}
+	
+	/**
+	 * 
+	 * @return une chaï¿½ne de caractï¿½re contenant le nom entrï¿½ par l'utilisateur
+	 * @throws NoDataException si la chaï¿½ne de caractï¿½re est vide
+	 */
+	public String getStreetName() throws NoDataException {
+		String streetName = streetNameTextField.getText();
+		if(streetName.length() == 0)
+			throw new NoDataException("Nom de rue");
+		else
+			return streetName;
+	}
+	
+	
 	@Override
 	public void reset() 
 	{

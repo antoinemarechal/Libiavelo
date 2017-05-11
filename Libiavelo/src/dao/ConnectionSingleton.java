@@ -1,10 +1,12 @@
 package dao;
 
+import java.sql.Connection;
+
 public class ConnectionSingleton {
 
-	private static ConnectionSingleton connection;
+	private static Connection connection;
 	
-	public static  ConnectionSingleton getInstance() {
+	public static  Connection getInstance() {
 		if (connection == null) {/*
 			try {
 	            Context ctx = new InitialContext();

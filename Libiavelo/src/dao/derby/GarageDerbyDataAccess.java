@@ -2,9 +2,10 @@ package dao.derby;
 
 import java.util.ArrayList;
 
+import dao.GarageDataAccess;
 import model.Garage;
 
-public class GarageDerbyDataAccess {
+public class GarageDerbyDataAccess implements GarageDataAccess {
 	public GarageDerbyDataAccess() {
 	}
 	/*************************************************************************************************

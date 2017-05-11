@@ -2,13 +2,14 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.AddressDataAccess;
 import dao.derby.AddressDerbyDataAccess;
 import model.Address;
 import model.Client;
 import model.Estate;
 
 public class AddressManager {
-	AddressDerbyDataAccess addressDataAccess;
+	AddressDataAccess addressDataAccess;
 	
 	public AddressManager() {
 		addressDataAccess = new AddressDerbyDataAccess();

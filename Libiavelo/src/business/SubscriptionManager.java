@@ -2,11 +2,12 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.SubscriptionDataAccess;
 import dao.derby.SubscriptionDerbyDataAccess;
 import model.Subscription;
 
 public class SubscriptionManager {
-	SubscriptionDerbyDataAccess subscriptionDataAccess;
+	SubscriptionDataAccess subscriptionDataAccess;
 	
 	public SubscriptionManager() {
 		subscriptionDataAccess = new SubscriptionDerbyDataAccess();

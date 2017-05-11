@@ -2,11 +2,12 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.ClientDataAccess;
 import dao.derby.ClientDerbyDataAccess;
 import model.Client;
 
 public class ClientManager {
-	ClientDerbyDataAccess clientDataAccess;
+	ClientDataAccess clientDataAccess;
 	
 	public ClientManager() {
 		clientDataAccess = new ClientDerbyDataAccess();

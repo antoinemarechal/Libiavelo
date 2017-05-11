@@ -2,12 +2,12 @@ package dao.derby;
 
 import java.util.ArrayList;
 
-import dao.ConnectionSingleton;
+import dao.AddressDataAccess;
 import model.Address;
 import model.Client;
 import model.Estate;
 
-public class AddressDerbyDataAccess {
+public class AddressDerbyDataAccess implements AddressDataAccess {
 	public AddressDerbyDataAccess() {
 	}
 	

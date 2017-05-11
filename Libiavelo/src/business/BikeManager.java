@@ -2,12 +2,13 @@ package business;
 
 import java.util.ArrayList;
 
+import dao.BikeDataAccess;
 import dao.derby.BikeDerbyDataAccess;
 import model.Bike;
 import model.Client;
 
 public class BikeManager {
-	BikeDerbyDataAccess bikeDataAccess;
+	BikeDataAccess bikeDataAccess;
 	
 	public BikeManager() {
 		bikeDataAccess = new BikeDerbyDataAccess();
