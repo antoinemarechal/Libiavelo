@@ -44,7 +44,7 @@ public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 				
 				ResultSetMetaData metaData = queryResult.getMetaData();
 				if (metaData.getColumnCount() == 1) {
-					Garage garage = new Garage(); // TODO : FIX ME
+					Garage garage = new Garage(); // TODO : récup garage. demande de faire garage dans dao
 					localisation = new Localisation(available, bike, garage);
 				}
 				else {
@@ -84,7 +84,7 @@ public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 				
 				ResultSetMetaData metaData = queryResult.getMetaData();
 				if (metaData.getColumnCount() == 1) {
-					Garage garage = new Garage(); // TODO : FIX ME
+					Garage garage = new Garage(); // TODO : récup garage dans bd. implique de faire garage dans dao
 					localisation = new Localisation(available, bike, garage);
 					localisations.add(localisation);
 				}

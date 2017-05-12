@@ -21,11 +21,11 @@ public class Client extends Person {
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public Client(Integer nationalNumber) throws InvalidNumberException {
+	public Client(String nationalNumber) throws InvalidNumberException {
 		this.setNationalNumber(nationalNumber);
 	}
 	
-	public Client(Integer nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Integer depositAmount, String streetNumber, String streetName, Date subscriptionDate) throws InvalidNumberException, NoDataException {
+	public Client(String nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Integer depositAmount, String streetNumber, String streetName, Date subscriptionDate) throws InvalidNumberException, NoDataException {
 		this.setNationalNumber(nationalNumber);
 		this.setHomeNumber(homeNumber);
 		this.setPhoneNumber(phoneNumber);
@@ -74,7 +74,7 @@ public class Client extends Person {
 	}
 	
 	public int getLocality() {
-		// TODO Auto-generated method stub
+		// FIXME : missin
 		return 0;
 	}
 	

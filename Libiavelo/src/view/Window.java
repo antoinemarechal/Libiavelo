@@ -150,7 +150,7 @@ public class Window extends JFrame implements ActionListener {
 	}
 
 	public void onConnectionSet(PersonnelMember member) {
-		// TODO :
+		// TODO : ?
 	}
 
 	public void onDialogClosed() {

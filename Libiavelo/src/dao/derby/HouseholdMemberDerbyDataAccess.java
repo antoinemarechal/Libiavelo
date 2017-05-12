@@ -37,7 +37,6 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 			if (firstNames[5] != "")
 				preparedStatement.setString(7, firstNames[5]);			
 		} catch (SQLException e) {
-			// TODO : fix ME
 			e.printStackTrace();
 		}
 	}
@@ -61,7 +60,7 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 				firstNames[5] = queryResult.getString("Prenom5");
 				String nationalNumber = queryResult.getString("NumeroNational");
 				
-				householdMember = new HouseholdMember(0); // TODO : swap nationalNumber in lieu of 0
+				householdMember = new HouseholdMember(nationalNumber);
 				householdMember.setSurname(surname);
 				householdMember.setFirstNames(firstNames);
 				
@@ -96,7 +95,7 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 				firstNames[5] = queryResult.getString("Prenom5");
 				String nationalNumber = queryResult.getString("NumeroNational");
 				
-				householdMember = new HouseholdMember(0); // TODO : swap nationalNumber in lieu of 0
+				householdMember = new HouseholdMember(nationalNumber);
 				householdMember.setSurname(surname);
 				householdMember.setFirstNames(firstNames);
 				

@@ -1,16 +1,13 @@
 package model;
 
-import java.util.Date;
-
 import exception.InvalidNumberException;
 import exception.NoDataException;
 
-public abstract class Person { // FIXME : pas de date de naissance dans membre de personnel ni de numero national
-	private Integer nationalNumber;
+public abstract class Person {
+	private String nationalNumber;
 	
 	private String surname;
 	private String[] firstNames;
-	private Date birthDate;
 	
 	/*************************************************************************************************
 	 GETTERS
@@ -21,11 +18,8 @@ public abstract class Person { // FIXME : pas de date de naissance dans membre d
 	public String[] getFirstNames() {
 		return firstNames;
 	}
-	public int getNationalNumber() {
+	public String getNationalNumber() {
 		return nationalNumber;
-	}
-	public Date getBirthDate() {
-		return birthDate;
 	}
 	
 	/*************************************************************************************************
@@ -42,14 +36,10 @@ public abstract class Person { // FIXME : pas de date de naissance dans membre d
 		this.firstNames = firstNames;
 	}
 	
-	void setNationalNumber(int nationalNumber) throws InvalidNumberException {
-		if (nationalNumber < 0) 
-			throw new InvalidNumberException(nationalNumber);
+	void setNationalNumber(String nationalNumber) throws InvalidNumberException {
+		if (nationalNumber.length() != 10) 
+			throw new InvalidNumberException(0); // FIXME : still the format prob
 		else
 			this.nationalNumber = nationalNumber;
-	}
-	
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
 	}
 }

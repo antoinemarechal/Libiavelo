@@ -140,13 +140,13 @@ public class NewClient extends Form {
 	 * @throws NotANumberException si l'utilisateur n'entre pas un nombre
 	 * @throws NoDataException 
 	 */
-	public int getNationalNumber() throws NotANumberException, NoDataException {
-		int nationalNumber;
+	public String getNationalNumber() throws NotANumberException, NoDataException {
+		String nationalNumber = null;
 		String textFieldContent = nationalNumberTextField.getText();
 		try {
 			if (textFieldContent.length() == 0)
 				throw new NoDataException("Numéro national");
-			nationalNumber = Integer.parseInt(textFieldContent);
+			Integer.parseInt(textFieldContent); // FIXME : format xxx-xxxxxx-xxx like, voir check de la BD
 		} catch (NumberFormatException numberFormatException) {
 			throw new NotANumberException("Numéro national", textFieldContent);
 		}

@@ -36,7 +36,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			if (firstNames[5] != "")
 				preparedStatement.setString(6, firstNames[5]);		
 			
-			preparedStatement.setInt(7, client.getNationalNumber());
+			preparedStatement.setString(7, client.getNationalNumber());
 			preparedStatement.setString(8, client.getStreetName());
 			preparedStatement.setString(9, client.getStreetNumber());
 			
@@ -52,7 +52,6 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			
 			
 		} catch (SQLException e) {
-			// TODO : fix ME
 			e.printStackTrace();
 		}
 	}
@@ -76,7 +75,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 				clientFirstNames[3] = queryResult.getString("Prenom3");
 				clientFirstNames[4] = queryResult.getString("Prenom4");
 				clientFirstNames[5] = queryResult.getString("Prenom5");
-				Integer nationalNumber = queryResult.getInt("NumeroNational");
+				String nationalNumber = queryResult.getString("NumeroNational");
 				String streetName = queryResult.getString("NomRue");
 				String streetNumber = queryResult.getString("Numero");
 				String homeNumber = queryResult.getString("NumeroTel");
@@ -119,7 +118,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 				clientFirstNames[3] = queryResult.getString("Prenom3");
 				clientFirstNames[4] = queryResult.getString("Prenom4");
 				clientFirstNames[5] = queryResult.getString("Prenom5");
-				Integer nationalNumber = queryResult.getInt("NumeroNational");
+				String nationalNumber = queryResult.getString("NumeroNational");
 				String streetName = queryResult.getString("NomRue");
 				String streetNumber = queryResult.getString("Numero");
 				String homeNumber = queryResult.getString("NumeroTel");

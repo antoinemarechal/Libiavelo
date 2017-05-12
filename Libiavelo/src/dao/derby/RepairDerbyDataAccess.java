@@ -4,17 +4,15 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.ConnectionSingleton;
 import dao.RepairDataAccess;
-import exception.InvalidNumberException;
+import exception.InvalidDateException;
+import exception.NoDataException;
 import model.Bike;
-import model.BikeStation;
 import model.Garage;
-import model.Localisation;
 import model.PersonnelMember;
 import model.Repair;
 
@@ -41,8 +39,8 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 				Date exitDate = queryResult.getDate("DateFinReparation");
 				Integer bikeID = queryResult.getInt("NumeroVelo");
 				Integer premisesID = queryResult.getInt("CodeGarage");
-				Integer verifierID = queryResult.getInt("Matricule");
-				String notes = queryResult.getString("Remarques");
+				String verifierID = queryResult.getString("Matricule");
+				String note = queryResult.getString("Remarques");
 				String description = queryResult.getString("DescriptionProbleme");
 				
 				BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
@@ -54,8 +52,12 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 				PersonnelMemberDerbyDataAccess personnelMemberDerbyDataAccess = new PersonnelMemberDerbyDataAccess();
 				PersonnelMember verifier = personnelMemberDerbyDataAccess.getPersonnelMember(verifierID);
 				repair = new Repair(bike, entryDate, garage, verifier);
+				repair.setDescription(description);
+				if (exitDate == null)
+					repair.setEndDate(exitDate);
+				repair.setNote(note);
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | NoDataException | InvalidDateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -74,8 +76,8 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 				Date exitDate = queryResult.getDate("DateFinReparation");
 				Integer bikeID = queryResult.getInt("NumeroVelo");
 				Integer premisesID = queryResult.getInt("CodeGarage");
-				Integer verifierID = queryResult.getInt("Matricule");
-				String notes = queryResult.getString("Remarques");
+				String verifierID = queryResult.getString("Matricule");
+				String note = queryResult.getString("Remarques");
 				String description = queryResult.getString("DescriptionProbleme");
 				
 				BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
@@ -87,9 +89,19 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 				PersonnelMemberDerbyDataAccess personnelMemberDerbyDataAccess = new PersonnelMemberDerbyDataAccess();
 				PersonnelMember verifier = personnelMemberDerbyDataAccess.getPersonnelMember(verifierID);
 				repair = new Repair(bike, entryDate, garage, verifier);
+				repair.setDescription(description);
+				if (exitDate == null)
+					repair.setEndDate(exitDate);
+				repair.setNote(note);
 				repairs.add(repair);
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidDateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

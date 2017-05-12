@@ -6,7 +6,7 @@ import dao.TransportationOrderDataAccess;
 import model.TransportationOrder;
 
 public class TransportationOrderDerbyDataAccess implements TransportationOrderDataAccess {
-	public TransportationOrderDerbyDataAccess() {
+	public TransportationOrderDerbyDataAccess() { // FIXME : DO dis + mettre la requête du join dans la table "principale" de la requête
 	}
 	/*************************************************************************************************
 	 CREATE

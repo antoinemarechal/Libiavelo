@@ -63,12 +63,12 @@ public class FormPanel extends JPanel implements ActionListener {
 		}
 		
 		else if(event.getSource() == validateButton) {
-			switch (form.getFormType()) {// TODO : indiquer le champ d'où vient l'erreur dans le popup
+			switch (form.getFormType()) { // FIXME : sortir vérification des inputs de la création de client et check pour chaque champ en-dehors
 				case ADD_CLIENT :
 					try  {
 						NewClient panel = (NewClient) form;
 						
-						Integer nationalNumber = panel.getNationalNumber();
+						String nationalNumber = panel.getNationalNumber();
 						String homeNumber = panel.getHomeNumber();
 						String phoneNumber = panel.getPhoneNumber();
 						String clientSurname = panel.getSurname();
@@ -87,11 +87,12 @@ public class FormPanel extends JPanel implements ActionListener {
 						int addMember = JOptionPane.showConfirmDialog(parent, "Souhaiez-vous ajouter quelqu'un à cette abonnement ?", "Ajouter du monde", JOptionPane.YES_NO_OPTION);
 						if (addMember == JOptionPane.OK_OPTION) {
 							if (parent != null && parent instanceof Window) 
-							((Window) parent).changeToHouseholdMemberForm();
+								((Window) parent).changeToHouseholdMemberForm();
 						}
 							
 						else if (addMember == JOptionPane.NO_OPTION) {
-							// TODO	: décider de l'affichage et afficher
+							if (parent != null && parent instanceof Window) 
+								((Window) parent).returnToMainMenu();
 						}
 								
 					} 
@@ -101,17 +102,17 @@ public class FormPanel extends JPanel implements ActionListener {
 					break;
 					
 				case ADD_HOUSEHOLD_MEMBER :
-					try {
+					try {// FIXME : remove getters, create yolo-IFs and a validate method in panel to checktextfield content. messageDialaog(parent, message) au bas des yolo-IFs, avec init de message au cas par cas
 						NewHouseholdMember panel = (NewHouseholdMember) form;
 					
 						Date birthDate = panel.getBirthDate();	
 						String clientSurname = panel.getSurname();
 						String[] firstNames = panel.getFirstnames();
-						int nationalNumber = panel.getNationalNumber();
-						Client client = null; // TODO : Quid de l'ajout du membre de ménage à quoi comment et où ?
+						String nationalNumber = panel.getNationalNumber();
+						Client client = null; // FIXME : en attente d'un rework de la vue
 						HouseholdMember householdmember = new HouseholdMember(birthDate, firstNames, nationalNumber, clientSurname);
 						ApplicationController appController = new ApplicationController();
-						appController.addHouseholdMember(householdmember, client.getClientNumber()); // TODO 'bout this ?
+						appController.addHouseholdMember(householdmember, client.getClientNumber()); // FIXME : related to ajout membre mén.
 						
 						int addMember = JOptionPane.showConfirmDialog(parent, "Souhaiez-vous ajouter quelqu'un à cette abonnement ?", "Ajouter du monde", JOptionPane.YES_NO_OPTION);
 						if (addMember == JOptionPane.OK_OPTION) {
