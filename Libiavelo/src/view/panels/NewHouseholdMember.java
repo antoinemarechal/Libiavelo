@@ -92,7 +92,7 @@ public class NewHouseholdMember extends Form { // TODO : rename + 2eme construct
 		this.add(nationalNumberLabel);
 		this.add(nationalNumberTextField);
 	}
-
+	
 	@Override
 	public void reset() 
 	{

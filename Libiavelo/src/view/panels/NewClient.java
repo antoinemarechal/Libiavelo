@@ -221,4 +221,5 @@ public class NewClient extends Form { // TODO : rename + 2eme constructeur pour 
 	{
 		return formGeneratedObject;
 	}
+	
 }

@@ -15,11 +15,11 @@ public class HouseholdMember extends Person {
 		super.setNationalNumber(nationalNumber);
 	}
 	
-	public HouseholdMember(Date birthDate, String[] firstNames, String nationalNumber, String clientSurname) throws InvalidNumberException, NoDataException{
+	public HouseholdMember(Date birthDate, String[] firstNames, String nationalNumber, String surname) throws InvalidNumberException, NoDataException{
 		this.setBirthDate(birthDate);
 		super.setFirstNames(firstNames);
 		super.setNationalNumber(nationalNumber);
-		super.setSurname(clientSurname);
+		super.setSurname(surname);
 	}
 	
 	public Date getBirthDate() {

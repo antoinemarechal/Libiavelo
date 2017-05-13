@@ -53,6 +53,7 @@ public class FormPanel extends JPanel implements ActionListener {
 			previous.goBackTo();
 		}
 		else if(event.getSource() == validateButton) {
+
 			if(form.validateForm())
 			{
 				switch (form.getFormType()) {
