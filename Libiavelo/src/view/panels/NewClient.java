@@ -152,20 +152,26 @@ public class NewClient extends Form {
 			
 		
 		String homeNumber = homeNumberTextField.getText();
-		try {
-			Integer.parseInt(homeNumber);
-		} catch (NumberFormatException numberFormatException) {
-			JOptionPane.showMessageDialog(getParent(), "Le champ \"Numéro de fixe\" ne doit contenir que des nombres");
-			return false;
+		if (homeNumber.length() > 0) {
+			try {
+				Integer.parseInt(homeNumber);
+			} catch (NumberFormatException numberFormatException) {
+				JOptionPane.showMessageDialog(getParent(), "Le champ \"Numéro de fixe\" ne doit contenir que des nombres");
+				return false;
+			}
 		}
 		
+		
 		String phoneNumber = phoneNumberTextField.getText();
-		try {
-			Integer.parseInt(phoneNumber);
-		} catch (NumberFormatException numberFormatException) {
-			JOptionPane.showMessageDialog(getParent(), "Le champ \"Numéro de gsm\" ne doit contenir que des nombres");
-			return false;
+		if (phoneNumber.length() > 0) {
+			try {
+				Integer.parseInt(phoneNumber);
+			} catch (NumberFormatException numberFormatException) {
+				JOptionPane.showMessageDialog(getParent(), "Le champ \"Numéro de portable\" ne doit contenir que des nombres");
+				return false;
+			}
 		}
+		
 		
 		if (name1TextField.getText().length() == 0) {
 			JOptionPane.showMessageDialog(getParent(), "Le champ obligatoire \"Prénom\" a été omis");
