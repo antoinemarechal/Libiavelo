@@ -2,13 +2,17 @@ package dao.derby;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.ConnectionSingleton;
 import dao.LocalityDataAccess;
+import exception.InvalidNumberException;
+import exception.NoDataException;
 import model.Client;
 import model.Estate;
+import model.HouseholdMember;
 import model.Locality;
 
 public class LocalityDerbyDataAccess implements LocalityDataAccess {
@@ -41,7 +45,27 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 	 READ
 	 *************************************************************************************************/
 	public ArrayList<Locality> getAllLocalities() {
-		return null;
+		ArrayList<Locality> localities = new ArrayList<Locality>();
+		Locality locality;
+		Connection connexion = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localite");
+			ResultSet queryResult = preparedStatement.executeQuery();
+			while(queryResult.next()) {
+				locality = new Locality(queryResult.getString("CodePostal "), queryResult.getInt("Libelle"));
+				localities.add(locality);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidNumberException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return localities;
 	}
 	
 	public Locality getClientLocality(Client client) {
