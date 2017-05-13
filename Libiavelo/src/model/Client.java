@@ -36,7 +36,7 @@ public class Client extends Person {
 		this.setStreetName(streetName);
 		this.setStreetNumber(streetNumber);
 		this.setSubscriptionDate(subscriptionDate);
-		}
+	}
 
 	/*************************************************************************************************
 	 GETTERS

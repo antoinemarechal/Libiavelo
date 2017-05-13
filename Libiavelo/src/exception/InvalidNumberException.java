@@ -1,7 +1,7 @@
 package exception;
 
 public class InvalidNumberException extends Exception {
-	private static final long serialVersionUID = 1L;
+
 	private int number;
 	
 	public InvalidNumberException(int number) {
@@ -13,7 +13,7 @@ public class InvalidNumberException extends Exception {
 	}
 	
 	@Override
-	public String toString() {
-		return number + " est un nombre invalide";
+	public String getMessage() {
+		return number + " est un nombre invalide.";
 	}
 }

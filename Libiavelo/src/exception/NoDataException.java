@@ -1,7 +1,7 @@
 package exception;
 
 public class NoDataException extends Exception {
-	private static final long serialVersionUID = 1L;
+
 	String source;
 	
 	public NoDataException() {
@@ -12,7 +12,7 @@ public class NoDataException extends Exception {
 	}
 	
 	@Override
-	public String toString() {
-		return "Le champ obligatoire " + source + " a été omis";
+	public String getMessage() {
+		return "Le champ obligatoire " + source + " a été omis.";
 	}
 }

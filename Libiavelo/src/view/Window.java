@@ -10,27 +10,27 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import model.PersonnelMember;
 import view.observers.CustomWindowListener;
 import view.panels.FormPanel;
+import view.panels.LocalityEdition;
 import view.panels.NewClient;
-import view.panels.NewHouseholdMember;
+import view.panels.PreviousPanel;
 
-public class Window extends JFrame implements ActionListener {
-	private static final long serialVersionUID = 1L;
+@SuppressWarnings("serial")
+public class Window extends JFrame implements ActionListener, PreviousPanel {
 	
 	private JMenuBar menuBar;
 	private JMenu menuApplication , menuForms, menuInfos, menuResearch;
-	private JMenuItem jMenuItemQuit, jMenuItemAddClient, jMenuItemAddHouseholdMember, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
+	private JMenuItem jMenuItemQuit, jMenuItemClient, jMenuItemLocality, jMenuItemBike, jMenuItemRepair, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
 	
 	public Window() {
 		super("MainWindow");
 		
 		this.setPreferredSize(new Dimension(500, 500));
-		
-		CustomWindowListener mainWindowListener = new CustomWindowListener();
-		this.addWindowListener(mainWindowListener);
+		this.addWindowListener(new CustomWindowListener());
 		
 		menuBar = new JMenuBar();
 		
@@ -42,12 +42,17 @@ public class Window extends JFrame implements ActionListener {
 		jMenuItemQuit = new JMenuItem("Quitter");
 		jMenuItemQuit.addActionListener(this);
 		
-		jMenuItemAddClient = new JMenuItem("Nouveau client");
-		jMenuItemAddClient.addActionListener(this);
+		jMenuItemClient = new JMenuItem("Clients");
+		jMenuItemClient.addActionListener(this);
 		
-		jMenuItemAddHouseholdMember = new JMenuItem("Nouveau membre de famille");
-		jMenuItemAddHouseholdMember.addActionListener(this); 
+		jMenuItemLocality = new JMenuItem("Localités");
+		jMenuItemLocality.addActionListener(this);
 		
+		jMenuItemBike = new JMenuItem("Vélos");
+		jMenuItemBike.addActionListener(this);
+		
+		jMenuItemRepair = new JMenuItem("Réparations");
+		jMenuItemRepair.addActionListener(this);		
 		
 		jMenuItemHelp = new JMenuItem("Aide");
 		jMenuItemHelp.addActionListener(this);
@@ -66,8 +71,10 @@ public class Window extends JFrame implements ActionListener {
 		
 		menuApplication.add(jMenuItemQuit);
 		
-		menuForms.add(jMenuItemAddClient);
-		menuForms.add(jMenuItemAddHouseholdMember);
+		menuForms.add(jMenuItemClient);
+		menuForms.add(jMenuItemLocality);
+		menuForms.add(jMenuItemBike);
+		menuForms.add(jMenuItemRepair);
 		
 		menuInfos.add(jMenuItemHelp);
 		menuInfos.add(jMenuItemAbout);
@@ -99,61 +106,57 @@ public class Window extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		Object object = arg0.getSource();	
 		
-		if (object.equals(jMenuItemQuit)) 
+		if (object.equals(jMenuItemQuit)) {
 			System.exit(0);
-		
-		else if(object.equals(jMenuItemAddClient)) {
+		}
+		else if(object.equals(jMenuItemClient)) {
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new FormPanel(new NewClient(), this), BorderLayout.CENTER);
 			this.getContentPane().repaint();
 			this.setVisible(true);			
 		}
-		
-		else if(object.equals(jMenuItemAddHouseholdMember)) {
-			changeToHouseholdMemberForm();
+		else if(object.equals(jMenuItemLocality)) {
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new FormPanel(new LocalityEdition(), this), BorderLayout.CENTER);
+			this.getContentPane().repaint();
+			this.setVisible(true);
 		}
-		
-		else if(object.equals(jMenuItemHelp)) {
+		else if(object.equals(jMenuItemBike)) {
 			
 		}
-		
-		else if(object.equals(jMenuItemAbout)) {
+		else if(object.equals(jMenuItemRepair)) {
 			
 		}
-		
 		else if (object.equals(jMenuItemSearch1)) {
 			
 		}
-		
 		else if (object.equals(jMenuItemSearch2)) {
 	
 		}
-		
 		else if (object.equals(jMenuItemSearch3)) {
 	
 		}
-	}
-
-	public void returnToMainMenu() 
-	{
-		this.getContentPane().removeAll();
-		this.getContentPane().repaint();
-		this.setVisible(true);
-	}
-
-	public void changeToHouseholdMemberForm() 
-	{
-		this.getContentPane().removeAll();
-		this.getContentPane().add(new FormPanel(new NewHouseholdMember(), this), BorderLayout.CENTER);
-		this.getContentPane().repaint();
-		this.setVisible(true);		
+		else if(object.equals(jMenuItemHelp)) {
+			JOptionPane.showMessageDialog(this, "En cas de problème veuillez contacter les développeurs à l'adresse suivante : libia-app@gmail.com", "A propos", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if(object.equals(jMenuItemAbout)) {
+			JOptionPane.showMessageDialog(this, "Application développée par Antoine Maréchal et Lionel Mottet à l'usage de la société Libiavélo.", "Aide", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	public void onConnectionSet(PersonnelMember member) {
-		// TODO : ?
+		// TODO : Thread
 	}
 
 	public void onDialogClosed() {
 		System.exit(0);		
+	}
+
+	@Override
+	public void goBackTo() 
+	{
+		this.getContentPane().removeAll();
+		this.getContentPane().repaint();
+		this.setVisible(true);		
 	}
 }

@@ -6,13 +6,17 @@ import javax.swing.JPanel;
 public abstract class Form extends JPanel {
 	private PanelType formType;
 	
-	public PanelType getFormType() {
-		return formType;
-	}
-
-	public void setFormType(PanelType formType) {
+	public Form(PanelType formType) {
 		this.formType = formType;
 	}
 	
+	public PanelType getFormType() {
+		return formType;
+	}
+	
 	abstract public void reset();
+	
+	abstract public boolean validateForm();
+	
+	abstract public Object getFormGeneratedObject();
 }

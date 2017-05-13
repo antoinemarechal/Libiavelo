@@ -3,14 +3,14 @@ package business;
 import java.util.ArrayList;
 
 import dao.PersonnelMemberDataAccess;
-import dao.derby.PersonnelMemberDerbyDataAccess;
+import dao.mysql.PersonnelMemberMySQLDataAccess;
 import model.PersonnelMember;
 
 public class PersonnelMemberManager {
 	PersonnelMemberDataAccess personnelMemberDataAccess;
 	
 	public PersonnelMemberManager() {
-		personnelMemberDataAccess = new PersonnelMemberDerbyDataAccess();
+		personnelMemberDataAccess = new PersonnelMemberMySQLDataAccess();
 	}
 	
 	/*************************************************************************************************

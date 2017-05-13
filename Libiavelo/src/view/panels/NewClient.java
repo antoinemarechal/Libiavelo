@@ -1,29 +1,55 @@
 package view.panels;
 
 import java.awt.GridLayout;
+import java.text.ParseException;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
+import model.Client;
+import exception.InvalidNumberException;
 import exception.NoDataException;
-import exception.NotANumberException;
 
-public class NewClient extends Form {
-	private static final long serialVersionUID = 1L;
+@SuppressWarnings("serial")
+public class NewClient extends Form { // TODO : rename + 2eme constructeur pour édition
 	
 	private JLabel surnameLabel, name1Label, name2Label, name3Label, name4Label, name5Label, nationalNumberLabel, homeNumberLabel, phoneNumberLabel, streetNameLabel, streetNumberLabel;
 	private JTextField surnameTextField, name1TextField, name2TextField, name3TextField, name4TextField, name5TextField, nationalNumberTextField, homeNumberTextField, phoneNumberTextField, streetNameTextField, streetNumberTextField;
 	
+	private final String nationalNumberFormat = "##.##.##-###.##";
+	private final String homeNumberFormat = "0## ## ## ##";
+	private final String phoneNumberFormat = "04## ## ## ##";
+	private final char placeholderCharacter = '_';
+	
+	private Client formGeneratedObject;
+	
 	public NewClient() {
-		super();
+		super(PanelType.ADD_CLIENT);
 		
 		this.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder(" Nouveau client : "), 
 				BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 		this.setLayout(new GridLayout(11, 2, 15, 5));
-				
-		super.setFormType(PanelType.ADD_CLIENT);
+		
+		MaskFormatter nationalNumberFormatter = null;
+		MaskFormatter homeNumberFormatter = null;
+		MaskFormatter phoneNumberFormatter = null;
+		
+		try 
+		{
+			nationalNumberFormatter = new MaskFormatter(nationalNumberFormat);
+			nationalNumberFormatter.setPlaceholderCharacter(placeholderCharacter);
+			homeNumberFormatter = new MaskFormatter(homeNumberFormat);
+			homeNumberFormatter.setPlaceholderCharacter(placeholderCharacter);
+			phoneNumberFormatter = new MaskFormatter(phoneNumberFormat);
+			phoneNumberFormatter.setPlaceholderCharacter(placeholderCharacter);
+		} 
+		catch (ParseException e) { }
 		
 		surnameLabel = new JLabel("Nom : ");
 		surnameLabel.setLabelFor(surnameTextField);
@@ -66,25 +92,25 @@ public class NewClient extends Form {
 		name5TextField = new JTextField("", 20);
 		this.add(name5Label);
 		this.add(name5TextField);
-		
+	    
 		nationalNumberLabel = new JLabel("Numéro national :");
 		nationalNumberLabel.setLabelFor(nationalNumberTextField);
 		nationalNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nationalNumberTextField = new JTextField("", 10);
+		nationalNumberTextField = new JFormattedTextField(nationalNumberFormatter);
 		this.add(nationalNumberLabel);
 		this.add(nationalNumberTextField);
 		
 		homeNumberLabel = new JLabel("Numéro de fixe :");
 		homeNumberLabel.setLabelFor(homeNumberTextField);
 		homeNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
-		homeNumberTextField = new JTextField("", 10);
+		homeNumberTextField = new JFormattedTextField(homeNumberFormatter);
 		this.add(homeNumberLabel);
 		this.add(homeNumberTextField);
 		
 		phoneNumberLabel = new JLabel("Numéro de portable :");
 		phoneNumberLabel.setLabelFor(phoneNumberTextField);
 		phoneNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
-		phoneNumberTextField = new JTextField("", 10);
+		phoneNumberTextField = new JFormattedTextField(phoneNumberFormatter);
 		this.add(phoneNumberLabel);
 		this.add(phoneNumberTextField);
 		
@@ -103,126 +129,6 @@ public class NewClient extends Form {
 		this.add(streetNameTextField);
 	}
 	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le nom entrï¿½ par l'utilisateur
-	 * @throws NoDataException si la chaï¿½ne de caractï¿½re est vide
-	 */
-	public String getSurname() throws NoDataException {
-		String surname = surnameTextField.getText();
-		if(surname.length() == 0)
-			throw new NoDataException("Nom");
-		else
-			return surname;
-	}
-	/**
-	 * 
-	 * @return un tableau de String contenant les prï¿½nom entrï¿½s par l'utilisateur
-	 * @throws NoDataException si le premier prï¿½nom est une chaï¿½ne de caractï¿½re vide
-	 */
-	public String[] getFirstnames() throws NoDataException {
-		String[] firstNames = new String[5];
-		firstNames[0] = name1TextField.getText();
-		firstNames[1] = name2TextField.getText();
-		firstNames[2] = name3TextField.getText();
-		firstNames[3] = name4TextField.getText();
-		firstNames[4] = name5TextField.getText();
-		
-		if (firstNames[0].length() == 0)
-			throw new NoDataException("Prénom");
-		else
-			return firstNames;
-	}
-	
-	/**
-	 * 
-	 * @return un entier, le numï¿½ro de registre national entrï¿½ par l'utilisateur
-	 * @throws NotANumberException si l'utilisateur n'entre pas un nombre
-	 * @throws NoDataException 
-	 */
-	public String getNationalNumber() throws NotANumberException, NoDataException {
-		String nationalNumber = null;
-		String textFieldContent = nationalNumberTextField.getText();
-		try {
-			if (textFieldContent.length() == 0)
-				throw new NoDataException("Numéro national");
-			Integer.parseInt(textFieldContent); // FIXME : format xxx-xxxxxx-xxx like, voir check de la BD
-		} catch (NumberFormatException numberFormatException) {
-			throw new NotANumberException("Numéro national", textFieldContent);
-		}
-		return nationalNumber;
-	}
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le numï¿½ro de tï¿½lï¿½phone entrï¿½ par l'utilisateur
-	 * @throws NotANumberException si cette chaï¿½ne de caractï¿½re contient autre chose de des nombres
-	 * @throws NoDataException 
-	 */
-	public String getHomeNumber() throws NotANumberException {
-		String homeNumber = homeNumberTextField.getText();
-		if (homeNumber.length() == 0) {
-			return null;			
-		}
-		else {
-			try {
-				Integer.parseInt(homeNumber);
-			} catch (NumberFormatException numberFormatException) {
-					throw new NotANumberException("Numéro de fixe", homeNumber);
-			}
-			return homeNumber;
-		}		
-	}
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le numï¿½ro de gsm entrï¿½ par l'utilisateur
-	 * @throws NotANumberException si cette chaï¿½ne de caractï¿½re contient autre chose de des nombres
-	 * @throws NoDataException 
-	 */
-	public String getPhoneNumber() throws NotANumberException {
-		String phoneNumber = phoneNumberTextField.getText();
-		if (phoneNumber.length() == 0) {
-			return null;
-		}
-		else {
-			try {
-				Integer.parseInt(phoneNumber);
-			} catch (NumberFormatException numberFormatException) {
-					throw new NotANumberException("Numéro de portable", phoneNumber);
-			}
-			return phoneNumber;
-		}	
-	}
-	
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le nom entrï¿½ par l'utilisateur
-	 * @throws NoDataException si la chaï¿½ne de caractï¿½re est vide
-	 */
-	public String getStreetNumber() throws NoDataException {
-		String streetNumber = streetNumberTextField.getText();
-		if(streetNumber.length() == 0)
-			throw new NoDataException("Numéro de rue");
-		else
-			return streetNumber;
-	}
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le nom entrï¿½ par l'utilisateur
-	 * @throws NoDataException si la chaï¿½ne de caractï¿½re est vide
-	 */
-	public String getStreetName() throws NoDataException {
-		String streetName = streetNameTextField.getText();
-		if(streetName.length() == 0)
-			throw new NoDataException("Nom de rue");
-		else
-			return streetName;
-	}
-	
-	
 	@Override
 	public void reset() 
 	{
@@ -235,5 +141,84 @@ public class NewClient extends Form {
 		nationalNumberTextField.setText("");
 		homeNumberTextField.setText("");
 		phoneNumberTextField.setText("");
+		streetNumberTextField.setText("");
+		streetNameTextField.setText("");
+	}
+
+	@Override
+	public boolean validateForm() 
+	{
+		NoDataException e = null;
+		
+		String nationalNumber = nationalNumberTextField.getText();
+		String homeNumber = null;
+		String phoneNumber = null;
+		String clientSurname = surnameTextField.getText();
+		String[] clientFirstNames = new String[5];
+		clientFirstNames[0] = name1TextField.getText();
+		clientFirstNames[1] = name2TextField.getText();
+		clientFirstNames[2] = name3TextField.getText();
+		clientFirstNames[3] = name4TextField.getText();
+		clientFirstNames[4] = name5TextField.getText();
+		Boolean subscriptionValidated = false;
+		Integer depositAmount = 0;
+		String streetNumber = streetNumberTextField.getText();
+		String streetName = streetNameTextField.getText();
+		Date subscriptionDate = new Date(System.currentTimeMillis()); // TODO : optionnel : faire façon cours avec greg calendar
+		
+		if(clientSurname.length() == 0)
+		{
+			e = new NoDataException("Nom");
+		}
+		else if(clientFirstNames[0].length() == 0)
+		{
+			e = new NoDataException("Prénom");
+		}
+		else if(nationalNumber.equals(nationalNumberFormat.replace('#', placeholderCharacter)))
+		{
+			e = new NoDataException("Numéro national");
+		}
+		else if(streetNumber.length() == 0)
+		{
+			e = new NoDataException("Numéro de rue");
+		}
+		else if(streetName.length() == 0)
+		{
+			e = new NoDataException("Nom de rue");
+		}	
+		
+		if(e == null)
+		{
+			if(!homeNumberTextField.getText().equals(homeNumberFormat.replace('#', placeholderCharacter)))
+				homeNumber = homeNumberTextField.getText();
+			
+			if(!phoneNumberTextField.getText().equals(phoneNumberFormat.replace('#', placeholderCharacter)))
+				phoneNumber = phoneNumberTextField.getText();
+			
+			try 
+			{
+				formGeneratedObject = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, streetNumber, streetName, subscriptionDate);
+			
+				// TODO : add les membres du ménage
+			} 
+			catch (InvalidNumberException | NoDataException e1) 
+			{
+				JOptionPane.showMessageDialog(this, e1.getMessage(), "Erreur de création", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			return true;
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur de formulaire", JOptionPane.ERROR_MESSAGE);
+			
+			return false;
+		}
+	}
+
+	@Override
+	public Object getFormGeneratedObject() 
+	{
+		return formGeneratedObject;
 	}
 }

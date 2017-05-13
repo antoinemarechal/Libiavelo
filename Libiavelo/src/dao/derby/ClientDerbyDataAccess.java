@@ -26,15 +26,15 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			preparedStatement.setString(1, client.getSurname());
 			
 			String[] firstNames = client.getFirstNames();
-			preparedStatement.setString(2, firstNames[1]);
+			preparedStatement.setString(2, firstNames[0]);
+			if (firstNames[1] != "")
+				preparedStatement.setString(3, firstNames[1]);
 			if (firstNames[2] != "")
-				preparedStatement.setString(3, firstNames[2]);
+				preparedStatement.setString(4, firstNames[2]);
 			if (firstNames[3] != "")
-				preparedStatement.setString(4, firstNames[3]);
+				preparedStatement.setString(5, firstNames[3]);
 			if (firstNames[4] != "")
-				preparedStatement.setString(5, firstNames[4]);
-			if (firstNames[5] != "")
-				preparedStatement.setString(6, firstNames[5]);		
+				preparedStatement.setString(6, firstNames[4]);		
 			
 			preparedStatement.setString(7, client.getNationalNumber());
 			preparedStatement.setString(8, client.getStreetName());
