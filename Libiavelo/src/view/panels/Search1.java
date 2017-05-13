@@ -25,4 +25,10 @@ public class Search1 extends Form {
 		
 	}
 
+	@Override
+	public boolean isDataValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

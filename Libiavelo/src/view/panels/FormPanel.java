@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -12,9 +11,6 @@ import javax.swing.JPanel;
 
 import view.Window;
 import controller.ApplicationController;
-import exception.InvalidNumberException;
-import exception.NoDataException;
-import exception.NotANumberException;
 import model.Client;
 import model.HouseholdMember;
 
@@ -63,27 +59,14 @@ public class FormPanel extends JPanel implements ActionListener {
 		}
 		
 		else if(event.getSource() == validateButton) {
-			switch (form.getFormType()) { // FIXME : sortir vérification des inputs de la création de client et check pour chaque champ en-dehors
+			switch (form.getFormType()) {
 				case ADD_CLIENT :
-					try  {
-						NewClient panel = (NewClient) form;
-						
-						String nationalNumber = panel.getNationalNumber();
-						String homeNumber = panel.getHomeNumber();
-						String phoneNumber = panel.getPhoneNumber();
-						String clientSurname = panel.getSurname();
-						String[] clientFirstNames = panel.getFirstnames();
-						Boolean subscriptionValidated = false;
-						Integer depositAmount = 50; // TODO : fix value, see dossier
-						String streetNumber = panel.getStreetNumber();
-						String streetName = panel.getStreetName();
-						Date subscriptionDate = new Date(System.currentTimeMillis()); // TODO : optionnel : faire façon cours avec greg calendar
-												
-						Client client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, streetNumber, streetName, subscriptionDate);
-								
+					NewClient clientPanel = (NewClient) form;
+					
+					Client client = clientPanel.getEnteredClient();
+					if (client != null) {
 						ApplicationController appController = new ApplicationController();
 						appController.addClient(client);
-
 						int addMember = JOptionPane.showConfirmDialog(parent, "Souhaiez-vous ajouter quelqu'un à cette abonnement ?", "Ajouter du monde", JOptionPane.YES_NO_OPTION);
 						if (addMember == JOptionPane.OK_OPTION) {
 							if (parent != null && parent instanceof Window) 
@@ -93,27 +76,17 @@ public class FormPanel extends JPanel implements ActionListener {
 						else if (addMember == JOptionPane.NO_OPTION) {
 							if (parent != null && parent instanceof Window) 
 								((Window) parent).returnToMainMenu();
-						}
+						}	
+					}
 								
-					} 
-					catch (InvalidNumberException | NoDataException | NotANumberException e) {
-						JOptionPane.showMessageDialog(parent, e.toString());
-					}					
 					break;
 					
 				case ADD_HOUSEHOLD_MEMBER :
-					try {// FIXME : remove getters, create yolo-IFs and a validate method in panel to checktextfield content. messageDialaog(parent, message) au bas des yolo-IFs, avec init de message au cas par cas
-						NewHouseholdMember panel = (NewHouseholdMember) form;
-					
-						Date birthDate = panel.getBirthDate();	
-						String clientSurname = panel.getSurname();
-						String[] firstNames = panel.getFirstnames();
-						String nationalNumber = panel.getNationalNumber();
-						Client client = null; // FIXME : en attente d'un rework de la vue
-						HouseholdMember householdmember = new HouseholdMember(birthDate, firstNames, nationalNumber, clientSurname);
+					NewHouseholdMember panel = (NewHouseholdMember) form;
+					HouseholdMember householdmember = panel.getEnteredHouseholdMember();
+					if (householdmember != null) {
 						ApplicationController appController = new ApplicationController();
-						appController.addHouseholdMember(householdmember, client.getClientNumber()); // FIXME : related to ajout membre mén.
-						
+						appController.addHouseholdMember(householdmember, null); // FIXME : related to ajout membre mén.
 						int addMember = JOptionPane.showConfirmDialog(parent, "Souhaiez-vous ajouter quelqu'un à cette abonnement ?", "Ajouter du monde", JOptionPane.YES_NO_OPTION);
 						if (addMember == JOptionPane.OK_OPTION) {
 							if (parent != null && parent instanceof Window) 
@@ -124,10 +97,7 @@ public class FormPanel extends JPanel implements ActionListener {
 							if (parent != null && parent instanceof Window) 
 								((Window) parent).returnToMainMenu();
 						}
-					} 
-					catch (InvalidNumberException | NoDataException | NotANumberException e1) {
-						JOptionPane.showMessageDialog(parent, e1.toString());
-					}
+					}					
 					break;
 					
 				case SEARCH1 :

@@ -68,4 +68,10 @@ public class NewLocality extends Form {
 		cityNameTextField.setText("");
 		postalCodeTextField.setText("");		
 	}
+
+	@Override
+	public boolean isDataValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

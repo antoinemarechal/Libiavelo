@@ -15,7 +15,7 @@ public enum WorkType {
 		return null;
 	}
 	
-	private int id; // not used ?
+	private int id; //FIXME : not used ?
 	private WorkType(int id)
 	{
 		this.id = id;

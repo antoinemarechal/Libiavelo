@@ -14,5 +14,7 @@ public abstract class Form extends JPanel {
 		this.formType = formType;
 	}
 	
+	abstract public boolean isDataValid();
+	
 	abstract public void reset();
 }

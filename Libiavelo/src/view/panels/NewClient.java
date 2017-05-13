@@ -1,13 +1,16 @@
 package view.panels;
 
 import java.awt.GridLayout;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import exception.InvalidNumberException;
 import exception.NoDataException;
-import exception.NotANumberException;
+import model.Client;
 
 public class NewClient extends Form {
 	private static final long serialVersionUID = 1L;
@@ -102,127 +105,7 @@ public class NewClient extends Form {
 		this.add(streetNameLabel);
 		this.add(streetNameTextField);
 	}
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le nom entrï¿½ par l'utilisateur
-	 * @throws NoDataException si la chaï¿½ne de caractï¿½re est vide
-	 */
-	public String getSurname() throws NoDataException {
-		String surname = surnameTextField.getText();
-		if(surname.length() == 0)
-			throw new NoDataException("Nom");
-		else
-			return surname;
-	}
-	/**
-	 * 
-	 * @return un tableau de String contenant les prï¿½nom entrï¿½s par l'utilisateur
-	 * @throws NoDataException si le premier prï¿½nom est une chaï¿½ne de caractï¿½re vide
-	 */
-	public String[] getFirstnames() throws NoDataException {
-		String[] firstNames = new String[5];
-		firstNames[0] = name1TextField.getText();
-		firstNames[1] = name2TextField.getText();
-		firstNames[2] = name3TextField.getText();
-		firstNames[3] = name4TextField.getText();
-		firstNames[4] = name5TextField.getText();
 		
-		if (firstNames[0].length() == 0)
-			throw new NoDataException("Prénom");
-		else
-			return firstNames;
-	}
-	
-	/**
-	 * 
-	 * @return un entier, le numï¿½ro de registre national entrï¿½ par l'utilisateur
-	 * @throws NotANumberException si l'utilisateur n'entre pas un nombre
-	 * @throws NoDataException 
-	 */
-	public String getNationalNumber() throws NotANumberException, NoDataException {
-		String nationalNumber = null;
-		String textFieldContent = nationalNumberTextField.getText();
-		try {
-			if (textFieldContent.length() == 0)
-				throw new NoDataException("Numéro national");
-			Integer.parseInt(textFieldContent); // FIXME : format xxx-xxxxxx-xxx like, voir check de la BD
-		} catch (NumberFormatException numberFormatException) {
-			throw new NotANumberException("Numéro national", textFieldContent);
-		}
-		return nationalNumber;
-	}
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le numï¿½ro de tï¿½lï¿½phone entrï¿½ par l'utilisateur
-	 * @throws NotANumberException si cette chaï¿½ne de caractï¿½re contient autre chose de des nombres
-	 * @throws NoDataException 
-	 */
-	public String getHomeNumber() throws NotANumberException {
-		String homeNumber = homeNumberTextField.getText();
-		if (homeNumber.length() == 0) {
-			return null;			
-		}
-		else {
-			try {
-				Integer.parseInt(homeNumber);
-			} catch (NumberFormatException numberFormatException) {
-					throw new NotANumberException("Numéro de fixe", homeNumber);
-			}
-			return homeNumber;
-		}		
-	}
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le numï¿½ro de gsm entrï¿½ par l'utilisateur
-	 * @throws NotANumberException si cette chaï¿½ne de caractï¿½re contient autre chose de des nombres
-	 * @throws NoDataException 
-	 */
-	public String getPhoneNumber() throws NotANumberException {
-		String phoneNumber = phoneNumberTextField.getText();
-		if (phoneNumber.length() == 0) {
-			return null;
-		}
-		else {
-			try {
-				Integer.parseInt(phoneNumber);
-			} catch (NumberFormatException numberFormatException) {
-					throw new NotANumberException("Numéro de portable", phoneNumber);
-			}
-			return phoneNumber;
-		}	
-	}
-	
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le nom entrï¿½ par l'utilisateur
-	 * @throws NoDataException si la chaï¿½ne de caractï¿½re est vide
-	 */
-	public String getStreetNumber() throws NoDataException {
-		String streetNumber = streetNumberTextField.getText();
-		if(streetNumber.length() == 0)
-			throw new NoDataException("Numéro de rue");
-		else
-			return streetNumber;
-	}
-	
-	/**
-	 * 
-	 * @return une chaï¿½ne de caractï¿½re contenant le nom entrï¿½ par l'utilisateur
-	 * @throws NoDataException si la chaï¿½ne de caractï¿½re est vide
-	 */
-	public String getStreetName() throws NoDataException {
-		String streetName = streetNameTextField.getText();
-		if(streetName.length() == 0)
-			throw new NoDataException("Nom de rue");
-		else
-			return streetName;
-	}
-	
-	
 	@Override
 	public void reset() 
 	{
@@ -235,5 +118,73 @@ public class NewClient extends Form {
 		nationalNumberTextField.setText("");
 		homeNumberTextField.setText("");
 		phoneNumberTextField.setText("");
+	}
+
+	public Client getEnteredClient() {
+		Client client = null;
+		if (isDataValid()) {
+			String[] firstNames = new String[5];
+			firstNames[0] = name1TextField.getText();
+			firstNames[1] = name2TextField.getText();
+			firstNames[2] = name3TextField.getText();
+			firstNames[3] = name4TextField.getText();
+			firstNames[4] = name5TextField.getText();
+			try {
+				client = new Client(nationalNumberTextField.getText(), homeNumberTextField.getText(), phoneNumberTextField.getText(), surnameTextField.getText(), firstNames, false, null, streetNumberTextField.getText(), streetNameTextField.getText(), new Date(System.currentTimeMillis()));
+			} catch (InvalidNumberException | NoDataException e) {
+				e.printStackTrace();
+			}
+		}
+		return client;
+	}
+	
+	@Override
+	public boolean isDataValid() {
+		if (streetNameTextField.getText().length() == 0) {
+			JOptionPane.showMessageDialog(getParent(), "Le champ obligatoire \"Nom de rue\" a été omis");
+			return false;
+		}
+		
+		if (streetNumberTextField.getText().length() == 0) {
+			JOptionPane.showMessageDialog(getParent(), "Le champ obligatoire \"Numéro de rue\" a été omis");
+			return false;
+		}
+			
+		
+		String homeNumber = homeNumberTextField.getText();
+		try {
+			Integer.parseInt(homeNumber);
+		} catch (NumberFormatException numberFormatException) {
+			JOptionPane.showMessageDialog(getParent(), "Le champ \"Numéro de fixe\" ne doit contenir que des nombres");
+			return false;
+		}
+		
+		String phoneNumber = phoneNumberTextField.getText();
+		try {
+			Integer.parseInt(phoneNumber);
+		} catch (NumberFormatException numberFormatException) {
+			JOptionPane.showMessageDialog(getParent(), "Le champ \"Numéro de gsm\" ne doit contenir que des nombres");
+			return false;
+		}
+		
+		if (name1TextField.getText().length() == 0) {
+			JOptionPane.showMessageDialog(getParent(), "Le champ obligatoire \"Prénom\" a été omis");
+			return false;
+		}
+				
+		if (surnameTextField.getText().length() == 0) {
+			JOptionPane.showMessageDialog(getParent(), "Le champ obligatoire \"Nom\" a été omis");
+			return false;
+		}
+		
+		String nationalNumber = nationalNumberTextField.getText();
+		if (nationalNumber.length() != 12) {
+			// FIXME size ?
+	
+			if (!nationalNumber.contains("-")) {
+				//FIXME position ?
+			}
+		}
+		return true;	
 	}
 }

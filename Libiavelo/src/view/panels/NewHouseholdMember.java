@@ -6,10 +6,13 @@ import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import exception.InvalidNumberException;
 import exception.NoDataException;
 import exception.NotANumberException;
+import model.HouseholdMember;
 
 public class NewHouseholdMember extends Form {
 	private static final long serialVersionUID = 1L;
@@ -128,6 +131,48 @@ public class NewHouseholdMember extends Form {
 		return nationalNumber;
 	}
 
+	public HouseholdMember getEnteredHouseholdMember() {
+		HouseholdMember householdMember = null;
+		if (isDataValid()) {
+			String[] firstNames = new String[5];
+			firstNames[0] = name1TextField.getText();
+			firstNames[1] = name2TextField.getText();
+			firstNames[2] = name3TextField.getText();
+			firstNames[3] = name4TextField.getText();
+			firstNames[4] = name5TextField.getText();
+			try {
+				householdMember = new HouseholdMember(getBirthDate(), firstNames, nationalNumberTextField.getText(), surnameTextField.getText());
+			} catch (InvalidNumberException | NoDataException e) {
+				e.printStackTrace();
+			}
+		}
+		return householdMember;
+	}
+
+	@Override
+	public boolean isDataValid() {
+		if (name1TextField.getText().length() == 0) {
+			JOptionPane.showMessageDialog(getParent(), "Le champ obligatoire \"Prénom\" a été omis");
+			return false;
+		}
+				
+		if (surnameTextField.getText().length() == 0) {
+			JOptionPane.showMessageDialog(getParent(), "Le champ obligatoire \"Nom\" a été omis");
+			return false;
+		}
+		
+		String nationalNumber = nationalNumberTextField.getText();
+		if (nationalNumber.length() != 12) {
+			// FIXME size ?
+			return false;
+		}
+		if (!nationalNumber.contains("-")) {
+			//FIXME position ?
+			return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public void reset() 
 	{
