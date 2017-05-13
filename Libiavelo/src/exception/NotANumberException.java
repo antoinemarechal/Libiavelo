@@ -19,7 +19,7 @@ public class NotANumberException extends Exception {
 	}
 	
 	@Override
-	public String toString() {
+	public String getMessage() {
 		return "Le champ " + source + " requiert un nombre, la valeur " + error + " est incorrect";
 	}
 }

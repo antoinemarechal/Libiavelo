@@ -26,9 +26,9 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 	 *************************************************************************************************/
 	public BikeStation getBikeStation(int bikeStationID) {
 		BikeStation bikeStation = null;
-		Connection connexion = ConnectionSingleton.getInstance();
+		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Station WHERE Code IS ?");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Station WHERE Code IS ?");
 			preparedStatement.setInt(1, bikeStationID);
 			ResultSet queryResult = preparedStatement.executeQuery();
 
@@ -54,9 +54,9 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 	public ArrayList<BikeStation> getAllBikeStations() {
 		ArrayList<BikeStation> bikeStations = new ArrayList<BikeStation>();
 		BikeStation bikeStation = null;
-		Connection connexion = ConnectionSingleton.getInstance();
+		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Station");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Station");
 			ResultSet queryResult = preparedStatement.executeQuery();
 
 			while(queryResult.next()) {

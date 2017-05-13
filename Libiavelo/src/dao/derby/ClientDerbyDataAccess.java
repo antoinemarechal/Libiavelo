@@ -19,10 +19,10 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	 CREATE
 	 *************************************************************************************************/
 	public void addClient(Client client) {
-		Connection connexion = (Connection)  (ConnectionSingleton.getInstance());
+		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO Client VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Client VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ");
 			preparedStatement.setString(1, client.getSurname());
 			
 			String[] firstNames = client.getFirstNames();
@@ -50,6 +50,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			preparedStatement.setInt(14, client.getDepositAmount());
 			preparedStatement.setInt(15, client.getLocality());
 			
+			preparedStatement.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,9 +62,9 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	 *************************************************************************************************/
 	public Client getClient(int clientID) {
 		Client client = null;
-		Connection connexion = ConnectionSingleton.getInstance();
+		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Client WHERE NumeroClient IS ?");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Client WHERE NumeroClient IS ?");
 			preparedStatement.setInt(1,clientID);
 			ResultSet queryResult = preparedStatement.executeQuery();
 

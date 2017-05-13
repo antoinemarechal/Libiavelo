@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import model.Locality;
+import exception.InvalidNumberException;
 import exception.NoDataException;
 
 @SuppressWarnings("serial")
@@ -81,7 +82,14 @@ public class LocalityEdition extends Form {
 		
 		if(e == null)
 		{
-			formGeneratedObject = new Locality(cityName, postalCode);
+			try 
+			{
+				formGeneratedObject = new Locality(cityName, Integer.parseInt(postalCode));
+			}
+			catch (NoDataException | NumberFormatException | InvalidNumberException e1) 
+			{
+					JOptionPane.showMessageDialog(this, e1.getMessage(), "Erreur de création", JOptionPane.ERROR_MESSAGE);
+			}
 			
 			return formGeneratedObject != null;
 		}

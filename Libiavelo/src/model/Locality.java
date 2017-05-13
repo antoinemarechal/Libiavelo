@@ -1,9 +1,48 @@
 package model;
 
-public class Locality {
+import exception.InvalidNumberException;
+import exception.NoDataException;
 
-	public Locality(String cityName, String postalCode) {
-		// TODO Auto-generated constructor stub
+public class Locality {
+	private Integer	postalCode;
+	private String cityName;
+	
+	/*************************************************************************************************
+	 CONSTRUCTORS
+	 * @throws NoDataException 
+	 * @throws InvalidNumberException 
+	 *************************************************************************************************/
+	public Locality(String cityName, Integer postalCode) throws NoDataException, InvalidNumberException {
+		this.setCityName(cityName);
+		this.setPostalCode(postalCode);
 	}
 
+	/*************************************************************************************************
+	 GETTERS
+	 *************************************************************************************************/
+	public Integer getPostalCode() {
+		return postalCode;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	/*************************************************************************************************
+	 SETTERS
+	 * @throws InvalidNumberException 
+	 *************************************************************************************************/
+	public void setPostalCode(Integer postalCode) throws  InvalidNumberException {
+		if ((1000 < postalCode) && (postalCode < 999))
+			this.postalCode = postalCode;
+		else
+			throw new InvalidNumberException(postalCode.intValue());
+	}
+
+	public void setCityName(String cityName) throws NoDataException {
+		if (cityName.length() == 0)
+			throw new NoDataException();
+		else
+			this.cityName = cityName;
+	}
 }

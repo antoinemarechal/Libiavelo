@@ -1,55 +1,34 @@
-package dao.derby;
+package dao;
 
 import java.util.ArrayList;
 
-import dao.AddressDataAccess;
-import model.Address;
 import model.Client;
 import model.Estate;
+import model.Locality;
 
-public class AddressDerbyDataAccess implements AddressDataAccess {
-	public AddressDerbyDataAccess() {
-	}
-	
+public interface LocalityDataAccess {
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addAddress(Address address) {
-	}
-	
-	public void addEstateAddress(Estate estate, Address address) {
-	}
-	
-	public void addClientAddress(Client client, Address address) {
-	}
+	public void addLocality(Locality locality);
+	public void addEstateLocality(Estate estate, Locality locality);
+	public void addClientLocality(Client client, Locality locality);
 	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public ArrayList<Address> getAllAddresses() {
-		return null;
-	}
-	
-	public Address getClientAddress(Client client) {
-		return null;
-	}
-	
-	public Address getEstateAddress(Estate estate) {
-		return null;
-	}
+	public ArrayList<Locality> getAllLocalities();
+	public Locality getClientLocality(Client client);
+	public Locality getEstateLocality(Estate estate);
 	
 	/*************************************************************************************************
 	 UPDATE
 	 *************************************************************************************************/
-	public void updateClientAddress(Client client, Address address) {
-	}
-	
-	public void updateEstateAddress(Estate estate, Address address) {
-	}
+	public void updateClientLocality(Client client, Locality locality);
+	public void updateEstateLocality(Estate estate, Locality locality);
 	
 	/*************************************************************************************************
 	 DELETE
 	 *************************************************************************************************/
-	public void removeAddress(Client client, Address address) {
-	}
+	public void removeLocality(Client client, Locality locality);
 }

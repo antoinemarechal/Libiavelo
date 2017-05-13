@@ -35,7 +35,9 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 			if (firstNames[4] != "")
 				preparedStatement.setString(6, firstNames[4]);
 			if (firstNames[5] != "")
-				preparedStatement.setString(7, firstNames[5]);			
+				preparedStatement.setString(7, firstNames[5]);	
+			
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
