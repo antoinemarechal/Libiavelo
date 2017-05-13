@@ -36,5 +36,4 @@ public class TransportationOrderDerbyDataAccess implements TransportationOrderDa
 	public void removeTransportationOrder() {
 		
 	}
-
 }

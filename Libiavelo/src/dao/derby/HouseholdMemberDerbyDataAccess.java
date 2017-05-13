@@ -19,9 +19,9 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 	 CREATE
 	 *************************************************************************************************/
 	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
-		Connection connexion = (Connection)  (ConnectionSingleton.getInstance());
+		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO Client VALUES (?,?,?,?,?,?,?) ");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Client VALUES (?,?,?,?,?,?,?) ");
 			String nationalNumber = "" + householdMember.getNationalNumber();
 			preparedStatement.setString(1, nationalNumber);
 			preparedStatement.setString(2, householdMember.getSurname());

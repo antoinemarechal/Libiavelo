@@ -30,9 +30,9 @@ public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 	 *************************************************************************************************/
 	public Localisation getLocalisation() {
 		Localisation localisation = null;
-		Connection connexion = ConnectionSingleton.getInstance();
+		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localisation");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Localisation");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {
 				Boolean available = queryResult.getBoolean("EstDisponible");

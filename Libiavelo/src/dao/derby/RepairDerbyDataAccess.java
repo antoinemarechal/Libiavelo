@@ -30,9 +30,9 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 	 *************************************************************************************************/
 	public Repair getRepair(int repairID) {
 		Repair repair = null;
-		Connection connexion = ConnectionSingleton.getInstance();
+		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Reparation");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Reparation");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {
 				Date entryDate = queryResult.getDate("DateEntreeGarage");
@@ -67,9 +67,9 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 	public ArrayList<Repair> getAllRepairs() {
 		ArrayList<Repair> repairs = new ArrayList<Repair>();
 		Repair repair = null;
-		Connection connexion = ConnectionSingleton.getInstance();
+		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Reparation");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Reparation");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {
 				Date entryDate = queryResult.getDate("DateEntreeGarage");

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.ConnectionSingleton;
@@ -12,7 +13,6 @@ import exception.InvalidNumberException;
 import exception.NoDataException;
 import model.Client;
 import model.Estate;
-import model.HouseholdMember;
 import model.Locality;
 
 public class LocalityDerbyDataAccess implements LocalityDataAccess {
@@ -25,10 +25,14 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 	public void addLocality(Locality locality) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Localite  VALUES (?,?) ");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Localite(CodePostal, Libelle)  VALUES (?,?) ", Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, locality.getPostalCode());
 			preparedStatement.setString(2, locality.getCityName());
 			preparedStatement.executeUpdate();
+						
+			ResultSet queryResults = preparedStatement.getGeneratedKeys();
+			queryResults.next();
+			locality.setId(queryResults.getInt("Code"));	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
