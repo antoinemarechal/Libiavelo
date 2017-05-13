@@ -12,6 +12,7 @@ import model.Client;
 
 @SuppressWarnings("serial")
 public class FormPanel extends JPanel implements ActionListener {
+	
 	private PreviousPanel previous;
 	
 	private JButton backButton;

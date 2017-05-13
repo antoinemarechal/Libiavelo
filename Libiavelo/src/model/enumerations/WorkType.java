@@ -1,9 +1,9 @@
 package model.enumerations;
 
 public enum WorkType {
-	SECRETARY(1),
-	BIKE_CHECKER(2),
-	BIKE_TRANSPORTER(3);
+	SECRETARY,
+	BIKE_CHECKER,
+	BIKE_TRANSPORTER;
 
 	public static WorkType getFromId(int id) {
 		for(WorkType wt : WorkType.values())
@@ -13,11 +13,5 @@ public enum WorkType {
 		}
 		
 		return null;
-	}
-	
-	private int id; //FIXME : not used ?
-	private WorkType(int id)
-	{
-		this.id = id;
 	}
 }

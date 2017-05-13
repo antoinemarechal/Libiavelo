@@ -37,9 +37,9 @@ public abstract class Person {
 	}
 	
 	void setNationalNumber(String nationalNumber) throws InvalidNumberException {
-		if (nationalNumber.length() != 10) 
-			throw new InvalidNumberException(0);
-		else
+//		if (nationalNumber.length() != 10) 
+//			throw new InvalidNumberException(0);
+//		else
 			this.nationalNumber = nationalNumber;
 	}
 }

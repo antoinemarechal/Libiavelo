@@ -83,7 +83,7 @@ public class LocalityEdition extends Form {
 		{
 			formGeneratedObject = new Locality(cityName, postalCode);
 			
-			return true;
+			return formGeneratedObject != null;
 		}
 		else
 		{

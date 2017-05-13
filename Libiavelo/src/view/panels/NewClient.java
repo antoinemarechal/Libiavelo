@@ -206,7 +206,7 @@ public class NewClient extends Form { // TODO : rename + 2eme constructeur pour 
 				JOptionPane.showMessageDialog(this, e1.getMessage(), "Erreur de création", JOptionPane.ERROR_MESSAGE);
 			}
 			
-			return true;
+			return formGeneratedObject != null;
 		}
 		else
 		{
