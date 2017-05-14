@@ -14,7 +14,7 @@ import model.Estate;
 import model.TransportationOrder;
 
 public class TransportationOrderDerbyDataAccess implements TransportationOrderDataAccess {
-	public TransportationOrderDerbyDataAccess() { // FIXME : DO dis + mettre la requête du join dans la table "principale" de la requête
+	public TransportationOrderDerbyDataAccess() { 
 	}
 	/*************************************************************************************************
 	 CREATE
@@ -40,7 +40,7 @@ public class TransportationOrderDerbyDataAccess implements TransportationOrderDa
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public TransportationOrder getTransportationOrder(int bikeID) {//FIXME prend int en paramètre mais reçoit Int => NullPointerE possible, et possible partout. aussi, prolly plusieurs getters à faire avec différent param. si oui, pêtre gen les méthodes et pas copier coller des codes quasi identiques
+	public TransportationOrder getTransportationOrder(int bikeID) {
 		TransportationOrder transportationOrder = null;
 		
 		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
