@@ -45,7 +45,7 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Repair getRepair(int repairID) {
+	public Repair getRepair(int bikeID, java.util.Date entryDate) {
 		Repair repair = null;
 		
 		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
@@ -54,12 +54,12 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Reparation");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Reparation where ? = NumeroVelo AND ? = DateEntreeGarage");
+			preparedStatement.setInt(1, bikeID);
+			preparedStatement.setDate(2,  new Date(entryDate.getTime()));
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {
-				Date entryDate = queryResult.getDate("DateEntreeGarage");
 				Date exitDate = queryResult.getDate("DateFinReparation");
-				Integer bikeID = queryResult.getInt("NumeroVelo");
 				Integer premisesID = queryResult.getInt("CodeGarage");
 				String verifierID = queryResult.getString("Matricule");
 				String note = queryResult.getString("Remarques");

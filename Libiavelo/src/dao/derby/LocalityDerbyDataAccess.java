@@ -3,7 +3,6 @@ package dao.derby;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -26,7 +25,7 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 	public void addLocality(Locality locality) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Localite(CodePostal, Libelle)  VALUES (?,?) ", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Localite(CodePostal, Libelle) VALUES (?,?) ", Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, locality.getPostalCode());
 			preparedStatement.setString(2, locality.getCityName());
 			preparedStatement.executeUpdate();

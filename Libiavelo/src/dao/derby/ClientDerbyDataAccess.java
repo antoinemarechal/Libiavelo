@@ -72,7 +72,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Client WHERE NumeroClient IS ?");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Client WHERE NumeroClient = ?");
 			preparedStatement.setInt(1,clientID);
 			ResultSet queryResult = preparedStatement.executeQuery();
 

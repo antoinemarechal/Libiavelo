@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import model.Repair;
 
@@ -13,7 +14,7 @@ public interface RepairDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Repair getRepair(int repairID);
+	public Repair getRepair(int repairID, Date entryDate);
 	public ArrayList<Repair> getAllRepairs();
 	
 	/*************************************************************************************************

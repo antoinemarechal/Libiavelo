@@ -1,6 +1,7 @@
 package business;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.RepairDataAccess;
 import dao.derby.RepairDerbyDataAccess;
@@ -23,8 +24,8 @@ public class RepairManager {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Repair getRepair(int repairID) {
-		return repairDerbyDataAccess.getRepair(repairID);
+	public Repair getRepair(int repairID, Date entryDate) {
+		return repairDerbyDataAccess.getRepair(repairID, entryDate);
 	}
 	
 	public ArrayList<Repair> getAllRepairs() {

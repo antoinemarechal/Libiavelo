@@ -32,7 +32,7 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement selectStationStatement = connection.prepareStatement("SELECT * FROM Station WHERE Code IS ?");
+			PreparedStatement selectStationStatement = connection.prepareStatement("SELECT * FROM Station WHERE Code = ?");
 			selectStationStatement.setInt(1, bikeStationID);
 			ResultSet selectStationResult = selectStationStatement.executeQuery();
 			selectStationResult.next();
@@ -42,7 +42,7 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 			Integer upperBikeSoftLimit = selectStationResult.getInt("LimiteHauteNbrVelos");
 			Integer upperBikeHardLimit = selectStationResult.getInt("LimiteHauteExtremeNbrVelos");
 			
-			PreparedStatement selectEstateStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code IS ?");
+			PreparedStatement selectEstateStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code = ?");
 			selectEstateStatement.setInt(1, bikeStationID);
 			ResultSet selectEstateResult = selectEstateStatement.executeQuery();					
 			selectEstateResult.next();
@@ -85,7 +85,7 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 				Integer upperBikeHardLimit = selectStationResult.getInt("LimiteHauteExtremeNbrVelos");
 				Integer bikeStationID = selectStationResult.getInt("Code");
 				
-				PreparedStatement selectEstateStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code IS ?");
+				PreparedStatement selectEstateStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code = ?");
 				selectEstateStatement.setInt(1, bikeStationID);
 				ResultSet selectEstateResult = selectEstateStatement.executeQuery();		
 				Locality locality = localityDerbyDataAccess.getLocality(selectEstateResult.getInt("CodeLocalite"));	

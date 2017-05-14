@@ -36,7 +36,7 @@ public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Localisation WHERE ? is NumeroVelo");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Localisation WHERE ? = NumeroVelo");
 			preparedStatement.setInt(1, bikeID);
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {

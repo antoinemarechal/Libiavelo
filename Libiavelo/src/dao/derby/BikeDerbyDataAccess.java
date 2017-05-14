@@ -43,7 +43,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo where NumeroVelo is ? ");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo where NumeroVelo = ? ");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			queryResult.next();
 			
@@ -63,7 +63,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo where NumeroVelo is ? ");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo where NumeroVelo = ? ");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while (queryResult.next()) {
 				bike = new Bike();

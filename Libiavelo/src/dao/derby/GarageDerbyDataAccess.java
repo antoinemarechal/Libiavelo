@@ -30,7 +30,7 @@ public class GarageDerbyDataAccess implements GarageDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code IS ?");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code = ?");
 			preparedStatement.setInt(1, garageID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
