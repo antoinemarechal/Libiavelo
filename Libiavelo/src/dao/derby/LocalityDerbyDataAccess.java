@@ -32,7 +32,7 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 						
 			ResultSet queryResults = preparedStatement.getGeneratedKeys();
 			queryResults.next();
-			locality.setId(queryResults.getInt("Code"));	
+			locality.setId(queryResults.getInt("1"));	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,6 +50,7 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 	 *************************************************************************************************/
 	public Locality getLocality(int localityID) {
 		Locality locality = null;
+		
 		Connection connexion = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localite where Code is ? ");
@@ -70,8 +71,9 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 	}
 	
 	public ArrayList<Locality> getAllLocalities() {
+		Locality locality = null;
 		ArrayList<Locality> localities = new ArrayList<Locality>();
-		Locality locality;
+		
 		Connection connexion = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localite");

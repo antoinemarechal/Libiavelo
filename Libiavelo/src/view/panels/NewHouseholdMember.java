@@ -137,7 +137,7 @@ public class NewHouseholdMember extends Form { // TODO : rename + 2eme construct
 		{
 			try 
 			{
-				formGeneratedObject = new HouseholdMember(birthDate, firstNames, nationalNumber, surname);
+				formGeneratedObject = new HouseholdMember(firstNames, nationalNumber, surname);
 			} 
 			catch (InvalidNumberException | NoDataException e1) 
 			{

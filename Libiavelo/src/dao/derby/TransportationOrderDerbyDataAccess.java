@@ -19,11 +19,11 @@ public class TransportationOrderDerbyDataAccess implements TransportationOrderDa
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
+	
 	public void addTransportationOrder(TransportationOrder transportationOrder) {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
-		
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Reparation VALUES(?,?,?,?,?)");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Transport VALUES(?,?,?,?,?)");
 			preparedStatement.setInt(1, transportationOrder.getDestination().getId());
 			preparedStatement.setInt(2, transportationOrder.getBike().getId());
 			preparedStatement.setInt(3, transportationOrder.getSource().getId());

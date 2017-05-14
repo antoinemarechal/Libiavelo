@@ -28,6 +28,8 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 	public BikeStation getBikeStation(int bikeStationID) {
 		BikeStation bikeStation = null;
 		
+		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
+		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement selectStationStatement = connection.prepareStatement("SELECT * FROM Station WHERE Code IS ?");
@@ -44,7 +46,8 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 			selectEstateStatement.setInt(1, bikeStationID);
 			ResultSet selectEstateResult = selectEstateStatement.executeQuery();					
 			selectEstateResult.next();
-			LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
+			
+			
 			Locality locality = localityDerbyDataAccess.getLocality(selectEstateResult.getInt("CodeLocalite"));
 			String streetName = selectEstateResult.getString("NomRue");
 			String streetNumber = selectEstateResult.getString("Numero");
@@ -68,6 +71,7 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 	public ArrayList<BikeStation> getAllBikeStations() {
 		BikeStation bikeStation = null;
 		ArrayList<BikeStation> bikeStations = new ArrayList<BikeStation>();
+		
 		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
 		
 		Connection connection = ConnectionSingleton.getInstance();
@@ -86,6 +90,7 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 				ResultSet selectEstateResult = selectEstateStatement.executeQuery();		
 				Locality locality = localityDerbyDataAccess.getLocality(selectEstateResult.getInt("CodeLocalite"));	
 				selectEstateResult.next();
+				
 				selectEstateResult = selectEstateStatement.executeQuery();	
 				String streetName = selectEstateResult.getString("NomRue");
 				String streetNumber = selectEstateResult.getString("Numero");

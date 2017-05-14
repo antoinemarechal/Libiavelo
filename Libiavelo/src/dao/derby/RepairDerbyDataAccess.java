@@ -19,12 +19,12 @@ import model.Repair;
 public class RepairDerbyDataAccess implements RepairDataAccess {
 	public RepairDerbyDataAccess() {
 	}
+	
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
 	public void addRepair(Repair repair) {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
-		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Reparation VALUES(?,?,?,?,?,?,?)");
 			preparedStatement.setInt(1, repair.getBike().getId());
@@ -47,6 +47,7 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 	 *************************************************************************************************/
 	public Repair getRepair(int repairID) {
 		Repair repair = null;
+		
 		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
 		GarageDerbyDataAccess garageDerbyDataAccess = new GarageDerbyDataAccess();
 		PersonnelMemberDerbyDataAccess personnelMemberDerbyDataAccess = new PersonnelMemberDerbyDataAccess();
@@ -85,6 +86,7 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 	public ArrayList<Repair> getAllRepairs() {
 		Repair repair = null;
 		ArrayList<Repair> repairs = new ArrayList<Repair>();
+		
 		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
 		GarageDerbyDataAccess garageDerbyDataAccess = new GarageDerbyDataAccess();
 		PersonnelMemberDerbyDataAccess personnelMemberDerbyDataAccess = new PersonnelMemberDerbyDataAccess();
@@ -131,7 +133,6 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 	 *************************************************************************************************/
 	public void updateRepair(Repair repair) {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
-		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Reparation SET DescriptionProbleme = ?, Remarques = ?, DateFinReparation = ?, Matricule = ?, CodeGarage = ? WHERE NumeroVelo = ? AND DateEntreeGarage = ?");
 			preparedStatement.setString(1, repair.getDescription());

@@ -46,6 +46,7 @@ public class GarageDerbyDataAccess implements GarageDataAccess {
 	 *************************************************************************************************/
 	public Garage getGarage(int garageID) {
 		Garage garage = null;
+		
 		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
 		
 		Connection connection = ConnectionSingleton.getInstance();

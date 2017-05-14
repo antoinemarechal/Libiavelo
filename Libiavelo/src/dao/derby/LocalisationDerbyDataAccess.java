@@ -29,6 +29,7 @@ public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 	 *************************************************************************************************/
 	public Localisation getLocalisation(int bikeID) {
 		Localisation localisation = null;
+		
 		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
 		GarageDerbyDataAccess garageDerbyDataAccess = new GarageDerbyDataAccess();		
 		BikeStationDerbyDataAccess bikeStationDerbyDataAccess = new BikeStationDerbyDataAccess();
@@ -62,8 +63,9 @@ public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 	
 	public ArrayList<Localisation> getAllLocalisation() {
 		Localisation localisation = null;
-		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
 		ArrayList<Localisation> localisations = new ArrayList<Localisation>();
+		
+		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
 		GarageDerbyDataAccess garageDerbyDataAccess = new GarageDerbyDataAccess();
 		BikeStationDerbyDataAccess bikeStationDerbyDataAccess = new BikeStationDerbyDataAccess();
 		

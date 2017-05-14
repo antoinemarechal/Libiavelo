@@ -17,6 +17,7 @@ public class Client extends Person {
 	private ArrayList<HouseholdMember> household;
 	
 	private Subscription subscription;
+	private Locality locality;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
@@ -36,6 +37,20 @@ public class Client extends Person {
 		this.setStreetName(streetName);
 		this.setStreetNumber(streetNumber);
 		this.setSubscriptionDate(subscriptionDate);
+	}
+	
+	public Client(String nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Integer depositAmount, String streetNumber, String streetName, Locality locality, Date subscriptionDate) throws InvalidNumberException, NoDataException {
+		this.setNationalNumber(nationalNumber);
+		this.setHomeNumber(homeNumber);
+		this.setPhoneNumber(phoneNumber);
+		this.setSurname(clientSurname);
+		this.setFirstNames(clientFirstNames);
+		this.setSubsriptionValidated(subscriptionValidated);
+		this.setDepositAmount(depositAmount);
+		this.setStreetName(streetName);
+		this.setStreetNumber(streetNumber);
+		this.setSubscriptionDate(subscriptionDate);
+		this.setLocality(locality);
 	}
 
 	/*************************************************************************************************
@@ -73,9 +88,8 @@ public class Client extends Person {
 		return household;
 	}
 	
-	public int getLocality() {
-		// FIXME : missin
-		return 0;
+	public Locality getLocality() {
+		return locality;
 	}
 	
 	public Boolean isSubsriptionValidated() {
@@ -126,6 +140,10 @@ public class Client extends Person {
 	
 	public void setClientNumber(int clientNumber) {
 		this.clientNumber = clientNumber;
+	}
+	
+	public void setLocality(Locality locality) {
+		this.locality = locality;
 	}
 	/***********************************************************************************************
 	 OTHERS
