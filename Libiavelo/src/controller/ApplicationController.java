@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.util.ArrayList;
+
 import business.ClientManager;
 import business.HouseholdMemberManager;
 import business.LocalityManager;
@@ -33,6 +35,21 @@ public class ApplicationController {
 	public PersonnelMember getPersonnelMember(String matricule)
 	{
 		return new PersonnelMemberManager().getPersonnelMember(matricule);
+	}
+
+	public ArrayList<Client> getAllClients() 
+	{
+		return new ClientManager().getAllClients();
+	}
+
+	public void removeClient(Client client) 
+	{
+		new ClientManager().removeClient(client.getClientNumber());		
+	}
+
+	public ArrayList<Locality> getAllLocalities() 
+	{
+		return new LocalityManager().getAllLocalities();
 	}
 	
 }

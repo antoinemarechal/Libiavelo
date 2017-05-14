@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 
 import model.PersonnelMember;
 import view.observers.CustomWindowListener;
+import view.panels.ClientListing;
 import view.panels.FormPanel;
 import view.panels.LocalityEdition;
-import view.panels.NewClient;
 import view.panels.PreviousPanel;
 
 @SuppressWarnings("serial")
@@ -27,9 +27,9 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 	private JMenuItem jMenuItemQuit, jMenuItemClient, jMenuItemLocality, jMenuItemBike, jMenuItemRepair, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
 	
 	public Window() {
-		super("MainWindow");
+		super("Application Libiavelo");
 		
-		this.setPreferredSize(new Dimension(500, 500));
+		this.setPreferredSize(new Dimension(500, 600));
 		this.addWindowListener(new CustomWindowListener());
 		
 		menuBar = new JMenuBar();
@@ -111,7 +111,7 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 		}
 		else if(object.equals(jMenuItemClient)) {
 			this.getContentPane().removeAll();
-			this.getContentPane().add(new FormPanel(new NewClient(), this), BorderLayout.CENTER);
+			this.getContentPane().add(new ClientListing(this), BorderLayout.CENTER);
 			this.getContentPane().repaint();
 			this.setVisible(true);			
 		}
@@ -145,7 +145,7 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 	}
 
 	public void onConnectionSet(PersonnelMember member) {
-		// TODO : Thread
+		// FIXME : Thread
 	}
 
 	public void onDialogClosed() {

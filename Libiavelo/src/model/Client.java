@@ -9,14 +9,16 @@ import exception.NoDataException;
 public class Client extends Person {	
 	private Integer clientNumber;
 	private Boolean subsriptionValidated;
-	private int depositAmount;
+	private Float depositAmount;
 	
 	private String streetName, streetNumber;
 	private String homeNumber, phoneNumber;
 	private Date subscriptionDate;
-	private ArrayList<HouseholdMember> household;
+	private ArrayList<HouseholdMember> household = new ArrayList<HouseholdMember>();
 	
 	private Subscription subscription;
+	
+	private Locality locality;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
@@ -25,7 +27,7 @@ public class Client extends Person {
 		this.setNationalNumber(nationalNumber);
 	}
 	
-	public Client(String nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Integer depositAmount, String streetNumber, String streetName, Date subscriptionDate) throws InvalidNumberException, NoDataException {
+	public Client(String nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Float depositAmount, String streetNumber, String streetName, Date subscriptionDate) throws InvalidNumberException, NoDataException {
 		this.setNationalNumber(nationalNumber);
 		this.setHomeNumber(homeNumber);
 		this.setPhoneNumber(phoneNumber);
@@ -53,7 +55,7 @@ public class Client extends Person {
 		return phoneNumber;
 	}
 
-	public int getDepositAmount() {
+	public Float getDepositAmount() {
 		return depositAmount;
 	}
 	
@@ -73,9 +75,8 @@ public class Client extends Person {
 		return household;
 	}
 	
-	public int getLocality() {
-		// FIXME : missin
-		return 0;
+	public Locality getLocality() {
+		return locality;
 	}
 	
 	public Boolean isSubsriptionValidated() {
@@ -103,7 +104,7 @@ public class Client extends Person {
 	}
 
 	// exception si depositAmount<0 ? ou pas pour remboursement ?
-	public void setDepositAmount(Integer depositAmount) {
+	public void setDepositAmount(Float depositAmount) {
 		this.depositAmount = depositAmount;
 	}
 
@@ -132,5 +133,10 @@ public class Client extends Person {
 	
 	public void removeHouseholdMember(HouseholdMember householdMember) {
 		household.remove(householdMember);
+	}
+
+	public void setLocality(Locality selectedItem) {
+		locality = selectedItem;
+		
 	}	
 }

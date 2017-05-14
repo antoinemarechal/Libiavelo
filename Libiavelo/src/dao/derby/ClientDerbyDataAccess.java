@@ -47,8 +47,8 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			
 			preparedStatement.setDate(12, new Date(client.getSubscriptionDate().getTime())); // java.sql.date créé via le long récupéré de la java.util.Date subscription
 			preparedStatement.setBoolean(13, client.isSubsriptionValidated());
-			preparedStatement.setInt(14, client.getDepositAmount());
-			preparedStatement.setInt(15, client.getLocality());
+			preparedStatement.setFloat(14, client.getDepositAmount());
+			preparedStatement.setInt(15, client.getLocality().getId());
 			
 			preparedStatement.executeUpdate();
 			
@@ -83,7 +83,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 				String phoneNumber = queryResult.getString("Gsm ");
 				Date subscriptionDate = queryResult.getDate("DateInscription");
 				Boolean subscriptionValidated = queryResult.getBoolean("InscriptionValidee");
-				Integer depositAmount = queryResult.getInt("MontantCaution ");
+				Float depositAmount = queryResult.getFloat("MontantCaution ");
 				
 				client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, streetNumber, streetName, subscriptionDate);
 			}
@@ -114,19 +114,19 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			while(queryResult.next()) {
 				String clientSurname = queryResult.getString("NomDemandeur");
 				String clientFirstNames[] = new String[5];
-				clientFirstNames[1] = queryResult.getString("Prenom1");
-				clientFirstNames[2] = queryResult.getString("Prenom2");
-				clientFirstNames[3] = queryResult.getString("Prenom3");
-				clientFirstNames[4] = queryResult.getString("Prenom4");
-				clientFirstNames[5] = queryResult.getString("Prenom5");
+				clientFirstNames[0] = queryResult.getString("Prenom1");
+				clientFirstNames[1] = queryResult.getString("Prenom2");
+				clientFirstNames[2] = queryResult.getString("Prenom3");
+				clientFirstNames[3] = queryResult.getString("Prenom4");
+				clientFirstNames[4] = queryResult.getString("Prenom5");
 				String nationalNumber = queryResult.getString("NumeroNational");
 				String streetName = queryResult.getString("NomRue");
 				String streetNumber = queryResult.getString("Numero");
 				String homeNumber = queryResult.getString("NumeroTel");
-				String phoneNumber = queryResult.getString("Gsm ");
+				String phoneNumber = queryResult.getString("Gsm");
 				Date subscriptionDate = queryResult.getDate("DateInscription");
 				Boolean subscriptionValidated = queryResult.getBoolean("InscriptionValidee");
-				Integer depositAmount = queryResult.getInt("MontantCaution ");
+				Float depositAmount = queryResult.getFloat("MontantCaution");
 				
 				client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, streetNumber, streetName, subscriptionDate);
 				clients.add(client);

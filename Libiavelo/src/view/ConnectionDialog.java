@@ -125,8 +125,8 @@ public class ConnectionDialog extends JDialog implements ActionListener, ItemLis
 			this.setVisible(true);
 		}		else		{			// TODO catch error pour déterminer que le nom de compte est invalide			ApplicationController ap = new ApplicationController();						PersonnelMember pm = ap.getPersonnelMember(usernameField.getText());						if(pm == null)			{				this.setVisible(false);								JOptionPane.showMessageDialog(this, "Le nom d'utilisateur entré n'existe pas.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);								this.setVisible(true);			}			else			{				if(pm.isEnteredPasswordValid(String.valueOf(passwordField.getPassword())))				{										this.dispose();
 					
-					mainWindow.onConnectionSet(pm);				}				else				{					this.setVisible(false);										JOptionPane.showMessageDialog(this, "Le mot de passe pour cet utilisateur est invalide.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);										this.setVisible(true);				
-			}}		}
+					mainWindow.onConnectionSet(pm);				}				else				{					this.setVisible(false);										JOptionPane.showMessageDialog(this, "Le mot de passe pour cet utilisateur est invalide.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);										this.setVisible(true);				}
+			}		}
 	}
 	
 	@Override

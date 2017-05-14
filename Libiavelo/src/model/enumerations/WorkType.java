@@ -2,8 +2,10 @@ package model.enumerations;
 
 public enum WorkType {
 	SECRETARY,
-	BIKE_CHECKER,
-	BIKE_TRANSPORTER;
+	WORKSHOP_CHIEF,
+	WORKSHOP_MANAGER,
+	REPAIRER,
+	ADMINISTRATOR;
 
 	public static WorkType getFromId(int id) {
 		for(WorkType wt : WorkType.values())

@@ -31,7 +31,7 @@ public class LocalityManager {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public ArrayList<Locality> getAllAddresses() {
+	public ArrayList<Locality> getAllLocalities() {
 		return localityDataAccess.getAllLocalities();
 	}
 	

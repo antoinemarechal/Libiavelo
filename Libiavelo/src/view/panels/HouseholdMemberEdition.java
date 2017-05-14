@@ -16,7 +16,7 @@ import exception.InvalidNumberException;
 import exception.NoDataException;
 
 @SuppressWarnings("serial")
-public class NewHouseholdMember extends Form { // TODO : rename + 2eme constructeur pour édition
+public class HouseholdMemberEdition extends Form { // TODO : passer le nom de famille d'office
 
 	private JLabel surnameLabel, name1Label, name2Label, name3Label, name4Label, name5Label, nationalNumberLabel;
 	private JTextField surnameTextField, name1TextField, name2TextField, name3TextField, name4TextField, name5TextField, nationalNumberTextField;
@@ -24,13 +24,33 @@ public class NewHouseholdMember extends Form { // TODO : rename + 2eme construct
 	private final String nationalNumberFormat = "##.##.##-###.##";
 	private final char placeholderCharacter = '_';
 	
+	private String baseSurname;
+	
 	private HouseholdMember formGeneratedObject;
 	
-	public NewHouseholdMember() {
+	public HouseholdMemberEdition(String surname) {
 		super(PanelType.ADD_HOUSEHOLD_MEMBER);
+
+		this.baseSurname = surname;
 		
+		buildDefaultDisplay();
+	}
+	
+	public HouseholdMemberEdition(HouseholdMember householdMember) 
+	{
+		super(PanelType.EDIT_HOUSEHOLD_MEMBER);
+		
+		this.formGeneratedObject = householdMember;
+		
+		buildDefaultDisplay();
+		
+		reset();
+	}
+	
+	public void buildDefaultDisplay()
+	{
 		this.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createTitledBorder(" Nouveau membre de la famille : "), 
+				BorderFactory.createTitledBorder(" Edition d'un membre de la famille : "), 
 				BorderFactory.createEmptyBorder(5, 10, 5, 10)));
 		this.setLayout(new GridLayout(7, 2, 15, 5));
 		
@@ -43,14 +63,21 @@ public class NewHouseholdMember extends Form { // TODO : rename + 2eme construct
 		} 
 		catch (ParseException e) { }
 		
-		surnameLabel = new JLabel("Nom :");
+		nationalNumberLabel = new JLabel("Numéro national* :");
+		nationalNumberLabel.setLabelFor(nationalNumberTextField);
+		nationalNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
+		nationalNumberTextField = new JFormattedTextField(nationalNumberFormatter);
+		this.add(nationalNumberLabel);
+		this.add(nationalNumberTextField);
+		
+		surnameLabel = new JLabel("Nom* :");
 		surnameLabel.setLabelFor(surnameTextField);
 		surnameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		surnameTextField = new JTextField("", 20);
 		this.add(surnameLabel);
 		this.add(surnameTextField);
 		
-		name1Label = new JLabel("Prénom :");
+		name1Label = new JLabel("Prénom* :");
 		name1Label.setLabelFor(name1TextField);
 		name1Label.setHorizontalAlignment(JLabel.RIGHT);
 		name1TextField = new JTextField("", 20);
@@ -85,24 +112,32 @@ public class NewHouseholdMember extends Form { // TODO : rename + 2eme construct
 		this.add(name5Label);
 		this.add(name5TextField);
 		
-		nationalNumberLabel = new JLabel("Numéro national :");
-		nationalNumberLabel.setLabelFor(nationalNumberTextField);
-		nationalNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
-		nationalNumberTextField = new JFormattedTextField(nationalNumberFormatter);
-		this.add(nationalNumberLabel);
-		this.add(nationalNumberTextField);
+		// TODO : birthdate
 	}
-	
+
 	@Override
 	public void reset() 
 	{
-		surnameTextField.setText("");
-		name1TextField.setText("");
-		name2TextField.setText("");
-		name3TextField.setText("");
-		name4TextField.setText("");
-		name5TextField.setText("");
-		nationalNumberTextField.setText("");
+		if(this.getFormType() == PanelType.ADD_HOUSEHOLD_MEMBER)
+		{
+			nationalNumberTextField.setText("");
+			surnameTextField.setText(baseSurname);
+			name1TextField.setText("");
+			name2TextField.setText("");
+			name3TextField.setText("");
+			name4TextField.setText("");
+			name5TextField.setText("");
+		}
+		else if(this.getFormType() == PanelType.EDIT_HOUSEHOLD_MEMBER)
+		{
+			nationalNumberTextField.setText(formGeneratedObject.getNationalNumber());
+			surnameTextField.setText(formGeneratedObject.getSurname());
+			name1TextField.setText(formGeneratedObject.getFirstNames()[0]);
+			name2TextField.setText(formGeneratedObject.getFirstNames()[1]);
+			name3TextField.setText(formGeneratedObject.getFirstNames()[2]);
+			name4TextField.setText(formGeneratedObject.getFirstNames()[3]);
+			name5TextField.setText(formGeneratedObject.getFirstNames()[4]);			
+		}
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package dao.derby;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -32,7 +33,13 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 						
 			ResultSet queryResults = preparedStatement.getGeneratedKeys();
 			queryResults.next();
-			locality.setId(queryResults.getInt("Code"));	
+			locality.setId(queryResults.getInt(1));	
+			
+			ResultSetMetaData meta = queryResults.getMetaData( );
+			
+			for(int i = 1; i <= meta.getColumnCount(); i++)
+				System.out.println(meta.getColumnLabel(i));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +63,7 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localite");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {
-				locality = new Locality(queryResult.getString("CodePostal "), queryResult.getInt("Libelle"));
+				locality = new Locality(queryResult.getString("Libelle"), queryResult.getInt("CodePostal"));
 				localities.add(locality);
 			}
 		} catch (SQLException e) {

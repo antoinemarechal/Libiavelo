@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import controller.ApplicationController;
 import model.Client;
+import model.Locality;
 
 @SuppressWarnings("serial")
 public class FormPanel extends JPanel implements ActionListener {
@@ -57,17 +58,35 @@ public class FormPanel extends JPanel implements ActionListener {
 
 			if(form.validateForm())
 			{
+				ApplicationController appController = new ApplicationController();
+				
 				switch (form.getFormType()) {
 					case ADD_CLIENT :
 						Client client = (Client) form.getFormGeneratedObject();
 						
-						ApplicationController appController = new ApplicationController();
 						appController.addClient(client);
 						
 						previous.goBackTo();
 						break;
 						
+					case EDIT_CLIENT :
+						//Client client = (Client) form.getFormGeneratedObject();
+						
+						// FIXME : appController.addClient(client);
+						
+						previous.goBackTo();
+						break;
+						
+					case ADD_LOCALITY :
+						Locality locality = (Locality) form.getFormGeneratedObject();
+						
+						appController.addLocality(locality);
+						
+						previous.goBackTo();
+						break;
+						
 					case ADD_HOUSEHOLD_MEMBER :
+						previous.goBackTo();
 						break;
 						
 					case SEARCH1 :

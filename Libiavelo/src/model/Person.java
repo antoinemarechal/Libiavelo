@@ -36,7 +36,7 @@ public abstract class Person {
 		this.firstNames = firstNames;
 	}
 	
-	void setNationalNumber(String nationalNumber) throws InvalidNumberException {
+	public void setNationalNumber(String nationalNumber) throws InvalidNumberException {
 //		if (nationalNumber.length() != 10) 
 //			throw new InvalidNumberException(0);
 //		else

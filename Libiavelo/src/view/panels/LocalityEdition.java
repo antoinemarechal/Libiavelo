@@ -42,15 +42,17 @@ public class LocalityEdition extends Form {
 		} 
 		catch (ParseException e) { }
 		
-		cityNameLabel = new JLabel("Ville :");
+		cityNameLabel = new JLabel("Ville* :");
 		cityNameLabel.setLabelFor(cityNameTextField);
+		cityNameLabel.setToolTipText("Obligatoire");
 		cityNameLabel.setHorizontalAlignment(JLabel.RIGHT);
 		cityNameTextField = new JTextField("", 20);
 		this.add(cityNameLabel);
 		this.add(cityNameTextField);
 		
-		postalCodeLabel = new JLabel("Code postal :");
+		postalCodeLabel = new JLabel("Code postal* :");
 		postalCodeLabel.setLabelFor(postalCodeTextField);
+		postalCodeLabel.setToolTipText("Obligatoire");
 		postalCodeLabel.setHorizontalAlignment(JLabel.RIGHT);
 		postalCodeTextField = new JFormattedTextField(postalCodeFormatter);
 		this.add(postalCodeLabel);
