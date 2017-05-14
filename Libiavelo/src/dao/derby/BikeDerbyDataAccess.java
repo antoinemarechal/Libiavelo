@@ -43,7 +43,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo where NumeroVelo = ? ");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo WHERE NumeroVelo = ? ");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			queryResult.next();
 			
@@ -63,7 +63,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo where NumeroVelo = ? ");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while (queryResult.next()) {
 				bike = new Bike();
@@ -83,7 +83,8 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT Velo.NumeroVelo, Velo.Etat, Transport.CodeEmission, Transport.CodeDestination FROM Velo INNER JOIN Transport ON Velo.NumeroVelo = Tansport.NumeroVelo WHERE Transport.DateDemande = ? AND Transport.EstExceptionnel = ? INNER JOIN Localisation ON Localisation.NumeroVelo where EstDisponible = ? ORDER BY Velo.NumeroVelo");			
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT v.NumeroVelo, v.Etat, t.CodeEmission, t.CodeDestination FROM Velo v INNER JOIN Transport t ON v.NumeroVelo = t.NumeroVelo and t.DATEDEMANDE = ? and t.ESTEXCEPTIONNEL = ? INNER JOIN Localisation l ON t.NumeroVelo = l.NUMEROVELO and l.ESTDISPONIBLE = ?");			
+					
 			preparedStatement.setDate(1, date);
 			preparedStatement.setBoolean(2, isExceptionnal);
 			preparedStatement.setBoolean(3, isAvailable);
