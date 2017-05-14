@@ -12,12 +12,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import view.form.ClientListing;
+import view.form.FormPanel;
+import view.form.LocalityEdition;
+import view.form.PreviousPanel;
+import view.search.Search1;
+import view.search.Search2;
+import view.search.Search3;
+import view.search.SearchPanel;
 import model.PersonnelMember;
-import view.observers.CustomWindowListener;
-import view.panels.ClientListing;
-import view.panels.FormPanel;
-import view.panels.LocalityEdition;
-import view.panels.PreviousPanel;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame implements ActionListener, PreviousPanel {
@@ -128,14 +131,24 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 			
 		}
 		else if (object.equals(jMenuItemSearch1)) {
-			
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new SearchPanel(new Search1()), BorderLayout.CENTER);
+			this.getContentPane().repaint();
+			this.setVisible(true);				
 		}
 		else if (object.equals(jMenuItemSearch2)) {
-	
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new SearchPanel(new Search2()), BorderLayout.CENTER);
+			this.getContentPane().repaint();
+			this.setVisible(true);	
 		}
 		else if (object.equals(jMenuItemSearch3)) {
-	
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new SearchPanel(new Search3()), BorderLayout.CENTER);
+			this.getContentPane().repaint();
+			this.setVisible(true);	
 		}
+		
 		else if(object.equals(jMenuItemHelp)) {
 			JOptionPane.showMessageDialog(this, "En cas de problème veuillez contacter les développeurs à l'adresse suivante : libia-app@gmail.com", "A propos", JOptionPane.INFORMATION_MESSAGE);
 		}

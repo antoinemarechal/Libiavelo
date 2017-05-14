@@ -1,4 +1,4 @@
-package view.panels;
+package view.form;
 
 import java.awt.GridLayout;
 import java.text.ParseException;
@@ -29,7 +29,7 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 	private HouseholdMember formGeneratedObject;
 	
 	public HouseholdMemberEdition(String surname) {
-		super(PanelType.ADD_HOUSEHOLD_MEMBER);
+		super(FormType.ADD_HOUSEHOLD_MEMBER);
 
 		this.baseSurname = surname;
 		
@@ -38,7 +38,7 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 	
 	public HouseholdMemberEdition(HouseholdMember householdMember) 
 	{
-		super(PanelType.EDIT_HOUSEHOLD_MEMBER);
+		super(FormType.EDIT_HOUSEHOLD_MEMBER);
 		
 		this.formGeneratedObject = householdMember;
 		
@@ -118,7 +118,7 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 	@Override
 	public void reset() 
 	{
-		if(this.getFormType() == PanelType.ADD_HOUSEHOLD_MEMBER)
+		if(this.getFormType() == FormType.ADD_HOUSEHOLD_MEMBER)
 		{
 			nationalNumberTextField.setText("");
 			surnameTextField.setText(baseSurname);
@@ -128,7 +128,7 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 			name4TextField.setText("");
 			name5TextField.setText("");
 		}
-		else if(this.getFormType() == PanelType.EDIT_HOUSEHOLD_MEMBER)
+		else if(this.getFormType() == FormType.EDIT_HOUSEHOLD_MEMBER)
 		{
 			nationalNumberTextField.setText(formGeneratedObject.getNationalNumber());
 			surnameTextField.setText(formGeneratedObject.getSurname());
@@ -172,7 +172,7 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 		{
 			try 
 			{
-				formGeneratedObject = new HouseholdMember(birthDate, firstNames, nationalNumber, surname);
+				formGeneratedObject = new HouseholdMember(birthDate, firstNames, nationalNumber, surname); // TODO : gestion update
 			} 
 			catch (InvalidNumberException | NoDataException e1) 
 			{

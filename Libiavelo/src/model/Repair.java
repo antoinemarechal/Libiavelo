@@ -18,12 +18,14 @@ public class Repair {
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
+	 * @throws NoDataException 
 	 *************************************************************************************************/
-	public Repair(Bike bike, Date startDate, Garage garage, PersonnelMember verifier) {
+	public Repair(Bike bike, Date startDate, Garage garage, PersonnelMember verifier, String description) throws NoDataException {
 		this.setBike(bike);
 		this.setStartDate(startDate);
 		this.setGarage(garage);
 		this.setVerifier(verifier);
+		this.setDescription(description);
 	}
 	
 	/*************************************************************************************************

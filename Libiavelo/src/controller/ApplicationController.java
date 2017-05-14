@@ -1,8 +1,9 @@
 package controller;
 
-
+import java.sql.Date;
 import java.util.ArrayList;
 
+import business.BikeManager;
 import business.ClientManager;
 import business.HouseholdMemberManager;
 import business.LocalityManager;
@@ -16,6 +17,7 @@ public class ApplicationController {
 	ClientManager clientManager;
 	HouseholdMemberManager householdMemberManager;
 	LocalityManager localityManager;
+	BikeManager bikeManager;
 	
 	public void addClient(Client client) {
 		clientManager = new ClientManager();
@@ -30,6 +32,11 @@ public class ApplicationController {
 	public void addLocality(Locality locality) {
 		localityManager = new LocalityManager();
 		localityManager.addLocality(locality);
+	}
+	
+	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable) {
+		bikeManager = new BikeManager();
+		return bikeManager.getSearch1Data(date, isExceptionnal, isAvailable);
 	}
 	
 	public PersonnelMember getPersonnelMember(String matricule)

@@ -33,13 +33,8 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 						
 			ResultSet queryResults = preparedStatement.getGeneratedKeys();
 			queryResults.next();
+
 			locality.setId(queryResults.getInt(1));	
-			
-			ResultSetMetaData meta = queryResults.getMetaData( );
-			
-			for(int i = 1; i <= meta.getColumnCount(); i++)
-				System.out.println(meta.getColumnLabel(i));
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,15 +50,41 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
+	public Locality getLocality(int localityID) {
+		Locality locality = null;
+		
+		Connection connexion = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localite WHERE Code = ?");
+			preparedStatement.setInt(1, localityID);
+			
+			ResultSet queryResult = preparedStatement.executeQuery();
+			queryResult.next();
+			locality = new Locality(queryResult.getInt("Code"), queryResult.getString("Libelle"), queryResult.getInt("CodePostal"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidNumberException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return locality;
+	}
+	
 	public ArrayList<Locality> getAllLocalities() {
+		Locality locality = null;
 		ArrayList<Locality> localities = new ArrayList<Locality>();
-		Locality locality;
+		
 		Connection connexion = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localite");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {
-				locality = new Locality(queryResult.getString("Libelle"), queryResult.getInt("CodePostal"));
+				locality = new Locality(queryResult.getInt("Code"), queryResult.getString("Libelle"), queryResult.getInt("CodePostal"));
+
 				localities.add(locality);
 			}
 		} catch (SQLException e) {
@@ -78,6 +99,8 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 		}
 		return localities;
 	}
+	
+	
 	
 	public Locality getClientLocality(Client client) {
 		return null;

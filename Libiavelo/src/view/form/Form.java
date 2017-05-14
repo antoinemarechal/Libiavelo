@@ -1,16 +1,16 @@
-package view.panels;
+package view.form;
 
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public abstract class Form extends JPanel {
-	private PanelType formType;
+	private FormType formType;
 	
-	public Form(PanelType formType) {
+	public Form(FormType formType) {
 		this.formType = formType;
 	}
 	
-	public PanelType getFormType() {
+	public FormType getFormType() {
 		return formType;
 	}
 	

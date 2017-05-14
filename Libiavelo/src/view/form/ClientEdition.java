@@ -1,4 +1,4 @@
-package view.panels;
+package view.form;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -65,7 +65,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 	private Form currentForm;
 	
 	public ClientEdition(ArrayList<Locality> localitiesListing) {
-		super(PanelType.ADD_CLIENT);
+		super(FormType.ADD_CLIENT);
 		
 		buildDefaultDisplay(localitiesListing);
 		
@@ -76,7 +76,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 	
 	public ClientEdition(Client client, ArrayList<Locality> localitiesListing) 
 	{
-		super(PanelType.EDIT_CLIENT);
+		super(FormType.EDIT_CLIENT);
 		
 		buildDefaultDisplay(localitiesListing);
 		
@@ -274,7 +274,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 	@Override
 	public void reset() 
 	{
-		if(this.getFormType() == PanelType.ADD_CLIENT)
+		if(this.getFormType() == FormType.ADD_CLIENT)
 		{
 			surnameTextField.setText("");
 			name1TextField.setText("");
@@ -290,7 +290,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 			
 			householdMembers.clear();
 		}
-		else if(this.getFormType() == PanelType.EDIT_CLIENT)
+		else if(this.getFormType() == FormType.EDIT_CLIENT)
 		{
 			surnameTextField.setText(formGeneratedObject.getSurname());
 			name1TextField.setText(formGeneratedObject.getFirstNames()[0]);
@@ -372,11 +372,11 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 			
 			try 
 			{
-				if(this.getFormType() == PanelType.ADD_CLIENT)
+				if(this.getFormType() == FormType.ADD_CLIENT)
 				{
 					formGeneratedObject = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, false, 0.0f, streetNumber, streetName, new Date(System.currentTimeMillis()));
 				}
-				else if(this.getFormType() == PanelType.EDIT_CLIENT)
+				else if(this.getFormType() == FormType.EDIT_CLIENT)
 				{
 					formGeneratedObject.setSurname(clientSurname);
 					formGeneratedObject.setFirstNames(clientFirstNames);
@@ -483,7 +483,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 	{
 		householdMemberEditionDialog.setVisible(false);
 				
-		if(currentForm.getFormType() == PanelType.ADD_HOUSEHOLD_MEMBER)
+		if(currentForm.getFormType() == FormType.ADD_HOUSEHOLD_MEMBER)
 		{
 			Object generatedObject = currentForm.getFormGeneratedObject();
 			

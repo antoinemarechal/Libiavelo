@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import dao.ConnectionSingleton;
 import dao.LocalisationDataAccess;
-import exception.InvalidNumberException;
 import model.Bike;
 import model.BikeStation;
 import model.Garage;
@@ -28,48 +27,48 @@ public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Localisation getLocalisation() {
+	public Localisation getLocalisation(int bikeID) {
 		Localisation localisation = null;
+		
+		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
+		GarageDerbyDataAccess garageDerbyDataAccess = new GarageDerbyDataAccess();		
+		BikeStationDerbyDataAccess bikeStationDerbyDataAccess = new BikeStationDerbyDataAccess();
+		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Localisation");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Localisation WHERE ? is NumeroVelo");
+			preparedStatement.setInt(1, bikeID);
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {
 				Boolean available = queryResult.getBoolean("EstDisponible");
-				Integer bikeID = queryResult.getInt("NumeroVelo");
-				Integer premisesID = queryResult.getInt("CodePropriete");
-				
-				BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
+				Integer premisesID = queryResult.getInt("CodePropriete");	
 				Bike bike = bikeDerbyDataAccess.getBike(bikeID);
 				
 				ResultSetMetaData metaData = queryResult.getMetaData();
 				if (metaData.getColumnCount() == 1) {
-					Garage garage = new Garage(); // TODO : récup garage. demande de faire garage dans dao
+					Garage garage = garageDerbyDataAccess.getGarage(premisesID);
 					localisation = new Localisation(available, bike, garage);
 				}
 				else {
-					Integer lowerBikeSoftLimit = queryResult.getInt("LimiteBasseNbrVelos");
-					Integer lowerBikeHardLimit = queryResult.getInt("LimiteBasseExtremeNbrVelos");
-					Integer upperBikeSoftLimit = queryResult.getInt("LimiteHauteNbrVelos");
-					Integer upperBikeHardLimit = queryResult.getInt("LimiteHauteExtremeNbrVelos");
-					BikeStation bikeStation = new BikeStation(lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
-					bikeStation.setId(premisesID);
+					BikeStation bikeStation = bikeStationDerbyDataAccess.getBikeStation(premisesID);
 					localisation = new Localisation(available, bike, bikeStation);
 				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvalidNumberException e) {
-			// not supposed to happen
-			e.printStackTrace();
 		}
 		return localisation;
 	}
 	
 	public ArrayList<Localisation> getAllLocalisation() {
-		ArrayList<Localisation> localisations = new ArrayList<Localisation>();
 		Localisation localisation = null;
+		ArrayList<Localisation> localisations = new ArrayList<Localisation>();
+		
+		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
+		GarageDerbyDataAccess garageDerbyDataAccess = new GarageDerbyDataAccess();
+		BikeStationDerbyDataAccess bikeStationDerbyDataAccess = new BikeStationDerbyDataAccess();
+		
 		Connection connexion = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localisation");
@@ -78,32 +77,21 @@ public class LocalisationDerbyDataAccess implements LocalisationDataAccess {
 				Boolean available = queryResult.getBoolean("EstDisponible");
 				Integer bikeID = queryResult.getInt("NumeroVelo");
 				Integer premisesID = queryResult.getInt("CodePropriete");
-				
-				BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
 				Bike bike = bikeDerbyDataAccess.getBike(bikeID);
 				
 				ResultSetMetaData metaData = queryResult.getMetaData();
 				if (metaData.getColumnCount() == 1) {
-					Garage garage = new Garage(); // TODO : récup garage dans bd. implique de faire garage dans dao
+					Garage garage = garageDerbyDataAccess.getGarage(premisesID);
 					localisation = new Localisation(available, bike, garage);
-					localisations.add(localisation);
 				}
 				else {
-					Integer lowerBikeSoftLimit = queryResult.getInt("LimiteBasseNbrVelos");
-					Integer lowerBikeHardLimit = queryResult.getInt("LimiteBasseExtremeNbrVelos");
-					Integer upperBikeSoftLimit = queryResult.getInt("LimiteHauteNbrVelos");
-					Integer upperBikeHardLimit = queryResult.getInt("LimiteHauteExtremeNbrVelos");
-					BikeStation bikeStation = new BikeStation(lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
-					bikeStation.setId(premisesID);
+					BikeStation bikeStation = bikeStationDerbyDataAccess.getBikeStation(premisesID);
 					localisation = new Localisation(available, bike, bikeStation);
-					localisations.add(localisation);
 				}
+				localisations.add(localisation);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidNumberException e) {
-			// not supposed to happen
 			e.printStackTrace();
 		}
 		return localisations;

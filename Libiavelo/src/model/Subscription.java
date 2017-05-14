@@ -12,7 +12,7 @@ public class Subscription {
 	/*************************************************************************************************
 	 CONSTRUCTOR
 	 *************************************************************************************************/
-	public Subscription(double amountToPay, Date demand, Date expiry, int subscriptionDuration, String description) {
+	public Subscription(Double amountToPay, Date demand, Date expiry, Integer subscriptionDuration, String description) {
 		this.setAmountToPay(amountToPay);
 		this.setDemand(demand);
 		this.setExpiry(expiry);
@@ -39,7 +39,7 @@ public class Subscription {
 	/*************************************************************************************************
 	 SETTERS
 	 *************************************************************************************************/
-	public void setAmountToPay(double amountToPay) {
+	public void setAmountToPay(Double amountToPay) {
 		this.amountToPay = amountToPay;
 	}
 	public void setDemand(Date demand) {

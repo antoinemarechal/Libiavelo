@@ -39,6 +39,20 @@ public class Client extends Person {
 		this.setStreetNumber(streetNumber);
 		this.setSubscriptionDate(subscriptionDate);
 	}
+	
+	public Client(String nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Float depositAmount, String streetNumber, String streetName, Locality locality, Date subscriptionDate) throws InvalidNumberException, NoDataException {
+		this.setNationalNumber(nationalNumber);
+		this.setHomeNumber(homeNumber);
+		this.setPhoneNumber(phoneNumber);
+		this.setSurname(clientSurname);
+		this.setFirstNames(clientFirstNames);
+		this.setSubsriptionValidated(subscriptionValidated);
+		this.setDepositAmount(depositAmount);
+		this.setStreetName(streetName);
+		this.setStreetNumber(streetNumber);
+		this.setSubscriptionDate(subscriptionDate);
+		this.setLocality(locality);
+	}
 
 	/*************************************************************************************************
 	 GETTERS
@@ -124,6 +138,14 @@ public class Client extends Person {
 		this.subscriptionDate = lastHouseholdRenewal;
 		
 	}
+	
+	public void setClientNumber(int clientNumber) {
+		this.clientNumber = clientNumber;
+	}
+	
+	public void setLocality(Locality locality) {
+		this.locality = locality;
+	}
 	/***********************************************************************************************
 	 OTHERS
 	 ***********************************************************************************************/
@@ -135,8 +157,4 @@ public class Client extends Person {
 		household.remove(householdMember);
 	}
 
-	public void setLocality(Locality selectedItem) {
-		locality = selectedItem;
-		
-	}	
 }

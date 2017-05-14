@@ -13,7 +13,7 @@ public interface LocalisationDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Localisation getLocalisation();
+	public Localisation getLocalisation(int bikeID);
 	public ArrayList<Localisation> getAllLocalisation();
 	
 	/*************************************************************************************************

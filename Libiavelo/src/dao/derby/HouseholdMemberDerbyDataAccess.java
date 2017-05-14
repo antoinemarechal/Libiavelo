@@ -1,6 +1,7 @@
 package dao.derby;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,13 +16,14 @@ import model.HouseholdMember;
 public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess {
 	public HouseholdMemberDerbyDataAccess() {
 	}
+	
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
+	public void addHouseholdMember(HouseholdMember householdMember, int clientID) {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Client VALUES (?,?,?,?,?,?,?) ");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Membre_Menage VALUES (?,?,?,?,?,?,?) ");
 			String nationalNumber = "" + householdMember.getNationalNumber();
 			preparedStatement.setString(1, nationalNumber);
 			preparedStatement.setString(2, householdMember.getSurname());
@@ -46,11 +48,12 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public HouseholdMember getHouseholdMember(Integer clientID) {
+	public HouseholdMember getHouseholdMember(int clientID) {
 		HouseholdMember householdMember = null;
-		Connection connexion = ConnectionSingleton.getInstance();
+		
+		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Membre_Menage");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Membre_Menage");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			while(queryResult.next()) {
 				String surname = queryResult.getString("Nom");
@@ -81,8 +84,9 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 	}
 	
 	public ArrayList<HouseholdMember> getAllHouseholdMembers() {
-		ArrayList<HouseholdMember> household = new ArrayList<HouseholdMember>();
 		HouseholdMember householdMember = null;
+		ArrayList<HouseholdMember> household = new ArrayList<HouseholdMember>();
+		
 		Connection connexion = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Membre_Menage");
@@ -96,11 +100,9 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 				firstNames[4] = queryResult.getString("Prenom4");
 				firstNames[5] = queryResult.getString("Prenom5");
 				String nationalNumber = queryResult.getString("NumeroNational");
+				Date birthDate = null;
 				
-				householdMember = new HouseholdMember(nationalNumber);
-				householdMember.setSurname(surname);
-				householdMember.setFirstNames(firstNames);
-				
+				householdMember = new HouseholdMember(birthDate, firstNames, nationalNumber, surname);
 				household.add(householdMember);
 			}
 		} catch (SQLException e) {

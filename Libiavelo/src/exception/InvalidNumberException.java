@@ -1,5 +1,6 @@
 package exception;
 
+@SuppressWarnings("serial")
 public class InvalidNumberException extends Exception {
 
 	private int number;

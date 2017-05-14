@@ -1,4 +1,4 @@
-package view.panels;
+package view.form;
 
 import java.awt.GridLayout;
 import java.text.ParseException;
@@ -26,7 +26,7 @@ public class LocalityEdition extends Form {
 	private Locality formGeneratedObject;
 		
 	public LocalityEdition() {
-		super(PanelType.ADD_LOCALITY);
+		super(FormType.ADD_LOCALITY);
 		
 		this.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder(" Localité : "), 

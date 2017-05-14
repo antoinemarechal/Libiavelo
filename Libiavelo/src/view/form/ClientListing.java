@@ -1,4 +1,4 @@
-package view.panels;
+package view.form;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -122,8 +122,8 @@ public class ClientListing extends JPanel implements ActionListener, ListSelecti
 		}
 		else if(e.getSource() == removeClientButton)
 		{
-			ApplicationController appController = new ApplicationController();
-			appController.removeClient(clientsListing.get(clientsTable.getSelectedRow()));
+			//ApplicationController appController = new ApplicationController();
+			//appController.removeClient(clientsListing.get(clientsTable.getSelectedRow()));
 			
 			clientsListing.remove(clientsTable.getSelectedRow());
 			
@@ -142,7 +142,7 @@ public class ClientListing extends JPanel implements ActionListener, ListSelecti
 	{
 		this.removeAll();
 		
-		if(currentForm.getFormType() == PanelType.ADD_CLIENT)
+		if(currentForm.getFormType() == FormType.ADD_CLIENT)
 		{
 			Object generatedObject = currentForm.getFormGeneratedObject();
 			

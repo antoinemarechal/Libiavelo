@@ -8,7 +8,7 @@ public class SubscriptionType {
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public SubscriptionType(int subscriptionDuration, String description) {
+	public SubscriptionType(Integer subscriptionDuration, String description) {
 		this.cost = subscriptionDuration * 10.95; //TODO de-troll me
 		this.description = description;
 	}

@@ -10,6 +10,7 @@ import dao.BikeStationDataAccess;
 import dao.ConnectionSingleton;
 import exception.InvalidNumberException;
 import model.BikeStation;
+import model.Locality;
 
 public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 	public BikeStationDerbyDataAccess() {
@@ -26,21 +27,33 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 	 *************************************************************************************************/
 	public BikeStation getBikeStation(int bikeStationID) {
 		BikeStation bikeStation = null;
+		
+		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
+		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Station WHERE Code IS ?");
-			preparedStatement.setInt(1, bikeStationID);
-			ResultSet queryResult = preparedStatement.executeQuery();
-
-			while(queryResult.next()) {
-				Integer lowerBikeSoftLimit = queryResult.getInt("LimiteBasseNbrVelos");
-				Integer lowerBikeHardLimit = queryResult.getInt("LimiteBasseExtremeNbrVelos");
-				Integer upperBikeSoftLimit = queryResult.getInt("LimiteHauteNbrVelos");
-				Integer upperBikeHardLimit = queryResult.getInt("LimiteHauteExtremeNbrVelos");
-				
-				bikeStation = new BikeStation(lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
-				bikeStation.setId(bikeStationID);
-			}
+			PreparedStatement selectStationStatement = connection.prepareStatement("SELECT * FROM Station WHERE Code IS ?");
+			selectStationStatement.setInt(1, bikeStationID);
+			ResultSet selectStationResult = selectStationStatement.executeQuery();
+			selectStationResult.next();
+			
+			Integer lowerBikeSoftLimit = selectStationResult.getInt("LimiteBasseNbrVelos");
+			Integer lowerBikeHardLimit = selectStationResult.getInt("LimiteBasseExtremeNbrVelos");
+			Integer upperBikeSoftLimit = selectStationResult.getInt("LimiteHauteNbrVelos");
+			Integer upperBikeHardLimit = selectStationResult.getInt("LimiteHauteExtremeNbrVelos");
+			
+			PreparedStatement selectEstateStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code IS ?");
+			selectEstateStatement.setInt(1, bikeStationID);
+			ResultSet selectEstateResult = selectEstateStatement.executeQuery();					
+			selectEstateResult.next();
+			
+			
+			Locality locality = localityDerbyDataAccess.getLocality(selectEstateResult.getInt("CodeLocalite"));
+			String streetName = selectEstateResult.getString("NomRue");
+			String streetNumber = selectEstateResult.getString("Numero");
+			String description = selectEstateResult.getString("Libelle");
+			
+			bikeStation = new BikeStation(bikeStationID, locality, streetName, streetNumber, description, lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,32 +61,51 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 			// not supposed to happen
 			e.printStackTrace();
 		}
+		catch (NullPointerException e) {
+			// not supposed to happen
+			e.printStackTrace();
+		}
 		return bikeStation;
 	}
 	
 	public ArrayList<BikeStation> getAllBikeStations() {
-		ArrayList<BikeStation> bikeStations = new ArrayList<BikeStation>();
 		BikeStation bikeStation = null;
+		ArrayList<BikeStation> bikeStations = new ArrayList<BikeStation>();
+		
+		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
+		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Station");
-			ResultSet queryResult = preparedStatement.executeQuery();
-
-			while(queryResult.next()) {
-				Integer lowerBikeSoftLimit = queryResult.getInt("LimiteBasseNbrVelos");
-				Integer lowerBikeHardLimit = queryResult.getInt("LimiteBasseExtremeNbrVelos");
-				Integer upperBikeSoftLimit = queryResult.getInt("LimiteHauteNbrVelos");
-				Integer upperBikeHardLimit = queryResult.getInt("LimiteHauteExtremeNbrVelos");
-				Integer bikeStationID = queryResult.getInt("Code");
+			PreparedStatement selectStationStatement = connection.prepareStatement("SELECT * FROM Station");
+			ResultSet selectStationResult = selectStationStatement.executeQuery();
+			while(selectStationResult.next()) {
+				Integer lowerBikeSoftLimit = selectStationResult.getInt("LimiteBasseNbrVelos");
+				Integer lowerBikeHardLimit = selectStationResult.getInt("LimiteBasseExtremeNbrVelos");
+				Integer upperBikeSoftLimit = selectStationResult.getInt("LimiteHauteNbrVelos");
+				Integer upperBikeHardLimit = selectStationResult.getInt("LimiteHauteExtremeNbrVelos");
+				Integer bikeStationID = selectStationResult.getInt("Code");
 				
-				bikeStation = new BikeStation(lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
-				bikeStation.setId(bikeStationID);
+				PreparedStatement selectEstateStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code IS ?");
+				selectEstateStatement.setInt(1, bikeStationID);
+				ResultSet selectEstateResult = selectEstateStatement.executeQuery();		
+				Locality locality = localityDerbyDataAccess.getLocality(selectEstateResult.getInt("CodeLocalite"));	
+				selectEstateResult.next();
+				
+				selectEstateResult = selectEstateStatement.executeQuery();	
+				String streetName = selectEstateResult.getString("NomRue");
+				String streetNumber = selectEstateResult.getString("Numero");
+				String description = selectEstateResult.getString("Libelle");
+				
+				bikeStation = new BikeStation(bikeStationID, locality, streetName, streetNumber, description, lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
 				bikeStations.add(bikeStation);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidNumberException e) {
+			// not supposed to happen
+			e.printStackTrace();
+		} catch (NullPointerException e) {
 			// not supposed to happen
 			e.printStackTrace();
 		}

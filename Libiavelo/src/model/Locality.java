@@ -18,6 +18,12 @@ public class Locality {
 		this.setCityName(cityName);
 		this.setPostalCode(postalCode);
 	}
+	
+	public Locality(Integer id, String cityName, Integer postalCode) throws NoDataException, InvalidNumberException {
+		this.setCityName(cityName);
+		this.setPostalCode(postalCode);
+		this.setId(id);
+	}
 
 	/*************************************************************************************************
 	 GETTERS

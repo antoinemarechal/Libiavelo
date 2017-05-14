@@ -21,7 +21,6 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import controller.ApplicationController;
-import view.observers.CustomWindowListener;
 import model.PersonnelMember;
 
 @SuppressWarnings("serial")

@@ -9,8 +9,11 @@ public class Garage extends Estate{
 		super();
 	}
 	
-	public Garage(String description) {
+	public Garage(String description, String streetName, String streetNumber, Locality locality) {
 		super();
 		super.setDescription(description);
+		super.setStreetName(streetName);
+		super.setStreetNumber(streetNumber);
+		super.setLocality(locality);
 	}
 }

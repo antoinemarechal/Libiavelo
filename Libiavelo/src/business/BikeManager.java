@@ -1,5 +1,6 @@
 package business;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import dao.BikeDataAccess;
@@ -29,6 +30,10 @@ public class BikeManager {
 	
 	public ArrayList<Bike> getAllBikes() {
 		return bikeDataAccess.getAllBikes();
+	}
+	
+	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable) {
+		return bikeDataAccess.getSearch1Data(date, isExceptionnal, isAvailable);
 	}
 	
 	/*************************************************************************************************
