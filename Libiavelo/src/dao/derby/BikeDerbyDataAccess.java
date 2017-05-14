@@ -24,7 +24,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Velo(Etat) VALUES(?)");
-			preparedStatement.setString(1, bike.getState().toString());
+			preparedStatement.setString(1, bike.getState().name());
 			preparedStatement.executeUpdate();
 			
 			ResultSet queryResults = preparedStatement.getGeneratedKeys();
@@ -105,7 +105,61 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		} 
 		return data;
 	}
-	 
+	
+	public ArrayList<ArrayList<Object>> getSearch2Data(Date startDate, Date endDate, BikeState state) {
+		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+		
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.libelle, r.DescriptionProbleme, r.NumeroVelo, v.Etat FROM Reparation r INNER JOIN Velo v ON r.NumeroVelo = v.NumeroVelo and r.DATEENTREEGARAGE >= ? and r.DATEFINREPARATION <= ? and v.etat = ? INNER JOIN Garage g ON r.CodeGarage = g.CODE INNER JOIN Propriete p on g.CODE = p.code");			
+			preparedStatement.setDate(1, startDate);
+			preparedStatement.setDate(2, endDate);
+			preparedStatement.setString(3, state.name());
+			
+			ResultSet queryResult = preparedStatement.executeQuery();
+			ResultSetMetaData metaData = queryResult.getMetaData();
+			
+			int columnCount = metaData.getColumnCount();	
+		    while (queryResult.next()) {
+		        ArrayList<Object> row = new ArrayList<Object>();
+		        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++)
+		        	row.add(queryResult.getObject(columnIndex));
+		        data.add(row);
+		    }	
+		} catch (SQLException | IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return data;
+	}
+	
+	public ArrayList<ArrayList<Object>> getSearch3Data(Boolean isValid, Date dateThreshold, Float minimumAmount) {
+		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+		
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT c. NomDemandeur, c.Prenom1, l.NomVille, a.DateDemande, A.SoldeRestantAPayer, c.InscriptionValidee FROM Client c INNER JOIN Localite l ON c.CodeLocalite = l.Code and c.InscriptionValidee = ? INNER JOIN Abonnement a on c.NumeroClient = a.Client and a.DateDemaned >= ? and a.SoldeRestantAPayer >= ?");				
+			
+			preparedStatement.setBoolean(1, isValid);
+			preparedStatement.setDate(2, dateThreshold);
+			preparedStatement.setFloat(3, minimumAmount);
+			
+			ResultSet queryResult = preparedStatement.executeQuery();
+			ResultSetMetaData metaData = queryResult.getMetaData();
+			
+			int columnCount = metaData.getColumnCount();	
+		    while (queryResult.next()) {
+		        ArrayList<Object> row = new ArrayList<Object>();
+		        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++)
+		        	row.add(queryResult.getObject(columnIndex));
+		        data.add(row);
+		    }	
+		} catch (SQLException | IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return data;
+	}
 	
 	/*************************************************************************************************
 	 UPDATE

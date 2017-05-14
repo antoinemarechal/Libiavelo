@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import dao.BikeDataAccess;
 import dao.derby.BikeDerbyDataAccess;
 import model.Bike;
+import model.enumerations.BikeState;
 
 public class BikeManager {
 	BikeDataAccess bikeDataAccess;
@@ -36,6 +37,13 @@ public class BikeManager {
 		return bikeDataAccess.getSearch1Data(date, isExceptionnal, isAvailable);
 	}
 	
+	public ArrayList<ArrayList<Object>> getSearch2Data(Date startDate, Date endDate, BikeState state) {
+		return bikeDataAccess.getSearch2Data(startDate, endDate, state);
+	}
+	
+	public ArrayList<ArrayList<Object>> getSearch3Data(Boolean isValid, Date dateThreshold, Float minimumAmount) {
+		return bikeDataAccess.getSearch3Data(isValid, dateThreshold, minimumAmount);
+	}
 	/*************************************************************************************************
 	 UPDATE
 	 *************************************************************************************************/

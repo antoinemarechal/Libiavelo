@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 import model.Bike;
+import model.enumerations.BikeState;
 
 public interface BikeDataAccess {
 	/*************************************************************************************************
@@ -17,8 +18,10 @@ public interface BikeDataAccess {
 	 *************************************************************************************************/
 	public Bike getBike(int bikeID);
 	public ArrayList<Bike> getAllBikes();
-	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable);
 	
+	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable);
+	public ArrayList<ArrayList<Object>> getSearch2Data(Date startDate, Date endDate, BikeState state);
+	public ArrayList<ArrayList<Object>> getSearch3Data(Boolean isValid, Date dateThreshold, Float minimumAmount);
 	/*************************************************************************************************
 	 UPDATE
 	 *************************************************************************************************/

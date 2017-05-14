@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.ApplicationController;
+import model.enumerations.BikeState;
 
 
 @SuppressWarnings("serial")
@@ -18,6 +19,8 @@ public class SearchPanel extends JPanel implements ActionListener {
 	private JButton resetButton;
 	
 	private Search search;
+	
+	private ApplicationController applicationController;
 	
 	public SearchPanel(Search search) {
 		super();
@@ -39,6 +42,7 @@ public class SearchPanel extends JPanel implements ActionListener {
 			
 		this.add(search, BorderLayout.CENTER);
 		this.add(buttonsPanel, BorderLayout.SOUTH);
+		applicationController = new ApplicationController();
 	}
 
 	@Override
@@ -46,15 +50,25 @@ public class SearchPanel extends JPanel implements ActionListener {
 		if(event.getSource() == validateButton) {
 			switch (search.getSearchType()) {
 				case SEARCH1 :
-					ApplicationController applicationController = new ApplicationController();
 					Date date = new Date(((Search1) search).getInputDate().getTime());
 					applicationController.getSearch1Data(date,((Search1) search).getIsExceptionnal(), ((Search1) search).getIsAvailable());
 					break;
 						
 				case SEARCH2 :
+					Date startDate = new Date(((Search2) search).getStartDate().getTime());
+					Date endDate = new Date(((Search2) search).getEndDate().getTime());
+					BikeState bikeState = ((Search2) search).getBikeState();
+					System.out.println(startDate);
+					System.out.println(endDate);
+					System.out.println(bikeState.name());
+					applicationController.getSearch2Data(startDate, endDate, bikeState);
 					break;
 						
 				case SEARCH3 :
+					Boolean isValid = ((Search3) search).getSubscriptionValidity();
+					Date dateThreshold =  new Date(((Search3) search).getDate().getTime());
+					Float minimumAmount = ((Search3) search).getMinimumAmount();
+					applicationController.getSearch3Data(isValid, dateThreshold, minimumAmount);
 					break;
 						
 				default :

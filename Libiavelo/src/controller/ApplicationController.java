@@ -12,6 +12,7 @@ import model.Client;
 import model.HouseholdMember;
 import model.Locality;
 import model.PersonnelMember;
+import model.enumerations.BikeState;
 
 public class ApplicationController {
 	ClientManager clientManager;
@@ -41,6 +42,16 @@ public class ApplicationController {
 	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable) {
 		bikeManager = new BikeManager();
 		return bikeManager.getSearch1Data(date, isExceptionnal, isAvailable);
+	}
+	
+	public ArrayList<ArrayList<Object>> getSearch2Data(Date startDate, Date endDate, BikeState state) {
+		bikeManager = new BikeManager();
+		return bikeManager.getSearch2Data(startDate, endDate, state);
+	}
+	
+	public ArrayList<ArrayList<Object>> getSearch3Data(Boolean isValid, Date dateThreshold, Float minimumAmount) {
+		bikeManager = new BikeManager();
+		return bikeManager.getSearch3Data(isValid, dateThreshold, minimumAmount);
 	}
 	
 	public PersonnelMember getPersonnelMember(String matricule, String password)
