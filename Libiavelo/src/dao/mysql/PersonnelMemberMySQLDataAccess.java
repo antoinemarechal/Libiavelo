@@ -35,7 +35,6 @@ public class PersonnelMemberMySQLDataAccess implements PersonnelMemberDataAccess
 			{
 				PersonnelMember member = new PersonnelMember();
 				member.setID(results.getString("Matricule"));
-				member.setHashedPassword(results.getString("MotDePasse"));
 				try {
 					member.setSurname(results.getString("Nom"));
 				} catch (NoDataException e) {

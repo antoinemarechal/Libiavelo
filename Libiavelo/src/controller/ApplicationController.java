@@ -39,9 +39,9 @@ public class ApplicationController {
 		return bikeManager.getSearch1Data(date, isExceptionnal, isAvailable);
 	}
 	
-	public PersonnelMember getPersonnelMember(String matricule)
+	public PersonnelMember getPersonnelMember(String matricule, String password)
 	{
-		return new PersonnelMemberManager().getPersonnelMember(matricule);
+		return new PersonnelMemberManager().getPersonnelMember(matricule);//FIXME:
 	}
 
 	public ArrayList<Client> getAllClients() 
