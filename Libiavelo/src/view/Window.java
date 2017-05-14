@@ -17,7 +17,6 @@ import view.form.FormPanel;
 import view.form.LocalityEdition;
 import view.form.NewClient;
 import view.form.PreviousPanel;
-import view.observers.CustomWindowListener;
 import view.search.Search1;
 import view.search.Search2;
 import view.search.Search3;

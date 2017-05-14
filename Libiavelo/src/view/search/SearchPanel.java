@@ -3,9 +3,12 @@ package view.search;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import controller.ApplicationController;
 
 
 @SuppressWarnings("serial")
@@ -43,6 +46,9 @@ public class SearchPanel extends JPanel implements ActionListener {
 		if(event.getSource() == validateButton) {
 			switch (search.getSearchType()) {
 				case SEARCH1 :
+					ApplicationController applicationController = new ApplicationController();
+					Date date = new Date(((Search1) search).getInputDate().getTime());
+					applicationController.getSearch1Data(date,((Search1) search).getIsExceptionnal(), ((Search1) search).getIsAvailable());
 					break;
 						
 				case SEARCH2 :

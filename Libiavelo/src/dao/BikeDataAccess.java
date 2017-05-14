@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 
@@ -16,6 +17,7 @@ public interface BikeDataAccess {
 	 *************************************************************************************************/
 	public Bike getBike(int bikeID);
 	public ArrayList<Bike> getAllBikes();
+	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable);
 	
 	/*************************************************************************************************
 	 UPDATE
