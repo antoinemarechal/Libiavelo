@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import view.form.ClientListing;
 import view.form.FormPanel;
 import view.form.LocalityEdition;
-import view.form.PreviousPanel;
 import view.search.Search1;
 import view.search.Search2;
 import view.search.Search3;

@@ -30,6 +30,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.text.MaskFormatter;
 
+import view.PreviousPanel;
 import model.Client;
 import model.HouseholdMember;
 import model.Locality;
@@ -445,7 +446,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 			currentForm = new HouseholdMemberEdition(surnameTextField.getText());
 			
 			householdMemberEditionDialog.getContentPane().add(new FormPanel(currentForm , this), BorderLayout.CENTER);
-			householdMemberEditionDialog.setPreferredSize(new Dimension(400, 300));
+			householdMemberEditionDialog.setPreferredSize(new Dimension(400, 350));
 			householdMemberEditionDialog.pack();
 			
 			householdMemberEditionDialog.setLocationRelativeTo(this);
@@ -458,7 +459,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 			currentForm = new HouseholdMemberEdition(householdMembers.get(householdMembersTable.getSelectedRow()));
 			
 			householdMemberEditionDialog.getContentPane().add(new FormPanel((currentForm), this), BorderLayout.CENTER);
-			householdMemberEditionDialog.setPreferredSize(new Dimension(400, 300));
+			householdMemberEditionDialog.setPreferredSize(new Dimension(400, 350));
 			householdMemberEditionDialog.pack();
 			
 			householdMemberEditionDialog.setLocationRelativeTo(this);

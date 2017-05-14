@@ -46,7 +46,7 @@ public class LocalityEdition extends Form {
 		cityNameLabel.setLabelFor(cityNameTextField);
 		cityNameLabel.setToolTipText("Obligatoire");
 		cityNameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		cityNameTextField = new JTextField("", 20);
+		cityNameTextField = new JTextField();
 		this.add(cityNameLabel);
 		this.add(cityNameTextField);
 		

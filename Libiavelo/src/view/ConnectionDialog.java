@@ -9,6 +9,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -122,10 +125,42 @@ public class ConnectionDialog extends JDialog implements ActionListener, ItemLis
 			JOptionPane.showMessageDialog(this, "Le mot de passe doit compter au moins un caractère.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);
 			
 			this.setVisible(true);
-		}		else		{			// TODO catch error pour déterminer que le nom de compte est invalide			ApplicationController ap = new ApplicationController();						PersonnelMember pm = ap.getPersonnelMember(usernameField.getText());						if(pm == null)			{				this.setVisible(false);								JOptionPane.showMessageDialog(this, "Le nom d'utilisateur entré n'existe pas.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);								this.setVisible(true);			}			else			{				if(pm.isEnteredPasswordValid(String.valueOf(passwordField.getPassword())))				{										this.dispose();
-					
-					mainWindow.onConnectionSet(pm);				}				else				{					this.setVisible(false);										JOptionPane.showMessageDialog(this, "Le mot de passe pour cet utilisateur est invalide.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);										this.setVisible(true);				}
+		}		else		{			ApplicationController appController = new ApplicationController();						PersonnelMember member = appController.getPersonnelMember(usernameField.getText(), hashPassword(String.valueOf(passwordField.getPassword())));						if(member == null)			{				this.setVisible(false);								JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe invalide.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);								this.setVisible(true);			}			else			{					
+				this.dispose();
+				
+				mainWindow.onConnectionSet(member);
 			}		}
+	}
+	
+	private String hashPassword(String clearPassword)
+	{
+		MessageDigest hashTool;
+		
+		try 
+		{
+			hashTool = MessageDigest.getInstance("SHA-256");
+			
+			byte[] hash = hashTool.digest(clearPassword.getBytes(StandardCharsets.UTF_8));
+			
+			StringBuilder hexString = new StringBuilder();
+
+	        for (int i = 0; i < hash.length; i++) {
+	        	String hex = Integer.toHexString(0xff & hash[i]);
+	            
+	            if(hex.length() == 1) 
+	            	hexString.append('0');
+	            
+	            hexString.append(hex);
+	        }
+
+	        return hexString.toString();
+		} 
+		catch (NoSuchAlgorithmException e) 
+		{
+			JOptionPane.showMessageDialog(this, "L'algorithme de cryptage n'a pas été trouvé, veuillez vous assurez que votre version de Java est à jour.", "Algoritme de cryptage invalide", JOptionPane.ERROR_MESSAGE);
+			
+			return null;
+		}
 	}
 	
 	@Override

@@ -24,6 +24,10 @@ public class ApplicationController {
 		clientManager.addClient(client);
 	}
 	
+	public void updateClient(Client client) {
+		new ClientManager().updateClient(client);
+	}
+	
 	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
 		householdMemberManager = new HouseholdMemberManager();
 		householdMemberManager.addHouseholdMember(householdMember, clientID);
@@ -39,9 +43,9 @@ public class ApplicationController {
 		return bikeManager.getSearch1Data(date, isExceptionnal, isAvailable);
 	}
 	
-	public PersonnelMember getPersonnelMember(String matricule)
+	public PersonnelMember getPersonnelMember(String matricule, String password)
 	{
-		return new PersonnelMemberManager().getPersonnelMember(matricule);
+		return new PersonnelMemberManager().getPersonnelMember(matricule);//FIXME:
 	}
 
 	public ArrayList<Client> getAllClients() 
