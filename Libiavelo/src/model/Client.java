@@ -123,6 +123,10 @@ public class Client extends Person {
 		this.subscriptionDate = lastHouseholdRenewal;
 		
 	}
+	
+	public void setClientNumber(int clientNumber) {
+		this.clientNumber = clientNumber;
+	}
 	/***********************************************************************************************
 	 OTHERS
 	 ***********************************************************************************************/
@@ -132,5 +136,7 @@ public class Client extends Person {
 	
 	public void removeHouseholdMember(HouseholdMember householdMember) {
 		household.remove(householdMember);
-	}	
+	}
+
+	
 }

@@ -23,8 +23,8 @@ public class TransportationOrderManager {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public TransportationOrder getClient(int clientID) {
-		return transportationOrderDataAccess.getClient(clientID);
+	public TransportationOrder getTransportationOrder(int clientID) {
+		return transportationOrderDataAccess.getTransportationOrder(clientID);
 	}
 	
 	public ArrayList<TransportationOrder> getAllTransportationOrders() {

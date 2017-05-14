@@ -1,23 +1,22 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class TransportationOrder {
 	private Boolean exceptionnal;
 	
 	private Date execution;
-	private ArrayList<Bike> bikes;
 	
+	private Bike bike;
 	private Estate source, destination;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public TransportationOrder(boolean exceptionnal, Date date, ArrayList<Bike> bikes, Estate source, Estate destination) {
+	public TransportationOrder(boolean exceptionnal, Date date, Bike bike, Estate source, Estate destination) {
 		this.setExceptionnal(exceptionnal);
 		this.setExecution(date);
-		this.setBikes(bikes);
+		this.setBike(bike);
 		this.setDestination(destination);
 		this.setSource(source);
 	}
@@ -33,8 +32,8 @@ public class TransportationOrder {
 		return execution;
 	}
 
-	public ArrayList<Bike> getBikes() {
-		return bikes;
+	public Bike getBike() {
+		return bike;
 	}
 
 	public Estate getSource() {
@@ -56,8 +55,8 @@ public class TransportationOrder {
 		this.execution = execution;
 	}
 	
-	private void setBikes(ArrayList<Bike> bikes) {
-		this.bikes = bikes;
+	private void setBike(Bike bike) {
+		this.bike = bike;
 	}
 	
 	public void setSource(Estate source) {

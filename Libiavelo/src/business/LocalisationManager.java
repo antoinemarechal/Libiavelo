@@ -23,8 +23,8 @@ public class LocalisationManager {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Localisation getLocalisation() {
-		return localisationDataAccess.getLocalisation();
+	public Localisation getLocalisation(int bikeID) {
+		return localisationDataAccess.getLocalisation(bikeID);
 	}
 	
 	public ArrayList<Localisation> getAllLocalisation() {

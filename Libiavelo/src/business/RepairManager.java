@@ -37,11 +37,4 @@ public class RepairManager {
 	public void updateRepair(Repair repair) {
 		repairDerbyDataAccess.updateRepair(repair);
 	}
-	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
-	public void removeRepair(Repair repair) {
-		repairDerbyDataAccess.removeRepair(repair);
-	}
 }

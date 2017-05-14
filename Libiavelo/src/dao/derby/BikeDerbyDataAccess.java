@@ -12,27 +12,25 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addBike(Bike bike) {
+	public void addBike(Bike bike) { // FIXME : todo
 		
 	}
 	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public Bike getBike(int bikeID) {
-		
-		// NumeroVelo INTEGER  Etat  VARCHAR
+	public Bike getBike(int bikeID) { // FIXME : todo
 		return null;
 	}
 	
-	public ArrayList<Bike> getAllBikes() {
+	public ArrayList<Bike> getAllBikes() { // FIXME : todo
 		return null;
 	}
 	
 	/*************************************************************************************************
 	 UPDATE
 	 *************************************************************************************************/
-	public void updateBike(Bike bike) {
+	public void updateBike(Bike bike) { // FIXME : todo
 		
 	}
 	

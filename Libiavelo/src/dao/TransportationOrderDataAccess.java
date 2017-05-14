@@ -13,7 +13,7 @@ public interface TransportationOrderDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public TransportationOrder getClient(int clientID);
+	public TransportationOrder getTransportationOrder(int clientID);
 	public ArrayList<TransportationOrder> getAllTransportationOrders();
 	
 	/*************************************************************************************************

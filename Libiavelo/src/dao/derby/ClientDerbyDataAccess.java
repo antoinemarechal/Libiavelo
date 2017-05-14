@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.ClientDataAccess;
@@ -22,7 +23,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Client VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Client VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, client.getSurname());
 			
 			String[] firstNames = client.getFirstNames();
@@ -51,6 +52,9 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			preparedStatement.setInt(15, client.getLocality());
 			
 			preparedStatement.executeUpdate();
+			ResultSet queryResults = preparedStatement.getGeneratedKeys();
+			queryResults.next();
+			client.setClientNumber(queryResults.getInt("Code"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
