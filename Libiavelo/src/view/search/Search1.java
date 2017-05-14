@@ -1,15 +1,14 @@
-package view.panels;
+package view.search;
 
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 
-public class Search1 extends Form {
-	private static final long serialVersionUID = 1L;
+@SuppressWarnings("serial")
+public class Search1 extends Search {
 
-	
 	public Search1() {
-		super(PanelType.SEARCH1);
+		super(SearchType.SEARCH1);
 		
 		this.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder("Recherche 1 : "), 
@@ -24,17 +23,4 @@ public class Search1 extends Form {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public boolean validateForm() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Object getFormGeneratedObject() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -13,11 +13,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import model.PersonnelMember;
+import view.form.FormPanel;
+import view.form.LocalityEdition;
+import view.form.NewClient;
+import view.form.PreviousPanel;
 import view.observers.CustomWindowListener;
-import view.panels.FormPanel;
-import view.panels.LocalityEdition;
-import view.panels.NewClient;
-import view.panels.PreviousPanel;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame implements ActionListener, PreviousPanel {

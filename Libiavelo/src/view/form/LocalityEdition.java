@@ -1,4 +1,4 @@
-package view.panels;
+package view.form;
 
 import java.awt.GridLayout;
 import java.text.ParseException;

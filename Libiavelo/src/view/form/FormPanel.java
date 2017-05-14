@@ -1,4 +1,4 @@
-package view.panels;
+package view.form;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -68,15 +68,6 @@ public class FormPanel extends JPanel implements ActionListener {
 						break;
 						
 					case ADD_HOUSEHOLD_MEMBER :
-						break;
-						
-					case SEARCH1 :
-						break;
-						
-					case SEARCH2 :
-						break;
-						
-					case SEARCH3 :
 						break;
 						
 					default :
