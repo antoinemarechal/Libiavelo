@@ -8,12 +8,12 @@ public interface HouseholdMemberDataAccess {
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID);
+	public void addHouseholdMember(HouseholdMember householdMember, int clientID);
 	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public HouseholdMember getHouseholdMember(Integer clientID);
+	public HouseholdMember getHouseholdMember(int clientID);
 	public ArrayList<HouseholdMember> getAllHouseholdMembers();
 	
 	/*************************************************************************************************

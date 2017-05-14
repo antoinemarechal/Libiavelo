@@ -22,7 +22,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Velo(Etat) VALUES(?)");
-			preparedStatement.setString(1, bike.getState().toString()); //FIXME : check dis
+			preparedStatement.setString(1, bike.getState().toString());
 			preparedStatement.executeUpdate();
 			
 			ResultSet queryResults = preparedStatement.getGeneratedKeys();

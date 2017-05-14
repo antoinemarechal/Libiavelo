@@ -16,10 +16,11 @@ import model.HouseholdMember;
 public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess {
 	public HouseholdMemberDerbyDataAccess() {
 	}
+	
 	/*************************************************************************************************
 	 CREATE
 	 *************************************************************************************************/
-	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
+	public void addHouseholdMember(HouseholdMember householdMember, int clientID) {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Membre_Menage VALUES (?,?,?,?,?,?,?) ");
@@ -47,7 +48,7 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public HouseholdMember getHouseholdMember(Integer clientID) {
+	public HouseholdMember getHouseholdMember(int clientID) {
 		HouseholdMember householdMember = null;
 		
 		Connection connection = ConnectionSingleton.getInstance();
@@ -99,7 +100,9 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 				firstNames[4] = queryResult.getString("Prenom4");
 				firstNames[5] = queryResult.getString("Prenom5");
 				String nationalNumber = queryResult.getString("NumeroNational");
-				householdMember = new HouseholdMember(firstNames, nationalNumber, surname);
+				Date birthDate = null;
+				
+				householdMember = new HouseholdMember(birthDate, firstNames, nationalNumber, surname);
 				household.add(householdMember);
 			}
 		} catch (SQLException e) {

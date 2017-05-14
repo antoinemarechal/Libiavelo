@@ -20,27 +20,6 @@ public class GarageDerbyDataAccess implements GarageDataAccess {
 	public void addGarage(Garage garage) {
 	}
 	
-	
-	/*
-	 * WARNIN : les garage & stations sont récup dans localisation via leur dataacces sur base de l'hypothèse qu'ils n'y a qu'une ID et qu'on peut utiliser NULL pour test s'il existe l'un ou l'aute dans la DB toussa
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
-	
-	
-	
-	
-	
-	
-	
-	
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/

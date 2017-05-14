@@ -13,7 +13,7 @@ public class TransportationOrder {
 	/*************************************************************************************************
 	 CONSTRUCTORS
 	 *************************************************************************************************/
-	public TransportationOrder(boolean exceptionnal, Date date, Bike bike, Estate source, Estate destination) {
+	public TransportationOrder(Boolean exceptionnal, Date date, Bike bike, Estate source, Estate destination) {
 		this.setExceptionnal(exceptionnal);
 		this.setExecution(date);
 		this.setBike(bike);
@@ -24,7 +24,7 @@ public class TransportationOrder {
 	/*************************************************************************************************
 	 GETTERS
 	 *************************************************************************************************/
-	public boolean isExceptionnal() {
+	public Boolean isExceptionnal() {
 		return exceptionnal;
 	}
 

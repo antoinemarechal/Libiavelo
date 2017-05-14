@@ -6,7 +6,7 @@ import exception.InvalidNumberException;
 import exception.NoDataException;
 
 public class HouseholdMember extends Person {
-	// private Date birthDate; FIXME missin ?
+	private Date birthDate;
 	
 	/*************************************************************************************************
 	 CONSTRUCTORS
@@ -15,13 +15,13 @@ public class HouseholdMember extends Person {
 		super.setNationalNumber(nationalNumber);
 	}
 	
-	public HouseholdMember(String[] firstNames, String nationalNumber, String surname) throws InvalidNumberException, NoDataException{
-		//this.setBirthDate(birthDate);
+	public HouseholdMember(Date birthDate, String[] firstNames, String nationalNumber, String surname) throws InvalidNumberException, NoDataException{
+		this.setBirthDate(birthDate);
 		super.setFirstNames(firstNames);
 		super.setNationalNumber(nationalNumber);
 		super.setSurname(surname);
 	}
-	/*
+	
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -29,5 +29,5 @@ public class HouseholdMember extends Person {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	*/
+	
 }

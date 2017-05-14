@@ -13,8 +13,9 @@ public enum BikeState {
 		case DESTROYED:
 			return "DESTROYED";
 		case WORKING:
-			return "WORKING";		
+			return "WORKING";
+		default:
+				return null;
 		}
-		return null; // FIXME force by syntax but illogical. 
 	}
 }
