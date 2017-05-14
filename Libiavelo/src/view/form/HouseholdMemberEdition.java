@@ -8,7 +8,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.text.MaskFormatter;
 
 import model.HouseholdMember;
@@ -16,11 +18,12 @@ import exception.InvalidNumberException;
 import exception.NoDataException;
 
 @SuppressWarnings("serial")
-public class HouseholdMemberEdition extends Form { // TODO : passer le nom de famille d'office
+public class HouseholdMemberEdition extends Form {
 
-	private JLabel surnameLabel, name1Label, name2Label, name3Label, name4Label, name5Label, nationalNumberLabel;
+	private JLabel surnameLabel, name1Label, name2Label, name3Label, name4Label, name5Label, nationalNumberLabel, birthDateLabel;
 	private JTextField surnameTextField, name1TextField, name2TextField, name3TextField, name4TextField, name5TextField, nationalNumberTextField;
-
+	private JSpinner birthDateSpinner;
+	
 	private final String nationalNumberFormat = "##.##.##-###.##";
 	private final char placeholderCharacter = '_';
 	
@@ -34,6 +37,8 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 		this.baseSurname = surname;
 		
 		buildDefaultDisplay();
+		
+		surnameTextField.setText(baseSurname);
 	}
 	
 	public HouseholdMemberEdition(HouseholdMember householdMember) 
@@ -52,7 +57,7 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 		this.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder(" Edition d'un membre de la famille : "), 
 				BorderFactory.createEmptyBorder(5, 10, 5, 10)));
-		this.setLayout(new GridLayout(7, 2, 15, 5));
+		this.setLayout(new GridLayout(8, 2, 15, 5));
 		
 		MaskFormatter nationalNumberFormatter = null;
 		
@@ -65,6 +70,7 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 		
 		nationalNumberLabel = new JLabel("Numéro national* :");
 		nationalNumberLabel.setLabelFor(nationalNumberTextField);
+		nationalNumberLabel.setToolTipText("Obligatoire");
 		nationalNumberLabel.setHorizontalAlignment(JLabel.RIGHT);
 		nationalNumberTextField = new JFormattedTextField(nationalNumberFormatter);
 		this.add(nationalNumberLabel);
@@ -72,47 +78,60 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 		
 		surnameLabel = new JLabel("Nom* :");
 		surnameLabel.setLabelFor(surnameTextField);
+		surnameLabel.setToolTipText("Obligatoire");
 		surnameLabel.setHorizontalAlignment(JLabel.RIGHT);
-		surnameTextField = new JTextField("", 20);
+		surnameTextField = new JTextField();
 		this.add(surnameLabel);
 		this.add(surnameTextField);
 		
 		name1Label = new JLabel("Prénom* :");
 		name1Label.setLabelFor(name1TextField);
+		name1Label.setToolTipText("Obligatoire");
 		name1Label.setHorizontalAlignment(JLabel.RIGHT);
-		name1TextField = new JTextField("", 20);
+		name1TextField = new JTextField();
 		this.add(name1Label);
 		this.add(name1TextField);
 		
 		name2Label = new JLabel("Deuxième prénom :");
 		name2Label.setLabelFor(name2TextField);
 		name2Label.setHorizontalAlignment(JLabel.RIGHT);
-		name2TextField = new JTextField("", 20);
+		name2TextField = new JTextField();
 		this.add(name2Label);
 		this.add(name2TextField);
 				
 		name3Label = new JLabel("Troisième prénom :");
 		name3Label.setLabelFor(name3TextField);
 		name3Label.setHorizontalAlignment(JLabel.RIGHT);
-		name3TextField = new JTextField("", 20);
+		name3TextField = new JTextField();
 		this.add(name3Label);
 		this.add(name3TextField);
 		
 		name4Label = new JLabel("Quatrième prénom :");
 		name4Label.setLabelFor(name4TextField);
 		name4Label.setHorizontalAlignment(JLabel.RIGHT);
-		name4TextField = new JTextField("", 20);
+		name4TextField = new JTextField();
 		this.add(name4Label);
 		this.add(name4TextField);
 		
 		name5Label = new JLabel("Cinquième prénom :");
 		name5Label.setLabelFor(name5TextField);
 		name5Label.setHorizontalAlignment(JLabel.RIGHT);
-		name5TextField = new JTextField("", 20);
+		name5TextField = new JTextField();
 		this.add(name5Label);
 		this.add(name5TextField);
 		
-		// TODO : birthdate
+		SpinnerDateModel birthDateSpinnerModel = new SpinnerDateModel();
+		birthDateSpinnerModel.setStart(new Date(System.currentTimeMillis() - 150 * 31536000000l));
+		birthDateSpinnerModel.setEnd(new Date(System.currentTimeMillis()));
+		
+		birthDateLabel = new JLabel("Date de naissance* :");
+		birthDateLabel.setLabelFor(birthDateSpinner);
+		birthDateLabel.setToolTipText("Obligatoire");
+		birthDateLabel.setHorizontalAlignment(JLabel.RIGHT);
+		birthDateSpinner = new JSpinner(birthDateSpinnerModel);
+		birthDateSpinner.setEditor(new JSpinner.DateEditor(birthDateSpinner, "dd/MM/yyyy"));
+		this.add(birthDateLabel);
+		this.add(birthDateSpinner);
 	}
 
 	@Override
@@ -127,6 +146,7 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 			name3TextField.setText("");
 			name4TextField.setText("");
 			name5TextField.setText("");
+			birthDateSpinner.setValue(new Date(System.currentTimeMillis()));
 		}
 		else if(this.getFormType() == FormType.EDIT_HOUSEHOLD_MEMBER)
 		{
@@ -136,7 +156,8 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 			name2TextField.setText(formGeneratedObject.getFirstNames()[1]);
 			name3TextField.setText(formGeneratedObject.getFirstNames()[2]);
 			name4TextField.setText(formGeneratedObject.getFirstNames()[3]);
-			name5TextField.setText(formGeneratedObject.getFirstNames()[4]);			
+			name5TextField.setText(formGeneratedObject.getFirstNames()[4]);		
+			birthDateSpinner.setValue(formGeneratedObject.getBirthDate());	
 		}
 	}
 
@@ -153,9 +174,13 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 		firstNames[2] = name3TextField.getText();
 		firstNames[3] = name4TextField.getText();
 		firstNames[4] = name5TextField.getText();
-		Date birthDate = null; // TODO : birthdate
+		Date birthDate = (Date) birthDateSpinner.getValue();
 		
-		if(surname.length() == 0)
+		if(nationalNumber.equals(nationalNumberFormat.replace('#', placeholderCharacter)))
+		{
+			e = new NoDataException("Numéro national");
+		}
+		else if(surname.length() == 0)
 		{
 			e = new NoDataException("Nom");
 		}
@@ -163,16 +188,22 @@ public class HouseholdMemberEdition extends Form { // TODO : passer le nom de fa
 		{
 			e = new NoDataException("Prénom");
 		}
-		else if(nationalNumber.equals(nationalNumberFormat.replace('#', placeholderCharacter)))
-		{
-			e = new NoDataException("Numéro national");
-		}
 		
 		if(e == null)
 		{
 			try 
 			{
-				formGeneratedObject = new HouseholdMember(birthDate, firstNames, nationalNumber, surname); // TODO : gestion update
+				if(this.getFormType() == FormType.ADD_HOUSEHOLD_MEMBER)
+				{
+					formGeneratedObject = new HouseholdMember(birthDate, firstNames, nationalNumber, surname);
+				}
+				else if(this.getFormType() == FormType.EDIT_HOUSEHOLD_MEMBER)
+				{
+					formGeneratedObject.setNationalNumber(nationalNumber);
+					formGeneratedObject.setSurname(surname);
+					formGeneratedObject.setFirstNames(firstNames);
+					formGeneratedObject.setBirthDate(birthDate);
+				}
 			} 
 			catch (InvalidNumberException | NoDataException e1) 
 			{

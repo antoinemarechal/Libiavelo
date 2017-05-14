@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import view.PreviousPanel;
 import controller.ApplicationController;
 import model.Client;
 import model.Locality;
@@ -70,9 +71,9 @@ public class FormPanel extends JPanel implements ActionListener {
 						break;
 						
 					case EDIT_CLIENT :
-						//Client client = (Client) form.getFormGeneratedObject();
+						Client clientBis = (Client) form.getFormGeneratedObject();
 						
-						// FIXME : appController.addClient(client);
+						appController.updateClient(clientBis);
 						
 						previous.goBackTo();
 						break;

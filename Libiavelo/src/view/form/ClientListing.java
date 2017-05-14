@@ -16,6 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
+import view.PreviousPanel;
 import model.Client;
 import model.Locality;
 import controller.ApplicationController;
@@ -122,8 +123,8 @@ public class ClientListing extends JPanel implements ActionListener, ListSelecti
 		}
 		else if(e.getSource() == removeClientButton)
 		{
-			//ApplicationController appController = new ApplicationController();
-			//appController.removeClient(clientsListing.get(clientsTable.getSelectedRow()));
+			ApplicationController appController = new ApplicationController();
+			appController.removeClient(clientsListing.get(clientsTable.getSelectedRow()));
 			
 			clientsListing.remove(clientsTable.getSelectedRow());
 			

@@ -1,4 +1,4 @@
-package view.form;
+package view;
 
 public interface PreviousPanel 
 {
