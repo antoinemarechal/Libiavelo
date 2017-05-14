@@ -34,24 +34,19 @@ public class Search1 extends Search {
 	}
 	
 	public Date getInputDate() {
-		System.out.println(dateSpinner.getModel().getValue().toString());
-		System.out.println(dateSpinner.getModel().getValue().getClass());
 		return (Date) dateSpinner.getModel().getValue();
 	}
 
 	public Boolean getIsExceptionnal() {
-		System.out.println(isExceptionnalButton.isSelected());
 		return isExceptionnalButton.isSelected();
 	}
 
 	public Boolean getIsAvailable() {
-		System.out.println(isAvailableButton.isSelected());
 		return isAvailableButton.isSelected();
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 }
