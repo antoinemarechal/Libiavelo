@@ -23,12 +23,12 @@ public class HouseholdMemberManager {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public HouseholdMember getHouseholdMember(int clientID) {
-		return householdMemberDataAccess.getHouseholdMember(clientID);
+	public HouseholdMember getHouseholdMember(String nationalNumber) {
+		return householdMemberDataAccess.getHouseholdMember(nationalNumber);
 	}
 	
-	public ArrayList<HouseholdMember> getAllHouseholdMembers() {
-		return householdMemberDataAccess.getAllHouseholdMembers();
+	public ArrayList<HouseholdMember> getAllHouseholdMembers(int clientID) {
+		return householdMemberDataAccess.getAllHouseholdMembers(clientID);
 	}
 	
 	/*************************************************************************************************

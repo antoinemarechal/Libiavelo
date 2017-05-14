@@ -13,8 +13,8 @@ public interface HouseholdMemberDataAccess {
 	/*************************************************************************************************
 	 READ
 	 *************************************************************************************************/
-	public HouseholdMember getHouseholdMember(int clientID);
-	public ArrayList<HouseholdMember> getAllHouseholdMembers();
+	public HouseholdMember getHouseholdMember(String nationalNumber);
+	public ArrayList<HouseholdMember> getAllHouseholdMembers(int clientID);
 	
 	/*************************************************************************************************
 	 UPDATE
