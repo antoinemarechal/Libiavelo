@@ -19,7 +19,7 @@ public class Search1 extends Search {
 		this.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder(" Recherche 1 : "), 
 				BorderFactory.createEmptyBorder(5, 10, 5, 10)));
-		this.setLayout(new GridLayout(3, 2, 15, 5));
+		this.setLayout(new GridLayout(4, 2, 15, 5));
 		
 		dateSpinner = new JSpinner(new SpinnerDateModel());
 		this.add(dateSpinner);
@@ -30,8 +30,9 @@ public class Search1 extends Search {
 		
 		isAvailableButton = new JRadioButton("Disponible");
 		isAvailableButton.setSelected(true);
-		this.add(isAvailableButton);
-	}
+		this.add(isAvailableButton); 
+                this.setVisible(true);
+      	}
 	
 	public Date getInputDate() {
 		return (Date) dateSpinner.getModel().getValue();
@@ -49,4 +50,5 @@ public class Search1 extends Search {
 	public void reset() {
 		// TODO Auto-generated method stub	
 	}
-}
+
+ }

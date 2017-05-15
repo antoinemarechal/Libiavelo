@@ -49,7 +49,7 @@ public class Search3 extends Search{
 		return (Boolean)(validSubscription.getSelectedItem());
 	}
 	
-	public Float getMinimumAmount() {
+	public Float getMinimumAmount() throws NumberFormatException{
 		return new Float(amountTextField.getText());
 	}
 	
