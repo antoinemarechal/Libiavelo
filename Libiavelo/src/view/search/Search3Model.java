@@ -14,12 +14,13 @@ public class Search3Model extends AbstractTableModel {
 		this.data = data;
         columnNames = new  ArrayList<>();
 		columnNames.add("NomDemandeur");
-		columnNames.add("Prenom1");
+		columnNames.add("Prenom");
+		columnNames.add("Ville");
 		columnNames.add("DateDemande");
 		columnNames.add("SoldeRestantAPayer");
 		columnNames.add("InscriptionValidee");
 	}
-	
+
 	@Override
 	public int getColumnCount() {
 		return columnNames.size();
