@@ -35,4 +35,10 @@ public class Bike {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString() 
+	{
+		return "Velo n°" + id;
+	}
 }

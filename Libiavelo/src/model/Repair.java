@@ -64,7 +64,7 @@ public class Repair {
 		else
 			this.description = description;
 	}
-	public void setNote(String note) {
+	public void setNotes(String note) {
 		this.note = note;
 	}
 	public void setStartDate(Date startDate) {

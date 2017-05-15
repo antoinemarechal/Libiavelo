@@ -52,7 +52,7 @@ public class HouseholdMemberEdition extends Form {
 		reset();
 	}
 	
-	public void buildDefaultDisplay()
+	public void buildDefaultDisplay() // TODO : contenu des combo box
 	{
 		this.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder(" Edition d'un membre de la famille : "), 

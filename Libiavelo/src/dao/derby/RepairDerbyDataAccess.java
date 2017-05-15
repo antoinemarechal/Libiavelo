@@ -74,7 +74,7 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 				if (exitDate != null)
 					repair.setEndDate(exitDate);
 				if (note != null)
-					repair.setNote(note);
+					repair.setNotes(note);
 			}
 		} catch (SQLException | NoDataException | InvalidDateException e) {
 			// TODO Auto-generated catch block
@@ -112,7 +112,7 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 				if (exitDate != null)
 					repair.setEndDate(exitDate);
 				if (note != null)
-					repair.setNote(note);
+					repair.setNotes(note);
 				repairs.add(repair);
 			}
 		} catch (SQLException e) {

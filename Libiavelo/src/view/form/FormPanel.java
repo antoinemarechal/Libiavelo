@@ -11,6 +11,7 @@ import view.PreviousPanel;
 import controller.ApplicationController;
 import model.Client;
 import model.Locality;
+import model.Repair;
 
 @SuppressWarnings("serial")
 public class FormPanel extends JPanel implements ActionListener {
@@ -88,6 +89,23 @@ public class FormPanel extends JPanel implements ActionListener {
 						
 					case ADD_HOUSEHOLD_MEMBER :
 					case EDIT_HOUSEHOLD_MEMBER :
+						previous.goBackTo();
+						break;
+						
+					case ADD_REPAIR :
+						Repair repair = (Repair) form.getFormGeneratedObject();
+						
+						appController.addRepair(repair);
+						
+						previous.goBackTo();
+						break;
+						
+					case EDIT_REPAIR :
+						Repair repairBis = (Repair) form.getFormGeneratedObject();
+						
+						appController.updateRepair(repairBis);
+						appController.updateBike(repairBis.getBike());
+						
 						previous.goBackTo();
 						break;
 						

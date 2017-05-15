@@ -40,4 +40,10 @@ public class PersonnelMember extends Person {
 	public void setID(String id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString() 
+	{
+		return this.getSurname().toUpperCase() + " " + this.getFirstNames()[0];
+	}
 }

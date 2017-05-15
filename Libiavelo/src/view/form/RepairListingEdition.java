@@ -17,6 +17,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import controller.ApplicationController;
+import model.Bike;
+import model.Garage;
 import model.PersonnelMember;
 import model.Repair;
 import view.PreviousPanel;
@@ -26,6 +28,8 @@ public class RepairListingEdition extends JPanel implements ActionListener, List
 {
 	private ArrayList<Repair> repairsListing;
 	private ArrayList<PersonnelMember> personnelMembers;
+	private ArrayList<Garage> garages;
+	private ArrayList<Bike> bikes;
 	
 	private JButton backButton;
 	private JButton addRepairButton;
@@ -46,6 +50,8 @@ public class RepairListingEdition extends JPanel implements ActionListener, List
 		ApplicationController appController = new ApplicationController();
 		repairsListing = appController.getAllRepairs();
 		personnelMembers = appController.getAllPersonnelMembers();
+		garages = appController.getAllGarages();
+		bikes = appController.getAllBikes();
 		
 		repairsTable = new JTable();
 		repairsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -102,7 +108,7 @@ public class RepairListingEdition extends JPanel implements ActionListener, List
 			this.removeAll();
 			this.setBorder(null);
 			
-			currentForm = new RepairEdition(personnelMembers);
+			currentForm = new RepairEdition(personnelMembers, garages, bikes);
 			
 			this.add(new FormPanel(currentForm, this), BorderLayout.CENTER);
 		}
@@ -111,7 +117,7 @@ public class RepairListingEdition extends JPanel implements ActionListener, List
 			this.removeAll();
 			this.setBorder(null);
 			
-			currentForm = new RepairEdition(repairsListing.get(repairsTable.getSelectedRow()), personnelMembers);
+			currentForm = new RepairEdition(repairsListing.get(repairsTable.getSelectedRow()), personnelMembers, garages, bikes);
 			
 			this.add(new FormPanel(currentForm, this), BorderLayout.CENTER);
 		}

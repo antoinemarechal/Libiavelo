@@ -70,7 +70,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 			while (queryResult.next()) {
 				bike = new Bike();
 				bike.setId(queryResult.getInt("NumeroVelo"));
-				bike.setState(BikeState.valueOf(queryResult.getString("Etat")));
+				bike.setState(BikeState.getFromId(queryResult.getInt("Etat")));
 				bikes.add(bike);
 			}
 		} catch (SQLException | IllegalArgumentException e) {

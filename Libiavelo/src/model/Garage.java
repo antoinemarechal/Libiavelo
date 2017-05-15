@@ -16,4 +16,10 @@ public class Garage extends Estate{
 		super.setStreetNumber(streetNumber);
 		super.setLocality(locality);
 	}
+	
+	@Override
+	public String toString() 
+	{
+		return this.getDescription() + " (" + this.getLocality() + ")";
+	}
 }

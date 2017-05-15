@@ -47,8 +47,34 @@ public class GarageDerbyDataAccess implements GarageDataAccess {
 		}
 		return garage;
 	}
-	public ArrayList<Garage> getAllGarages() {
-		return null;
+	
+	@Override
+	public ArrayList<Garage> getAllGarages() 
+	{
+		ArrayList<Garage> garages = new ArrayList<Garage>();
+
+		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
+		
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Garage INNER JOIN Propriete ON Garage.Code = Propriete.Code");
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				Locality locality = localityDerbyDataAccess.getLocality(resultSet.getInt("CodeLocalite"));
+				String streetName = resultSet.getString("NomRue");
+				String streetNumber = resultSet.getString("Numero");
+				String description = resultSet.getString("Libelle");
+				
+				garages.add(new Garage(description, streetName, streetNumber, locality));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return garages;
 	}
 	
 	/*************************************************************************************************

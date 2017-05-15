@@ -1,9 +1,16 @@
 package model.enumerations;
 
 public enum BikeState {
-	WORKING,
-	DAMMAGED,
-	DESTROYED;
+	WORKING("Bon"),
+	DAMMAGED("Endommagé"),
+	DESTROYED("Déclassé");
+	
+	private String label;
+	
+	private BikeState(String label)
+	{
+		this.label = label;
+	}
 	
 	public static BikeState getFromId(int id) {
 		for(BikeState bs : BikeState.values())
@@ -13,5 +20,11 @@ public enum BikeState {
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public String toString() 
+	{
+		return label;
 	}
 }

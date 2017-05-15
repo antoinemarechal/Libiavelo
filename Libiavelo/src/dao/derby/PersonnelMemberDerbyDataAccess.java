@@ -63,6 +63,41 @@ public class PersonnelMemberDerbyDataAccess implements PersonnelMemberDataAccess
 	}
 	
 	public ArrayList<PersonnelMember> getAllPersonnelMembers() {
+		ArrayList<PersonnelMember> members = new ArrayList<PersonnelMember>();
+		
+		PreparedStatement statement;
+		try {
+			statement = ConnectionSingleton.getInstance().prepareStatement("SELECT * FROM Personnel");
+					
+			ResultSet results = statement.executeQuery();
+			
+			while(results.next())
+			{
+				PersonnelMember member = new PersonnelMember();
+				member.setID(results.getString("Matricule"));
+				try {
+					member.setSurname(results.getString("Nom"));
+				} catch (NoDataException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				member.setFirstNames(new String[] {results.getString("Prenom1"),
+						results.getString("Prenom2"),
+						results.getString("Prenom3"),
+						results.getString("Prenom4"),
+						results.getString("Prenom5")});	
+				member.setFunction(WorkType.getFromId(results.getInt("CodeFonction")));
+				
+				members.add(member);
+			}
+				
+			return members;
+			
+		} catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
