@@ -23,8 +23,8 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 	public void addBike(Bike bike) {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Velo(Etat) VALUES(?)");
-			preparedStatement.setString(1, bike.getState().name());
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Velo(CodeEtat) VALUES(?)");
+			preparedStatement.setInt(1, bike.getState().ordinal());
 			preparedStatement.executeUpdate();
 			
 			ResultSet queryResults = preparedStatement.getGeneratedKeys();
@@ -43,15 +43,15 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo WHERE NumeroVelo = ? ");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo where NumeroVelo = ?");
 			preparedStatement.setInt(1, bikeID);
 			
 			ResultSet queryResult = preparedStatement.executeQuery();
 			queryResult.next();
 			
 			bike = new Bike();
-			bike.setId(queryResult.getInt("NumeroVelo"));
-			bike.setState(BikeState.getFromId(queryResult.getInt("Etat")));
+			bike.setId(bikeID);
+			bike.setState(BikeState.getFromId(queryResult.getInt("CodeEtat")));
 		} catch (SQLException | IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 			while (queryResult.next()) {
 				bike = new Bike();
 				bike.setId(queryResult.getInt("NumeroVelo"));
-				bike.setState(BikeState.getFromId(queryResult.getInt("Etat")));
+				bike.setState(BikeState.getFromId(queryResult.getInt("CodeEtat")));
 				bikes.add(bike);
 			}
 		} catch (SQLException | IllegalArgumentException e) {
@@ -85,7 +85,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT v.NumeroVelo, v.Etat, t.CodeEmission, t.CodeDestination FROM Velo v INNER JOIN Transport t ON v.NumeroVelo = t.NumeroVelo and t.DATEDEMANDE = ? and t.ESTEXCEPTIONNEL = ? INNER JOIN Localisation l ON t.NumeroVelo = l.NUMEROVELO and l.ESTDISPONIBLE = ?");			
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT v.NumeroVelo, e.Libelle, t.CodeEmission, t.CodeDestination FROM Velo v INNER JOIN Transport t ON v.NumeroVelo = t.NumeroVelo and t.DATEDEMANDE = ? and t.ESTEXCEPTIONNEL = ? INNER JOIN EtatVelo e ON e.Code = v.CodeEtat INNER JOIN Localisation l ON t.NumeroVelo = l.NUMEROVELO and l.ESTDISPONIBLE = ?");			
 					
 			preparedStatement.setDate(1, date);
 			preparedStatement.setBoolean(2, isExceptionnal);
@@ -113,10 +113,10 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.libelle, r.DescriptionProbleme, r.NumeroVelo, v.Etat FROM Reparation r INNER JOIN Velo v ON r.NumeroVelo = v.NumeroVelo and r.DATEENTREEGARAGE >= ? and r.DATEFINREPARATION <= ? and v.etat = ? INNER JOIN Garage g ON r.CodeGarage = g.CODE INNER JOIN Propriete p on g.CODE = p.code");			
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.libelle, r.DescriptionProbleme, r.NumeroVelo, e.Libelle FROM Reparation r INNER JOIN Velo v ON r.NumeroVelo = v.NumeroVelo and r.DATEENTREEGARAGE >= ? and r.DATEFINREPARATION <= ?  and v.CodeEtat = ? INNER JOIN EtatVelo e on v.CodeEtat = e.Code  INNER JOIN Garage g ON r.CodeGarage = g.CODE INNER JOIN Propriete p on g.CODE = p.code");			
 			preparedStatement.setDate(1, startDate);
 			preparedStatement.setDate(2, endDate);
-			preparedStatement.setString(3, state.name());
+			preparedStatement.setInt(3, state.ordinal());
 			
 			ResultSet queryResult = preparedStatement.executeQuery();
 			ResultSetMetaData metaData = queryResult.getMetaData();
@@ -140,7 +140,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT c. NomDemandeur, c.Prenom1, l.NomVille, a.DateDemande, A.SoldeRestantAPayer, c.InscriptionValidee FROM Client c INNER JOIN Localite l ON c.CodeLocalite = l.Code and c.InscriptionValidee = ? INNER JOIN Abonnement a on c.NumeroClient = a.Client and a.DateDemaned >= ? and a.SoldeRestantAPayer >= ?");				
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT c.NomDemandeur, c.Prenom1, l.NomVille, a.DateDemande, A.SoldeRestantAPayer, c.InscriptionValidee FROM Client c INNER JOIN Localite l ON c.CodeLocalite = l.Code and c.InscriptionValidee = ? INNER JOIN Abonnement a on c.NumeroClient = a.Client and a.DateDemaned >= ? and a.SoldeRestantAPayer >= ?");				
 			
 			preparedStatement.setBoolean(1, isValid);
 			preparedStatement.setDate(2, dateThreshold);
@@ -169,8 +169,8 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 	public void updateBike(Bike bike) {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Velo SET Etat = ? WHERE NumeroVelo = ?");
-			preparedStatement.setString(1, bike.getState().toString());
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Velo SET CodeEtat = ? WHERE NumeroVelo = ?");
+			preparedStatement.setInt(1, bike.getState().ordinal());
 			preparedStatement.setInt(2, bike.getId());
 			
 			preparedStatement.executeUpdate();

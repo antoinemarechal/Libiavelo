@@ -31,7 +31,7 @@ public class Search1 extends Search {
 		isAvailableButton = new JRadioButton("Disponible");
 		isAvailableButton.setSelected(true);
 		this.add(isAvailableButton); 
-          this.setVisible(true);
+        this.setVisible(true);
       	}
 	
 	public Date getInputDate() {
