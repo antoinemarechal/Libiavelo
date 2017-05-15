@@ -5,13 +5,13 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public abstract class Search extends JPanel{
 	private SearchType searchType;
-        private Search previous;
+    private Search previous;
 	
 	public Search(SearchType searchType) {
 		this.searchType = searchType;
 	}
         
-        public Search(SearchType searchType, Search previous) {
+    public Search(SearchType searchType, Search previous) {
 		this.searchType = searchType;
                 this.previous = previous;
 	}
@@ -20,12 +20,13 @@ public abstract class Search extends JPanel{
 		return searchType;
 	}
 	 
-        public Search getSearch() {
+    public Search getSearch() {
 		return previous;
 	}
         
-        public void setSearch(Search previous) {
-            this.previous = previous;
+     public void setSearch(Search previous) {
+        this.previous = previous;
 	}
+        
 	abstract public void reset();
 }

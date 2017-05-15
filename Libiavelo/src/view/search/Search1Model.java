@@ -11,7 +11,7 @@ public class Search1Model extends AbstractTableModel {
 	
 	public Search1Model(ArrayList<ArrayList<Object>> data) {
 		this.data = data;
-                columnNames = new ArrayList<>();
+         columnNames = new ArrayList<>();
 		columnNames.add("NumeroVelo");
 		columnNames.add("Etat");
 		columnNames.add("ID source");
@@ -33,10 +33,10 @@ public class Search1Model extends AbstractTableModel {
 		return data.get(rowNumber).get(columnNumber);
 	}
         
-        @Override
-        public String getColumnName(int col) {
-            return columnNames.get(col);
-        }
+    @Override
+    public String getColumnName(int col) {
+         return columnNames.get(col);
+    }
         
 	@Override
 	public Class<?> getColumnClass(int columnIndex) 

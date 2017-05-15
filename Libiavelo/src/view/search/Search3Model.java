@@ -12,7 +12,7 @@ public class Search3Model extends AbstractTableModel {
 	
 	public Search3Model(ArrayList<ArrayList<Object>> data) {
 		this.data = data;
-                columnNames = new  ArrayList<>();
+        columnNames = new  ArrayList<>();
 		columnNames.add("NomDemandeur");
 		columnNames.add("Prenom1");
 		columnNames.add("DateDemande");
@@ -35,10 +35,10 @@ public class Search3Model extends AbstractTableModel {
 		return data.get(rowNumber).get(columnNumber);
 	}
 
-       @Override
-        public String getColumnName(int col) {
-            return columnNames.get(col);
-        }
+    @Override
+    public String getColumnName(int col) {
+        return columnNames.get(col);
+    }
          
 	@Override
 	public Class<?> getColumnClass(int columnIndex) 

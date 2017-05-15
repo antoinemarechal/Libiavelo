@@ -21,7 +21,7 @@ public class SearchPanel extends JPanel implements ActionListener {
         
 	private JButton validateButton, resetButton, leaveButton, backToSearchButton;
 	
-        private JPanel searchButtonPanel, resultButtonPanel;
+    private JPanel searchButtonPanel, resultButtonPanel;
 	private Search search;
 	
 	private ApplicationController applicationController;
@@ -29,34 +29,28 @@ public class SearchPanel extends JPanel implements ActionListener {
         
 	public SearchPanel(Search search, boolean isSearch) {
 		super();
-                this.setLayout(new BorderLayout());
+         this.setLayout(new BorderLayout());
 		this.search = search;
 		searchButtonPanel = new JPanel();
-			
 			validateButton = new JButton("Valider");
 			validateButton.addActionListener(this);
-			
 			resetButton = new JButton("Reinitialiser");
 			resetButton.addActionListener(this);
-	
 			searchButtonPanel.add(validateButton);
 			searchButtonPanel.add(resetButton);
                         
 		resultButtonPanel = new JPanel();
-			
 			leaveButton = new JButton("Quitter");
 			leaveButton.addActionListener(this);
-			
 			backToSearchButton = new JButton("Retour a la recherche");
 			backToSearchButton.addActionListener(this);
-	
 			resultButtonPanel.add(leaveButton);
 			resultButtonPanel.add(backToSearchButton);
 
 		applicationController = new ApplicationController();
-                this.isSearch = isSearch;
-                this.switchToSearch(search);
-                this.setVisible(true);
+        this.isSearch = isSearch;
+        this.switchToSearch(search);
+        this.setVisible(true);
 	}       
         
         public void switchToSearch(Search search) {

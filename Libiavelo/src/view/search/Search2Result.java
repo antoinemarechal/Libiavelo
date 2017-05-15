@@ -19,18 +19,19 @@ import javax.swing.JTable;
 public class Search2Result extends Search {
         JSpinner dateSpinner;
         JScrollPane jScrollPane;
+        
     	public Search2Result(Search previous, JTable table) {
-		super(SearchType.SEARCH2RESULT);
-		super.setSearch(previous);
+    		super(SearchType.SEARCH2RESULT);
+    		super.setSearch(previous);
                 
-		this.setBorder(BorderFactory.createCompoundBorder(
+    		this.setBorder(BorderFactory.createCompoundBorder(
 				BorderFactory.createTitledBorder(" Resultat recherche 2 : "), 
 				BorderFactory.createEmptyBorder(5, 10, 5, 10)));
-		this.setLayout(new GridLayout(4, 2, 15, 5));
+    		this.setLayout(new GridLayout(4, 2, 15, 5));
 		
-		jScrollPane = new JScrollPane(table);
-		this.add(jScrollPane);
-                this.setVisible(true);
+    		jScrollPane = new JScrollPane(table);
+    		this.add(jScrollPane);
+            this.setVisible(true);
       	}
 
     @Override

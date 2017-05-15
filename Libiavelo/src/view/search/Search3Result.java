@@ -17,10 +17,10 @@ import javax.swing.JTable;
  */
 @SuppressWarnings("serial")
 public class Search3Result extends Search {
-        JSpinner dateSpinner;
-        JScrollPane jScrollPane;
+	JSpinner dateSpinner;
+    JScrollPane jScrollPane;
         
-    	public Search3Result(Search previous, JTable table) {
+    public Search3Result(Search previous, JTable table) {
 		super(SearchType.SEARCH2RESULT);
 		super.setSearch(previous);
                 
@@ -31,7 +31,7 @@ public class Search3Result extends Search {
 		
 		jScrollPane = new JScrollPane(table);
 		this.add(jScrollPane);
-                this.setVisible(true);
+        this.setVisible(true);
       	}
 
     @Override

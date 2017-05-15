@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
 @SuppressWarnings("serial")
-public class Search3 extends Search{
+public class Search3 extends Search {
 	private JSpinner dateSpinner;
 	private JComboBox<Boolean> validSubscription;
 	private JTextField amountTextField;
