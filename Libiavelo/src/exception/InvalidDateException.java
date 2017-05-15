@@ -2,13 +2,23 @@ package exception;
 
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class InvalidDateException extends Exception {
-	private static final long serialVersionUID = 1L;
+	
+	private String sourceBefore, sourceAfter;
 	private Date dateBefore, dateAfter;
 	
-	public InvalidDateException(Date dateBefore, Date dateAfter) {
+	public InvalidDateException(String sourceBefore, Date dateBefore, String sourceAfter, Date dateAfter) {
 		this.dateBefore = dateBefore;
 		this.dateAfter = dateAfter;
+	}
+	
+	public String getSourceBefore() {
+		return sourceBefore;
+	}
+	
+	public String getSourceAfter() {
+		return sourceAfter;
 	}
 		
 	public Date getDateBefore() {
@@ -21,6 +31,6 @@ public class InvalidDateException extends Exception {
 
 	@Override
 	public String toString() {
-		return dateBefore + " est avant " + dateAfter;
+		return "La donnée " + dateBefore + " précède dans le temps de façon invalide la donnée " + dateAfter + ".";
 	}
 }

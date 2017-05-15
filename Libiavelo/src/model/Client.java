@@ -3,10 +3,14 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 
 public class Client extends Person {	
+	
+	private String nationalNumber;
+	
 	private Integer clientNumber;
 	private Boolean subsriptionValidated;
 	private Float depositAmount;
@@ -14,38 +18,22 @@ public class Client extends Person {
 	private String streetName, streetNumber;
 	private String homeNumber, phoneNumber;
 	private Date subscriptionDate;
+	
 	private ArrayList<HouseholdMember> household = new ArrayList<HouseholdMember>();
 	
 	private Subscription subscription;
 	
 	private Locality locality;
 	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/
-	public Client(String nationalNumber) throws InvalidNumberException {
-		this.setNationalNumber(nationalNumber);
-	}
-	
-	public Client(String nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Float depositAmount, String streetNumber, String streetName, Date subscriptionDate) throws InvalidNumberException, NoDataException {
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
+	public Client(String nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Float depositAmount, String streetNumber, String streetName, Locality locality, Date subscriptionDate) throws InvalidNumberException, NoDataException, DataLengthException {
+		super(clientSurname, clientFirstNames);
+		
 		this.setNationalNumber(nationalNumber);
 		this.setHomeNumber(homeNumber);
 		this.setPhoneNumber(phoneNumber);
-		this.setSurname(clientSurname);
-		this.setFirstNames(clientFirstNames);
-		this.setSubsriptionValidated(subscriptionValidated);
-		this.setDepositAmount(depositAmount);
-		this.setStreetName(streetName);
-		this.setStreetNumber(streetNumber);
-		this.setSubscriptionDate(subscriptionDate);
-	}
-	
-	public Client(String nationalNumber, String homeNumber, String phoneNumber, String clientSurname, String[] clientFirstNames, Boolean subscriptionValidated, Float depositAmount, String streetNumber, String streetName, Locality locality, Date subscriptionDate) throws InvalidNumberException, NoDataException {
-		this.setNationalNumber(nationalNumber);
-		this.setHomeNumber(homeNumber);
-		this.setPhoneNumber(phoneNumber);
-		this.setSurname(clientSurname);
-		this.setFirstNames(clientFirstNames);
 		this.setSubsriptionValidated(subscriptionValidated);
 		this.setDepositAmount(depositAmount);
 		this.setStreetName(streetName);
@@ -54,9 +42,13 @@ public class Client extends Person {
 		this.setLocality(locality);
 	}
 
-	/*************************************************************************************************
-	 GETTERS
-	 *************************************************************************************************/
+	// =================================================================================================
+	// GETTERS
+	// =================================================================================================
+	public String getNationalNumber() {
+		return nationalNumber;
+	}
+	
 	public Integer getClientNumber() {
 		return clientNumber;
 	}
@@ -100,15 +92,18 @@ public class Client extends Person {
 	public Date getSubscriptionDate() {
 		return subscriptionDate;
 	}
+		
+	// =================================================================================================
+	// SETTERS
+	// =================================================================================================	
+	public void setNationalNumber(String nationalNumber) {
+		this.nationalNumber = nationalNumber;
+	}
 	
-	/*************************************************************************************************
-	 SETTERS
-	 *************************************************************************************************/
 	public void setHomeNumber(String homeNumber) {
 		this.homeNumber = homeNumber;
 	}
-	
-	
+		
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
@@ -117,9 +112,11 @@ public class Client extends Person {
 		this.subsriptionValidated = subsriptionValidated;
 	}
 
-	// exception si depositAmount<0 ? ou pas pour remboursement ?
-	public void setDepositAmount(Float depositAmount) {
-		this.depositAmount = depositAmount;
+	public void setDepositAmount(Float depositAmount) throws InvalidNumberException{
+		if(depositAmount < 0)
+			throw new InvalidNumberException("Caution", depositAmount);
+		else
+			this.depositAmount = depositAmount;
 	}
 
 	public void setStreetNumber(String streetNumber) {
@@ -136,19 +133,19 @@ public class Client extends Person {
 	
 	private void setSubscriptionDate(Date lastHouseholdRenewal) {
 		this.subscriptionDate = lastHouseholdRenewal;
-		
 	}
 	
-	public void setClientNumber(int clientNumber) {
+	public void setClientNumber(Integer clientNumber) {
 		this.clientNumber = clientNumber;
 	}
 	
 	public void setLocality(Locality locality) {
 		this.locality = locality;
 	}
-	/***********************************************************************************************
-	 OTHERS
-	 ***********************************************************************************************/
+	
+	// =================================================================================================
+	// OTHERS
+	// =================================================================================================
 	public void addHouseholdMember(HouseholdMember householdMember) {
 		household.add(householdMember);
 	}

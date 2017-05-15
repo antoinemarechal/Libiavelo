@@ -1,42 +1,47 @@
 package model;
 
 public class SubscriptionType {
-	private Integer id;
-	private Double cost;
 	
+	private Integer id;
+	private Double annualCost;
 	private String description;	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/
-	public SubscriptionType(Integer subscriptionDuration, String description) {
-		this.cost = subscriptionDuration * 10.95; //TODO de-troll me
-		this.description = description;
+	
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
+	public SubscriptionType(Integer id, String description, Double annualCost) {
+		this.setId(id);
+		this.setDescription(description);
+		this.setAnnualCost(annualCost);
 	}
 	
-	/*************************************************************************************************
-	 GETTERS
-	 *************************************************************************************************/
-	public int getId() {
+	// =================================================================================================
+	// GETTERS
+	// =================================================================================================
+	public Integer getId() {
 		return id;
 	}
-	public double getTotalCost() {
-		return cost;
+	
+	public Double getAnnualCost() {
+		return annualCost;
 	}
 	
 	public String getDescription() {
 		return description;
 	}
-	/*************************************************************************************************
-	 SETTERS
-	 *************************************************************************************************/
-	public void setId(int id) {
+	
+	// =================================================================================================
+	// SETTERS
+	// =================================================================================================
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public void setTotalCost(double cost) {
-		this.cost = cost;
+	
+	public void setAnnualCost(Double cost) {
+		this.annualCost = cost;
 	}	
 	
-	public void setDescritption(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 }

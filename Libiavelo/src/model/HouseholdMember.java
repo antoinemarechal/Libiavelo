@@ -2,32 +2,45 @@ package model;
 
 import java.util.Date;
 
+import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 
 public class HouseholdMember extends Person {
+	
+	private String nationalNumber;
+	
 	private Date birthDate;
 	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/
-	public HouseholdMember(String nationalNumber) throws InvalidNumberException {
-		super.setNationalNumber(nationalNumber);
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
+	public HouseholdMember(String nationalNumber, String surname, String[] firstNames, Date birthDate) throws InvalidNumberException, NoDataException, DataLengthException{
+		super(surname, firstNames);
+		
+		this.setNationalNumber(nationalNumber);
+		this.setBirthDate(birthDate);
 	}
 	
-	public HouseholdMember(Date birthDate, String[] firstNames, String nationalNumber, String surname) throws InvalidNumberException, NoDataException{
-		this.setBirthDate(birthDate);
-		super.setFirstNames(firstNames);
-		super.setNationalNumber(nationalNumber);
-		super.setSurname(surname);
+	// =================================================================================================
+	// GETTERS
+	// =================================================================================================
+	public String getNationalNumber() {
+		return nationalNumber;
 	}
 	
 	public Date getBirthDate() {
 		return birthDate;
 	}
 	
+	// =================================================================================================
+	// SETTERS
+	// =================================================================================================
+	public void setNationalNumber(String nationalNumber) {
+		this.nationalNumber = nationalNumber;
+	}
+	
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-	
 }

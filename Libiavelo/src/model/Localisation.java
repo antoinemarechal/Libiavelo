@@ -1,23 +1,23 @@
 package model;
 
 public class Localisation {
-	private Boolean available;
 	
+	private Boolean available;
 	private Bike bike;
 	private Estate premises;
 	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/
-	public Localisation(boolean available, Bike bike, Estate premises) {
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
+	public Localisation(Boolean available, Bike bike, Estate premises) {
 		this.setAvailable(available);
 		this.setBike(bike);
 		this.setPremises(premises);
 	}
 	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/
+	// =================================================================================================
+	// GETTERS
+	// =================================================================================================
 	public boolean isAvailable() {
 		return available;
 	}
@@ -30,9 +30,9 @@ public class Localisation {
 		return premises;
 	}
 	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/
+	// =================================================================================================
+	// SETTERS
+	// =================================================================================================
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
@@ -43,7 +43,5 @@ public class Localisation {
 	
 	public void setPremises(Estate premises) {
 		this.premises = premises;
-	}
-	
-	
+	}	
 }

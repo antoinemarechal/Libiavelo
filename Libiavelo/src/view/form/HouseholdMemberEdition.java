@@ -14,6 +14,7 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.text.MaskFormatter;
 
 import model.HouseholdMember;
+import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 
@@ -195,7 +196,7 @@ public class HouseholdMemberEdition extends Form {
 			{
 				if(this.getFormType() == FormType.ADD_HOUSEHOLD_MEMBER)
 				{
-					formGeneratedObject = new HouseholdMember(birthDate, firstNames, nationalNumber, surname);
+					formGeneratedObject = new HouseholdMember(nationalNumber, surname, firstNames, birthDate);
 				}
 				else if(this.getFormType() == FormType.EDIT_HOUSEHOLD_MEMBER)
 				{
@@ -205,7 +206,7 @@ public class HouseholdMemberEdition extends Form {
 					formGeneratedObject.setBirthDate(birthDate);
 				}
 			} 
-			catch (InvalidNumberException | NoDataException e1) 
+			catch (InvalidNumberException | NoDataException | DataLengthException e1) 
 			{
 				JOptionPane.showMessageDialog(this, e1.getMessage(), "Erreur de création", JOptionPane.ERROR_MESSAGE);
 			}

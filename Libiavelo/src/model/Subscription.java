@@ -3,31 +3,35 @@ package model;
 import java.util.Date;
 
 public class Subscription {
-	private Double amountToPay;
+	
+	private Float amountToPay;
 	
 	private Date demand;
 	private Date expiry;
 
 	private SubscriptionType subscriptionType;
-	/*************************************************************************************************
-	 CONSTRUCTOR
-	 *************************************************************************************************/
-	public Subscription(Double amountToPay, Date demand, Date expiry, Integer subscriptionDuration, String description) {
+	
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
+	public Subscription(Float amountToPay, Date demand, Date expiry, SubscriptionType subscriptionType) {
 		this.setAmountToPay(amountToPay);
 		this.setDemand(demand);
 		this.setExpiry(expiry);
-		this.setSubscriptionType(new SubscriptionType(subscriptionDuration, description));
+		this.setSubscriptionType(subscriptionType);
 	}
 	
-	/*************************************************************************************************
-	 GETTERS
-	 *************************************************************************************************/	
-	public double getAmountToPay() {
+	// =================================================================================================
+	// GETTERS
+	// =================================================================================================
+	public Float getAmountToPay() {
 		return amountToPay;
 	}
+	
 	public Date getDemand() {
 		return demand;
 	}
+	
 	public Date getExpiry() {
 		return expiry;
 	}
@@ -36,15 +40,17 @@ public class Subscription {
 		return subscriptionType;
 	}
 	
-	/*************************************************************************************************
-	 SETTERS
-	 *************************************************************************************************/
-	public void setAmountToPay(Double amountToPay) {
+	// =================================================================================================
+	// SETTERS
+	// =================================================================================================
+	public void setAmountToPay(Float amountToPay) {
 		this.amountToPay = amountToPay;
 	}
+	
 	public void setDemand(Date demand) {
 		this.demand = demand;
 	}
+	
 	public void setExpiry(Date expiry) {
 		this.expiry = expiry;
 	}

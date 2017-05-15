@@ -34,6 +34,7 @@ import view.PreviousPanel;
 import model.Client;
 import model.HouseholdMember;
 import model.Locality;
+import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 
@@ -326,6 +327,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 		NoDataException e = null;
 		
 		String nationalNumber = nationalNumberTextField.getText();
+		Locality locality = (Locality) localityComboBox.getSelectedItem();
 		String homeNumber = null;
 		String phoneNumber = null;
 		String clientSurname = surnameTextField.getText();
@@ -375,14 +377,14 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 			{
 				if(this.getFormType() == FormType.ADD_CLIENT)
 				{
-					formGeneratedObject = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, false, 0.0f, streetNumber, streetName, new Date(System.currentTimeMillis()));
+					formGeneratedObject = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, false, 0.0f, streetNumber, streetName, locality, new Date(System.currentTimeMillis()));
 				}
 				else if(this.getFormType() == FormType.EDIT_CLIENT)
 				{
 					formGeneratedObject.setSurname(clientSurname);
 					formGeneratedObject.setFirstNames(clientFirstNames);
 					formGeneratedObject.setNationalNumber(nationalNumber);
-					formGeneratedObject.setLocality((Locality) localityComboBox.getSelectedItem());
+					formGeneratedObject.setLocality(locality);
 					formGeneratedObject.setStreetName(streetName);
 					formGeneratedObject.setStreetNumber(streetNumber);
 					formGeneratedObject.setHomeNumber(homeNumber);
@@ -397,7 +399,7 @@ public class ClientEdition extends Form implements ListSelectionListener, Action
 				for(HouseholdMember hm : householdMembers)
 					formGeneratedObject.addHouseholdMember(hm);
 			} 
-			catch (InvalidNumberException | NoDataException e1) 
+			catch (InvalidNumberException | NoDataException | DataLengthException e1) 
 			{
 				JOptionPane.showMessageDialog(this, e1.getMessage(), "Erreur de création", JOptionPane.ERROR_MESSAGE);
 			}

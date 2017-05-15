@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 public class TransportationOrder {
+	
 	private Boolean exceptionnal;
 	
 	private Date execution;
@@ -10,9 +11,9 @@ public class TransportationOrder {
 	private Bike bike;
 	private Estate source, destination;
 	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
 	public TransportationOrder(Boolean exceptionnal, Date date, Bike bike, Estate source, Estate destination) {
 		this.setExceptionnal(exceptionnal);
 		this.setExecution(date);
@@ -21,9 +22,9 @@ public class TransportationOrder {
 		this.setSource(source);
 	}
 	
-	/*************************************************************************************************
-	 GETTERS
-	 *************************************************************************************************/
+	// =================================================================================================
+	// GETTERS
+	// =================================================================================================
 	public Boolean isExceptionnal() {
 		return exceptionnal;
 	}
@@ -44,10 +45,10 @@ public class TransportationOrder {
 		return destination;
 	}
 	
-	/*************************************************************************************************
-	 SETTERS
-	 *************************************************************************************************/
-	public void setExceptionnal(boolean exceptionnal) {
+	// =================================================================================================
+	// SETTERS
+	// =================================================================================================
+	public void setExceptionnal(Boolean exceptionnal) {
 		this.exceptionnal = exceptionnal;
 	}
 

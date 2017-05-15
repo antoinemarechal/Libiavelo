@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import dao.ClientDataAccess;
 import dao.ConnectionSingleton;
+import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 import model.Client;
@@ -112,6 +113,9 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 		} catch (InvalidNumberException e) {
 			// not supposed to happen
 			e.printStackTrace();
+		} catch (DataLengthException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return client;
@@ -157,6 +161,9 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			e.printStackTrace();
 		} catch (InvalidNumberException e) {
 			// not supposed to happen
+			e.printStackTrace();
+		} catch (DataLengthException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -3,13 +3,15 @@ package exception;
 @SuppressWarnings("serial")
 public class NoDataException extends Exception {
 
-	String source;
-	
-	public NoDataException() {
-	}
-	
+	private String source;
+		
 	public NoDataException(String source) {
 		this.source = source;
+	}
+	
+	public String getSource() 
+	{
+		return source;
 	}
 	
 	@Override

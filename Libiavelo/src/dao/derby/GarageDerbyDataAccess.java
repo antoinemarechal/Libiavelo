@@ -40,7 +40,7 @@ public class GarageDerbyDataAccess implements GarageDataAccess {
 			String streetNumber = resultSet.getString("Numero");
 			String description = resultSet.getString("Libelle");
 			
-			garage = new Garage(description, streetName, streetNumber, locality);
+			garage = new Garage(garageID, description, streetName, streetNumber, locality);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,8 +66,9 @@ public class GarageDerbyDataAccess implements GarageDataAccess {
 				String streetName = resultSet.getString("NomRue");
 				String streetNumber = resultSet.getString("Numero");
 				String description = resultSet.getString("Libelle");
+				Integer code = resultSet.getInt("Code");
 				
-				garages.add(new Garage(description, streetName, streetNumber, locality));
+				garages.add(new Garage(code, description, streetName, streetNumber, locality));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

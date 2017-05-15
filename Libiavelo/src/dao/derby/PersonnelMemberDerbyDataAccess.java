@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import dao.ConnectionSingleton;
 import dao.PersonnelMemberDataAccess;
+import exception.DataLengthException;
 import exception.NoDataException;
 import model.PersonnelMember;
 import model.enumerations.WorkType;
@@ -33,29 +34,24 @@ public class PersonnelMemberDerbyDataAccess implements PersonnelMemberDataAccess
 			
 			if(results.next())
 			{
-				PersonnelMember member = new PersonnelMember();
-				member.setID(results.getString("Matricule"));
-				try {
-					member.setSurname(results.getString("Nom"));
-				} catch (NoDataException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				member.setFirstNames(new String[] {results.getString("Prenom1"),
+				String surname = results.getString("Nom");
+				String[] firstNames = new String[] {
+						results.getString("Prenom1"),
 						results.getString("Prenom2"),
 						results.getString("Prenom3"),
 						results.getString("Prenom4"),
-						results.getString("Prenom5")});	
-				member.setFunction(WorkType.getFromId(results.getInt("CodeFonction")));
+						results.getString("Prenom5")
+					};	
+				WorkType function = WorkType.getFromId(results.getInt("CodeFonction"));
 				
-				return member;
+				return new PersonnelMember(matricule, surname, firstNames, function);
 			}
 			else
 			{
 				//TODO not found exception ?
 			}
 			
-		} catch (SQLException e) {
+		} catch (SQLException | NoDataException | DataLengthException e) {
 			e.printStackTrace();
 		}
 		
@@ -73,27 +69,23 @@ public class PersonnelMemberDerbyDataAccess implements PersonnelMemberDataAccess
 			
 			while(results.next())
 			{
-				PersonnelMember member = new PersonnelMember();
-				member.setID(results.getString("Matricule"));
-				try {
-					member.setSurname(results.getString("Nom"));
-				} catch (NoDataException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				member.setFirstNames(new String[] {results.getString("Prenom1"),
+				String matricule = results.getString("Matricule");
+				String surname = results.getString("Nom");
+				String[] firstNames = new String[] {
+						results.getString("Prenom1"),
 						results.getString("Prenom2"),
 						results.getString("Prenom3"),
 						results.getString("Prenom4"),
-						results.getString("Prenom5")});	
-				member.setFunction(WorkType.getFromId(results.getInt("CodeFonction")));
+						results.getString("Prenom5")
+					};	
+				WorkType function = WorkType.getFromId(results.getInt("CodeFonction"));
 				
-				members.add(member);
+				members.add(new PersonnelMember(matricule, surname, firstNames, function));
 			}
 				
 			return members;
 			
-		} catch (SQLException e) 
+		} catch (SQLException | NoDataException | DataLengthException e) 
 		{
 			e.printStackTrace();
 		}

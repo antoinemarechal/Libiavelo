@@ -1,27 +1,27 @@
 package model;
 
+import exception.DataLengthException;
+import exception.NoDataException;
 import model.enumerations.WorkType;
 
 public class PersonnelMember extends Person {
-	private String id;
 	
+	private String id;
 	private WorkType function;
 
-	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/	
-	public PersonnelMember(WorkType function) {
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
+	public PersonnelMember(String matricule, String surname, String[] firstNames, WorkType function) throws NoDataException, DataLengthException {
+		super(surname, firstNames);
+		
+		this.setId(matricule);
 		this.setFunction(function);
 	}
-	
-	public PersonnelMember() {
-		// TODO Auto-generated constructor stub
-	}
 
-	/*************************************************************************************************
-	 GETTERS
-	 *************************************************************************************************/
+	// =================================================================================================
+	// GETTERS
+	// =================================================================================================
 	public String getId() {
 		return id;
 	}
@@ -30,17 +30,20 @@ public class PersonnelMember extends Person {
 		return function;
 	}
 	
-	/*************************************************************************************************
-	 SETTERS
-	 *************************************************************************************************/
+	// =================================================================================================
+	// SETTERS
+	// =================================================================================================
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public void setFunction(WorkType function) {
 		this.function = function;
 	}
 	
-	public void setID(String id) {
-		this.id = id;
-	}
-	
+	// =================================================================================================
+	// OTHERS
+	// =================================================================================================
 	@Override
 	public String toString() 
 	{

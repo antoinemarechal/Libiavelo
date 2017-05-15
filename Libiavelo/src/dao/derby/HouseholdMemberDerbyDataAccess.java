@@ -1,6 +1,7 @@
 package dao.derby;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 
 import dao.ConnectionSingleton;
 import dao.HouseholdMemberDataAccess;
+import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 import model.HouseholdMember;
@@ -64,10 +66,9 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 				firstNames[3] = queryResult.getString("Prenom3");
 				firstNames[4] = queryResult.getString("Prenom4");
 				firstNames[5] = queryResult.getString("Prenom5");
+				Date birthDate = queryResult.getDate("DateNaissance");
 				
-				householdMember = new HouseholdMember(nationalNumber);
-				householdMember.setSurname(surname);
-				householdMember.setFirstNames(firstNames);
+				householdMember = new HouseholdMember(nationalNumber, surname, firstNames, birthDate);
 				
 			}
 		} catch (SQLException e) {
@@ -77,6 +78,9 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidNumberException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DataLengthException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

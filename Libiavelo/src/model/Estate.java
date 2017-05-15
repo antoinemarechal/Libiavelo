@@ -1,16 +1,28 @@
 package model;
 
-public abstract class Estate {
+public class Estate {
+	
 	private Integer id;
 	
 	private String description, streetName, streetNumber;
 
 	private Locality locality;
 	
-	/*************************************************************************************************
-	 GETTERS
-	 *************************************************************************************************/
-	public int getId() {
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
+	public Estate(Integer id, String description, String streetName, String streetNumber, Locality locality) {
+		this.setId(id);
+		this.setDescription(description);
+		this.setStreetName(streetName);
+		this.setStreetNumber(streetNumber);
+		this.setLocality(locality);
+	}
+
+	// =================================================================================================
+	// GETTERS
+	// =================================================================================================
+	public Integer getId() {
 		return id;
 	}
 
@@ -29,11 +41,11 @@ public abstract class Estate {
 	public Locality getLocality() {
 		return locality;
 	}
-	
-	/*************************************************************************************************
-	 SETTERS
-	 *************************************************************************************************/
-	public void setId(int id) {
+
+	// =================================================================================================
+	// SETTERS
+	// =================================================================================================
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -1,22 +1,17 @@
 package model;
 
-public class Garage extends Estate{
+public class Garage extends Estate {
 
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/
-	public Garage() {
-		super();
+	// =================================================================================================
+	// CONSTRUCTORS
+	// =================================================================================================
+	public Garage(Integer id, String description, String streetName, String streetNumber, Locality locality) {
+		super(id, description, streetName, streetNumber, locality);
 	}
 	
-	public Garage(String description, String streetName, String streetNumber, Locality locality) {
-		super();
-		super.setDescription(description);
-		super.setStreetName(streetName);
-		super.setStreetNumber(streetNumber);
-		super.setLocality(locality);
-	}
-	
+	// =================================================================================================
+	// OTHERS
+	// =================================================================================================
 	@Override
 	public String toString() 
 	{

@@ -3,28 +3,25 @@ package model;
 import exception.InvalidNumberException;
 
 public class BikeStation extends Estate {
+	
 	private Integer lowerBikeSoftLimit, lowerBikeHardLimit;
 	private Integer upperBikeSoftLimit, upperBikeHardLimit;
 	
-	/*************************************************************************************************
-	 CONSTRUCTORS
-	 *************************************************************************************************/	
-	public BikeStation(Integer id, Locality locality, String streetName, String streetNumber, String description, Integer lowerBikeSoftLimit, Integer lowerBikeHardLimit, Integer upperBikeSoftLimit, Integer upperBikeHardLimit) throws InvalidNumberException, NullPointerException{
-		super();
-		super.setId(id);
-		super.setDescription(description);
-		super.setLocality(locality);
-		super.setStreetName(streetName);
-		super.setStreetNumber(streetNumber);
+	// =================================================================================================
+	// CONSTRUCTORS 
+	// =================================================================================================
+	public BikeStation(Integer id, Locality locality, String streetName, String streetNumber, String description, Integer lowerBikeSoftLimit, Integer lowerBikeHardLimit, Integer upperBikeSoftLimit, Integer upperBikeHardLimit) throws InvalidNumberException {
+		super(id, description, streetName, streetNumber, locality);
+		
 		this.setLowerBikeSoftLimit(lowerBikeSoftLimit);
 		this.setLowerBikeHardLimit(lowerBikeHardLimit);
 		this.setUpperBikeSoftLimit(upperBikeSoftLimit);
 		this.setUpperBikeHardLimit(upperBikeHardLimit);
 	}
 	
-	/*************************************************************************************************
-	 GETTERS
-	 *************************************************************************************************/
+	// =================================================================================================
+	// GETTERS 
+	// =================================================================================================
 	public Integer getLowerBikeSoftLimit() {
 		return lowerBikeSoftLimit;
 	}
@@ -38,41 +35,33 @@ public class BikeStation extends Estate {
 		return upperBikeHardLimit;
 	}
 	
-	/*************************************************************************************************
-	 SETTERS
-	 *************************************************************************************************/
-	public void setLowerBikeSoftLimit(Integer lowerBikeSoftLimit) throws InvalidNumberException, NullPointerException {
-		if (lowerBikeSoftLimit == null)
-			throw new NullPointerException();
+	// =================================================================================================
+	// SETTERS 
+	// =================================================================================================
+	public void setLowerBikeSoftLimit(Integer lowerBikeSoftLimit) throws InvalidNumberException {
 		if (lowerBikeSoftLimit < 0)
-			throw new InvalidNumberException(lowerBikeSoftLimit);
+			throw new InvalidNumberException("Limite basse de vélos", lowerBikeSoftLimit);
 		else
 			this.lowerBikeSoftLimit = lowerBikeSoftLimit;
 	}
 	
-	public void setLowerBikeHardLimit(Integer lowerBikeHardLimit) throws InvalidNumberException, NullPointerException {
-		if (lowerBikeHardLimit == null)
-			throw new NullPointerException();
+	public void setLowerBikeHardLimit(Integer lowerBikeHardLimit) throws InvalidNumberException {
 		if (lowerBikeHardLimit < 0)
-			throw new InvalidNumberException(lowerBikeHardLimit);
+			throw new InvalidNumberException("Limite basse extrême de vélos", lowerBikeHardLimit);
 		else
 			this.lowerBikeHardLimit = lowerBikeHardLimit;
 	}
 	
-	public void setUpperBikeSoftLimit(Integer upperBikeSoftLimit) throws InvalidNumberException, NullPointerException {
-		if (upperBikeSoftLimit == null)
-			throw new NullPointerException();
+	public void setUpperBikeSoftLimit(Integer upperBikeSoftLimit) throws InvalidNumberException {
 		if (upperBikeSoftLimit < 0)
-			throw new InvalidNumberException(upperBikeSoftLimit);
+			throw new InvalidNumberException("Limite haute de vélos", upperBikeSoftLimit);
 		else
 			this.upperBikeSoftLimit = upperBikeSoftLimit;
 	}
 	
-	public void setUpperBikeHardLimit(Integer upperBikeHardLimit) throws InvalidNumberException, NullPointerException {
-		if (upperBikeHardLimit == null)
-			throw new NullPointerException();
+	public void setUpperBikeHardLimit(Integer upperBikeHardLimit) throws InvalidNumberException {
 		if (upperBikeHardLimit < 0)
-			throw new InvalidNumberException(upperBikeHardLimit);	
+			throw new InvalidNumberException("Limite haute extrême de vélos", upperBikeHardLimit);	
 		else
 			this.upperBikeHardLimit = upperBikeHardLimit;
 	}	

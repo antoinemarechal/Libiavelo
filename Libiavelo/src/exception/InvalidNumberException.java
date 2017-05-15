@@ -3,18 +3,26 @@ package exception;
 @SuppressWarnings("serial")
 public class InvalidNumberException extends Exception {
 
-	private int number;
+	private String source;
+	private Number number;
 	
-	public InvalidNumberException(int number) {
+	public InvalidNumberException(String source, Number number) {
+		this.source = source;
 		this.number = number;
 	}
 	
-	public int getSource() {
-		return number;
+	public String getSource()
+	{
+		return source;
 	}
 	
+	public Number getInvalidNumber()
+	{
+		return number;
+	}
+
 	@Override
 	public String getMessage() {
-		return number + " est un nombre invalide.";
+		return "Le nombre " + number + " est un invalide pour la donnée " + source + ".";
 	}
 }
