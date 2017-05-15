@@ -5,6 +5,12 @@ import java.util.Date;
 
 import dao.RepairDataAccess;
 import dao.derby.RepairDerbyDataAccess;
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
+import exception.DataLengthException;
+import exception.InvalidDateException;
+import exception.InvalidNumberException;
+import exception.NoDataException;
 import model.Repair;
 
 public class RepairManager {
@@ -18,25 +24,25 @@ public class RepairManager {
 	// ===============================================================================================
 	// CREATE
 	// ===============================================================================================
-	public void addRepair(Repair repair) {
+	public void addRepair(Repair repair) throws DataAccessConnectionException, DataAccessOperationException {
 		repairDerbyDataAccess.addRepair(repair);
 	}
 	
 	// ===============================================================================================
 	// READ
 	// ===============================================================================================
-	public Repair getRepair(int repairID, Date entryDate) {
+	public Repair getRepair(int repairID, Date entryDate) throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException, InvalidDateException, DataLengthException {
 		return repairDerbyDataAccess.getRepair(repairID, entryDate);
 	}
 	
-	public ArrayList<Repair> getAllRepairs() {
+	public ArrayList<Repair> getAllRepairs() throws DataAccessConnectionException, DataAccessOperationException, NoDataException, DataLengthException, InvalidDateException, InvalidNumberException {
 		return repairDerbyDataAccess.getAllRepairs();
 	}
 	
 	// ===============================================================================================
 	// UPDATE
 	// ===============================================================================================
-	public void updateRepair(Repair repair) {
+	public void updateRepair(Repair repair) throws DataAccessConnectionException, DataAccessOperationException {
 		repairDerbyDataAccess.updateRepair(repair);
 	}
 }

@@ -3,11 +3,12 @@ package view.form;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,6 +18,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import controller.ApplicationController;
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
+import exception.DataLengthException;
+import exception.InvalidDateException;
+import exception.InvalidNumberException;
+import exception.NoDataException;
 import model.Bike;
 import model.Garage;
 import model.PersonnelMember;
@@ -48,10 +55,26 @@ public class RepairListingEdition extends JPanel implements ActionListener, List
 		this.previous = previous;
 		
 		ApplicationController appController = new ApplicationController();
-		repairsListing = appController.getAllRepairs();
-		personnelMembers = appController.getAllPersonnelMembers();
-		garages = appController.getAllGarages();
-		bikes = appController.getAllBikes();
+		repairsListing = new ArrayList<Repair>();
+		personnelMembers = new ArrayList<PersonnelMember>();
+		garages = new ArrayList<Garage>();
+		bikes = new ArrayList<Bike>();
+		
+		try 
+		{
+			repairsListing = appController.getAllRepairs();
+			personnelMembers = appController.getAllPersonnelMembers();
+			garages = appController.getAllGarages();
+			bikes = appController.getAllBikes();
+		} 
+		catch (DataAccessConnectionException | DataAccessOperationException e) 
+		{
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+		}
+		catch (NoDataException | DataLengthException | InvalidDateException | InvalidNumberException e) 
+		{
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur de récupération", JOptionPane.ERROR_MESSAGE);
+		}
 		
 		repairsTable = new JTable();
 		repairsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

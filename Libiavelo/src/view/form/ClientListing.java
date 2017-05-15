@@ -3,11 +3,12 @@ package view.form;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,6 +21,11 @@ import view.PreviousPanel;
 import model.Client;
 import model.Locality;
 import controller.ApplicationController;
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
+import exception.DataLengthException;
+import exception.InvalidNumberException;
+import exception.NoDataException;
 
 @SuppressWarnings("serial")
 public class ClientListing extends JPanel implements ActionListener, ListSelectionListener, PreviousPanel
@@ -45,8 +51,23 @@ public class ClientListing extends JPanel implements ActionListener, ListSelecti
 		this.previous = previous;
 		
 		ApplicationController appController = new ApplicationController();
-		clientsListing = appController.getAllClients();
-		localities = appController.getAllLocalities();
+		
+		clientsListing = new ArrayList<Client>();
+		localities = new ArrayList<Locality>();
+		
+		try 
+		{
+			clientsListing = appController.getAllClients();
+			localities = appController.getAllLocalities();
+		} 
+		catch (DataAccessConnectionException | DataAccessOperationException e) 
+		{
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+		}
+		catch (InvalidNumberException | NoDataException	| DataLengthException e) 
+		{
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur de récupération", JOptionPane.ERROR_MESSAGE);
+		}
 				
 		clientsTable = new JTable();
 		clientsTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -97,13 +118,13 @@ public class ClientListing extends JPanel implements ActionListener, ListSelecti
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent event) 
 	{
-		if(e.getSource() == backButton)
+		if(event.getSource() == backButton)
 		{
 			previous.goBackTo();
 		}	
-		else if(e.getSource() == addClientButton)
+		else if(event.getSource() == addClientButton)
 		{
 			this.removeAll();
 			this.setBorder(null);
@@ -112,7 +133,7 @@ public class ClientListing extends JPanel implements ActionListener, ListSelecti
 			
 			this.add(new FormPanel(currentForm, this), BorderLayout.CENTER);
 		}
-		else if(e.getSource() == editClientButton)
+		else if(event.getSource() == editClientButton)
 		{
 			this.removeAll();
 			this.setBorder(null);
@@ -121,19 +142,27 @@ public class ClientListing extends JPanel implements ActionListener, ListSelecti
 			
 			this.add(new FormPanel(currentForm, this), BorderLayout.CENTER);
 		}
-		else if(e.getSource() == removeClientButton)
+		else if(event.getSource() == removeClientButton)
 		{
 			ApplicationController appController = new ApplicationController();
-			appController.removeClient(clientsListing.get(clientsTable.getSelectedRow()));
 			
-			clientsListing.remove(clientsTable.getSelectedRow());
-			
-			clientsTable.revalidate();
-			
-			if(clientsListing.size() == 0)
+			try 
 			{
-				editClientButton.setEnabled(false);
-				removeClientButton.setEnabled(false);
+				appController.removeClient(clientsListing.get(clientsTable.getSelectedRow()));
+
+				clientsListing.remove(clientsTable.getSelectedRow());
+				
+				clientsTable.revalidate();
+				
+				if(clientsListing.size() == 0)
+				{
+					editClientButton.setEnabled(false);
+					removeClientButton.setEnabled(false);
+				}
+			} 
+			catch (DataAccessConnectionException | DataAccessOperationException e) 
+			{
+    			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

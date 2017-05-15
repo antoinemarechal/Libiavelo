@@ -13,7 +13,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import view.form.BikeEdition;
 import view.form.ClientListing;
 import view.form.FormPanel;
 import view.form.LocalityEdition;
@@ -29,7 +28,7 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 	
 	private JMenuBar menuBar;
 	private JMenu menuApplication , menuForms, menuInfos, menuResearch;
-	private JMenuItem jMenuItemQuit, jMenuItemClient, jMenuItemLocality, jMenuItemBike, jMenuItemRepair, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
+	private JMenuItem jMenuItemQuit, jMenuItemClient, jMenuItemLocality, jMenuItemRepair, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
 
 	private JPanel basePanel;
 	
@@ -55,9 +54,6 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 		jMenuItemLocality = new JMenuItem("Localités");
 		jMenuItemLocality.addActionListener(this);
 		
-		jMenuItemBike = new JMenuItem("Vélos");
-		jMenuItemBike.addActionListener(this);
-		
 		jMenuItemRepair = new JMenuItem("Réparations");
 		jMenuItemRepair.addActionListener(this);		
 		
@@ -80,7 +76,6 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 		
 		menuForms.add(jMenuItemClient);
 		menuForms.add(jMenuItemLocality);
-		menuForms.add(jMenuItemBike);
 		menuForms.add(jMenuItemRepair);
 		
 		menuInfos.add(jMenuItemHelp);
@@ -125,12 +120,6 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 		else if(object.equals(jMenuItemLocality)) {
 			this.getContentPane().removeAll();
 			this.getContentPane().add(new FormPanel(new LocalityEdition(), this), BorderLayout.CENTER);
-			this.getContentPane().repaint();
-			this.setVisible(true);
-		}
-		else if(object.equals(jMenuItemBike)) {
-			this.getContentPane().removeAll();
-			this.getContentPane().add(new FormPanel(new BikeEdition(), this), BorderLayout.CENTER);
 			this.getContentPane().repaint();
 			this.setVisible(true);
 		}

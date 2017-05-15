@@ -3,14 +3,22 @@ package view.search;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+
+
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import controller.ApplicationController;
+
+import java.sql.Date;
 import java.util.ArrayList;
+
 import javax.swing.JTable;
+
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
 import model.enumerations.BikeState;
 import view.Window;
 
@@ -90,30 +98,48 @@ public class SearchPanel extends JPanel implements ActionListener {
             	switch (search.getSearchType()) {
                 	case SEARCH1 :
                 		Date date = new Date(((Search1) search).getInputDate().getTime());
-                        data = applicationController.getSearch1Data(date,((Search1) search).getIsExceptionnal(), ((Search1) search).getIsAvailable());  
-                        Search1Model search1DataModel = new Search1Model(data);
-                        table = new JTable(search1DataModel);
-                        this.swtichToResult(new Search1Result(search, table));
+					
+                		try {
+							data = applicationController.getSearch1Data(date,((Search1) search).getIsExceptionnal(), ((Search1) search).getIsAvailable());
+	                        Search1Model search1DataModel = new Search1Model(data);
+	                        table = new JTable(search1DataModel);
+	                        this.swtichToResult(new Search1Result(search, table));
+						} 
+                		catch (DataAccessConnectionException | DataAccessOperationException e) {
+                			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+						}
                         break;
 						
                     case SEARCH2 :
                         Date startDate = new Date(((Search2) search).getStartDate().getTime());
                         Date endDate = new Date(((Search2) search).getEndDate().getTime());
                         BikeState bikeState = ((Search2) search).getBikeState();
-                        data = applicationController.getSearch2Data(startDate, endDate, bikeState);
-                        Search2Model search2DataModel = new Search2Model(data);
-                        table = new JTable(search2DataModel);
-                        this.swtichToResult(new Search2Result(search, table));                    
+						
+                        try {
+							data = applicationController.getSearch2Data(startDate, endDate, bikeState);
+	                        Search2Model search2DataModel = new Search2Model(data);
+	                        table = new JTable(search2DataModel);
+	                        this.swtichToResult(new Search2Result(search, table));  
+						} 
+						catch (DataAccessConnectionException | DataAccessOperationException e) {
+                			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+						}                  
                         break;
 						
                     case SEARCH3 :
                         Boolean isValid = ((Search3) search).getSubscriptionValidity();
                         Date dateThreshold =  new Date(((Search3) search).getDate().getTime());
                         Float minimumAmount = ((Search3) search).getMinimumAmount();
-                        data = applicationController.getSearch3Data(isValid, dateThreshold, minimumAmount);
-                        Search3Model search3DataModel = new Search3Model(data);
-                        table = new JTable(search3DataModel);
-                        this.swtichToResult(new Search3Result(search, table));
+						
+                        try {
+							data = applicationController.getSearch3Data(isValid, dateThreshold, minimumAmount);
+	                        Search3Model search3DataModel = new Search3Model(data);
+	                        table = new JTable(search3DataModel);
+	                        this.swtichToResult(new Search3Result(search, table));
+						} 
+                        catch (DataAccessConnectionException | DataAccessOperationException e) {
+                			JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+						}
                         break;
                         
                     default :
