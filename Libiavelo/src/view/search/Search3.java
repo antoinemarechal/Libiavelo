@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
 @SuppressWarnings("serial")
-public class Search3 extends Search{
+public class Search3 extends Search {
 	private JSpinner dateSpinner;
 	private JComboBox<Boolean> validSubscription;
 	private JTextField amountTextField;
@@ -49,7 +49,7 @@ public class Search3 extends Search{
 		return (Boolean)(validSubscription.getSelectedItem());
 	}
 	
-	public Float getMinimumAmount() {
+	public Float getMinimumAmount() throws NumberFormatException{
 		return new Float(amountTextField.getText());
 	}
 	

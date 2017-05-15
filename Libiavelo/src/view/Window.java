@@ -142,19 +142,19 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 		}
 		else if (object.equals(jMenuItemSearch1)) {
 			this.getContentPane().removeAll();
-			this.getContentPane().add(new SearchPanel(new Search1()), BorderLayout.CENTER);
+			this.getContentPane().add(new SearchPanel(new Search1(), true), BorderLayout.CENTER);
 			this.getContentPane().repaint();
 			this.setVisible(true);				
 		}
 		else if (object.equals(jMenuItemSearch2)) {
 			this.getContentPane().removeAll();
-			this.getContentPane().add(new SearchPanel(new Search2()), BorderLayout.CENTER);
+			this.getContentPane().add(new SearchPanel(new Search2(), true), BorderLayout.CENTER);
 			this.getContentPane().repaint();
 			this.setVisible(true);	
 		}
 		else if (object.equals(jMenuItemSearch3)) {
 			this.getContentPane().removeAll();
-			this.getContentPane().add(new SearchPanel(new Search3()), BorderLayout.CENTER);
+			this.getContentPane().add(new SearchPanel(new Search3(), true), BorderLayout.CENTER);
 			this.getContentPane().repaint();
 			this.setVisible(true);	
 		}

@@ -9,73 +9,138 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controller.ApplicationController;
+import java.util.ArrayList;
+import javax.swing.JTable;
 import model.enumerations.BikeState;
+import view.Window;
 
 
 @SuppressWarnings("serial")
 public class SearchPanel extends JPanel implements ActionListener {
+	private boolean isSearch;
+        
+	private JButton validateButton, resetButton, leaveButton, backToSearchButton;
 	
-	private JButton validateButton;
-	private JButton resetButton;
-	
+    private JPanel searchButtonPanel, resultButtonPanel;
 	private Search search;
 	
 	private ApplicationController applicationController;
-	
-	public SearchPanel(Search search) {
+	private Window window;
+        
+	public SearchPanel(Search search, boolean isSearch) {
 		super();
-	
+         this.setLayout(new BorderLayout());
 		this.search = search;
-		
-		this.setLayout(new BorderLayout());		
-		
-		JPanel buttonsPanel = new JPanel();
-			
+		searchButtonPanel = new JPanel();
 			validateButton = new JButton("Valider");
 			validateButton.addActionListener(this);
-			
-			resetButton = new JButton("Réinitialiser");
+			resetButton = new JButton("Reinitialiser");
 			resetButton.addActionListener(this);
-	
-			buttonsPanel.add(validateButton);
-			buttonsPanel.add(resetButton);
-			
-		this.add(search, BorderLayout.CENTER);
-		this.add(buttonsPanel, BorderLayout.SOUTH);
-		applicationController = new ApplicationController();
-	}
+			searchButtonPanel.add(validateButton);
+			searchButtonPanel.add(resetButton);
+                        
+		resultButtonPanel = new JPanel();
+			leaveButton = new JButton("Quitter");
+			leaveButton.addActionListener(this);
+			backToSearchButton = new JButton("Retour a la recherche");
+			backToSearchButton.addActionListener(this);
+			resultButtonPanel.add(leaveButton);
+			resultButtonPanel.add(backToSearchButton);
 
+		applicationController = new ApplicationController();
+        this.isSearch = isSearch;
+        this.switchToSearch(search);
+        this.setVisible(true);
+	}       
+        
+        public void switchToSearch(Search search) {
+            this.removeAll();
+            this.setLayout(new BorderLayout());
+            isSearch = true;
+            this.search = search;
+            this.add(search, BorderLayout.CENTER);
+            this.add(searchButtonPanel, BorderLayout.SOUTH);	
+            this.setVisible(true);
+            this.repaint();
+		
+        }
+        
+        public void swtichToResult(Search search) {
+            this.removeAll();
+            this.setLayout(new BorderLayout());
+            isSearch = false;
+            this.search = search;
+            this.add(search, BorderLayout.CENTER);
+            this.add(resultButtonPanel, BorderLayout.SOUTH);
+            this.setVisible(true);
+            this.repaint();
+        }
+        
 	@Override
 	public void actionPerformed(ActionEvent event) {
-		if(event.getSource() == validateButton) {
-			switch (search.getSearchType()) {
-				case SEARCH1 :
-					Date date = new Date(((Search1) search).getInputDate().getTime());
-					applicationController.getSearch1Data(date,((Search1) search).getIsExceptionnal(), ((Search1) search).getIsAvailable());
-					break;
+            if (isSearch) {
+                ArrayList<ArrayList<Object>> data;
+                JTable table;
+                if(event.getSource() == validateButton) {
+                    switch (search.getSearchType()) {
+                        case SEARCH1 :
+                            Date date = new Date(((Search1) search).getInputDate().getTime());
+                            data = applicationController.getSearch1Data(date,((Search1) search).getIsExceptionnal(), ((Search1) search).getIsAvailable());  
+                            Search1Model search1DataModel = new Search1Model(data);
+                            table = new JTable(search1DataModel);
+                            this.swtichToResult(new Search1Result(search, table));
+                            break;
 						
-				case SEARCH2 :
-					Date startDate = new Date(((Search2) search).getStartDate().getTime());
-					Date endDate = new Date(((Search2) search).getEndDate().getTime());
-					BikeState bikeState = ((Search2) search).getBikeState();
-					System.out.println(startDate);
-					System.out.println(endDate);
-					System.out.println(bikeState.name());
-					applicationController.getSearch2Data(startDate, endDate, bikeState);
-					break;
+                        case SEARCH2 :
+                            Date startDate = new Date(((Search2) search).getStartDate().getTime());
+                            Date endDate = new Date(((Search2) search).getEndDate().getTime());
+                            BikeState bikeState = ((Search2) search).getBikeState();
+                            data = applicationController.getSearch2Data(startDate, endDate, bikeState);
+                            Search2Model search2DataModel = new Search2Model(data);
+                            table = new JTable(search2DataModel);
+                            this.swtichToResult(new Search2Result(search, table));                    
+                            break;
 						
-				case SEARCH3 :
-					Boolean isValid = ((Search3) search).getSubscriptionValidity();
-					Date dateThreshold =  new Date(((Search3) search).getDate().getTime());
-					Float minimumAmount = ((Search3) search).getMinimumAmount();
-					applicationController.getSearch3Data(isValid, dateThreshold, minimumAmount);
-					break;
-						
-				default :
-					break;
+                        case SEARCH3 :
+                            Boolean isValid = ((Search3) search).getSubscriptionValidity();
+                            Date dateThreshold =  new Date(((Search3) search).getDate().getTime());
+                            Float minimumAmount = ((Search3) search).getMinimumAmount();
+                            data = applicationController.getSearch3Data(isValid, dateThreshold, minimumAmount);
+                            Search3Model search3DataModel = new Search3Model(data);
+                            table = new JTable(search3DataModel);
+                            this.swtichToResult(new Search3Result(search, table));
+                            break;
+                        
+                           default :
+			break;
 			}
 		}
 		else if(event.getSource() == resetButton)
-			search.reset();
+			window.goBackTo();
+            }
+            else {
+                if(event.getSource() == backToSearchButton) {
+                    switch (search.getSearchType()) {
+                        case SEARCH1RESULT :
+                            this.switchToSearch(search.getSearch());
+                            break;
+						
+                        case SEARCH2RESULT :
+			this.switchToSearch(search.getSearch());
+                            break;
+						
+                        case SEARCH3RESULT :
+			this.switchToSearch(search.getSearch());
+                            break;
+                        
+                        default :
+                            break;
+                }
+            }
+		else if(event.getSource() == leaveButton) {
+                    window.goBackTo();
+                }
+            }
+            
 	}
 }
