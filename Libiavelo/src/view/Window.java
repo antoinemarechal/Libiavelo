@@ -11,10 +11,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
+import view.form.BikeEdition;
 import view.form.ClientListing;
 import view.form.FormPanel;
 import view.form.LocalityEdition;
+import view.form.RepairListingEdition;
 import view.search.Search1;
 import view.search.Search2;
 import view.search.Search3;
@@ -27,6 +30,8 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 	private JMenuBar menuBar;
 	private JMenu menuApplication , menuForms, menuInfos, menuResearch;
 	private JMenuItem jMenuItemQuit, jMenuItemClient, jMenuItemLocality, jMenuItemBike, jMenuItemRepair, jMenuItemHelp, jMenuItemAbout, jMenuItemSearch1, jMenuItemSearch2, jMenuItemSearch3;
+
+	private JPanel basePanel;
 	
 	public Window() {
 		super("Application Libiavelo");
@@ -124,10 +129,16 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 			this.setVisible(true);
 		}
 		else if(object.equals(jMenuItemBike)) {
-			
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new FormPanel(new BikeEdition(), this), BorderLayout.CENTER);
+			this.getContentPane().repaint();
+			this.setVisible(true);
 		}
 		else if(object.equals(jMenuItemRepair)) {
-			
+			this.getContentPane().removeAll();
+			this.getContentPane().add(new RepairListingEdition(this), BorderLayout.CENTER);
+			this.getContentPane().repaint();
+			this.setVisible(true);			
 		}
 		else if (object.equals(jMenuItemSearch1)) {
 			this.getContentPane().removeAll();
@@ -157,17 +168,20 @@ public class Window extends JFrame implements ActionListener, PreviousPanel {
 	}
 
 	public void onConnectionSet(PersonnelMember member) {
-		// FIXME : Thread
+		basePanel = new MainMenuPanel(member.getFirstNames()[0]);
+		
+		goBackTo();
 	}
 
 	public void onDialogClosed() {
 		System.exit(0);		
 	}
-
+	
 	@Override
 	public void goBackTo() 
 	{
 		this.getContentPane().removeAll();
+		this.getContentPane().add(basePanel);
 		this.getContentPane().repaint();
 		this.setVisible(true);		
 	}
