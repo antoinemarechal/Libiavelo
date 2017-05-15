@@ -34,7 +34,7 @@ public class Repair {
 	public String getDescription() {
 		return description;
 	}
-	public String getNote() {
+	public String getNotes() {
 		return note;
 	}
 	public Date getRepairStartDate() {

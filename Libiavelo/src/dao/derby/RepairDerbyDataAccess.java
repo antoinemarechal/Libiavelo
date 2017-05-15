@@ -30,7 +30,7 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 			preparedStatement.setInt(1, repair.getBike().getId());
 			preparedStatement.setDate(2, new Date(repair.getRepairStartDate().getTime()));
 			preparedStatement.setString(3, repair.getDescription());
-			preparedStatement.setString(4, repair.getNote());
+			preparedStatement.setString(4, repair.getNotes());
 			preparedStatement.setDate(5, new Date(repair.getRepairEndDate().getTime()));
 			preparedStatement.setString(6, repair.getVerifier().getId());
 			preparedStatement.setInt(7, repair.getGarage().getId());
@@ -136,7 +136,7 @@ public class RepairDerbyDataAccess implements RepairDataAccess {
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Reparation SET DescriptionProbleme = ?, Remarques = ?, DateFinReparation = ?, Matricule = ?, CodeGarage = ? WHERE NumeroVelo = ? AND DateEntreeGarage = ?");
 			preparedStatement.setString(1, repair.getDescription());
-			preparedStatement.setString(2, repair.getNote());
+			preparedStatement.setString(2, repair.getNotes());
 			preparedStatement.setDate(3, new Date(repair.getRepairEndDate().getTime()));
 			preparedStatement.setString(4, repair.getVerifier().getId());
 			preparedStatement.setInt(5, repair.getGarage().getId());

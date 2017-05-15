@@ -5,17 +5,13 @@ public enum BikeState {
 	DAMMAGED,
 	DESTROYED;
 	
-	@Override
-	public String toString() {
-		switch(this) {
-		case DAMMAGED:
-			return "DAMMAGED";
-		case DESTROYED:
-			return "DESTROYED";
-		case WORKING:
-			return "WORKING";
-		default:
-				return null;
+	public static BikeState getFromId(int id) {
+		for(BikeState bs : BikeState.values())
+		{
+			if(bs.ordinal() == id)
+				return bs;
 		}
+		
+		return null;
 	}
 }

@@ -44,12 +44,14 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Velo WHERE NumeroVelo = ? ");
+			preparedStatement.setInt(1, bikeID);
+			
 			ResultSet queryResult = preparedStatement.executeQuery();
 			queryResult.next();
 			
 			bike = new Bike();
 			bike.setId(queryResult.getInt("NumeroVelo"));
-			bike.setState(BikeState.valueOf(queryResult.getString("Etat")));
+			bike.setState(BikeState.getFromId(queryResult.getInt("Etat")));
 		} catch (SQLException | IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -8,10 +8,12 @@ import business.ClientManager;
 import business.HouseholdMemberManager;
 import business.LocalityManager;
 import business.PersonnelMemberManager;
+import business.RepairManager;
 import model.Client;
 import model.HouseholdMember;
 import model.Locality;
 import model.PersonnelMember;
+import model.Repair;
 import model.enumerations.BikeState;
 
 public class ApplicationController {
@@ -72,6 +74,16 @@ public class ApplicationController {
 	public ArrayList<Locality> getAllLocalities() 
 	{
 		return new LocalityManager().getAllLocalities();
+	}
+
+	public ArrayList<Repair> getAllRepairs() 
+	{
+		return new RepairManager().getAllRepairs();
+	}
+
+	public ArrayList<PersonnelMember> getAllPersonnelMembers() 
+	{
+		return new PersonnelMemberManager().getAllPersonnelMembers();
 	}
 	
 }

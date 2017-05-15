@@ -24,8 +24,8 @@ import controller.ApplicationController;
 @SuppressWarnings("serial")
 public class ClientListing extends JPanel implements ActionListener, ListSelectionListener, PreviousPanel
 {
-	private ArrayList<Client> clientsListing = new ArrayList<Client>();
-	private ArrayList<Locality> localities = new ArrayList<Locality>( );
+	private ArrayList<Client> clientsListing;
+	private ArrayList<Locality> localities;
 	
 	private JButton backButton;
 	private JButton addClientButton;
