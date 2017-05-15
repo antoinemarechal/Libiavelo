@@ -7,42 +7,42 @@ import dao.derby.ClientDerbyDataAccess;
 import model.Client;
 
 public class ClientManager {
-	ClientDataAccess clientDataAccess;
+	
+	private ClientDataAccess clientDataAccess;
 	
 	public ClientManager() {
 		clientDataAccess = new ClientDerbyDataAccess();
 	}
 	
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
 	public void addClient(Client client) {
 		clientDataAccess.addClient(client);
 	}
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
 	public Client getClient(int clientID) {
-		return clientDataAccess.getClient(clientID);
-		
-	}
-	public ArrayList<Client> getAllClients() {
-		return clientDataAccess.getAllClients();
-		
+		return clientDataAccess.getClient(clientID);	
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
+	public ArrayList<Client> getAllClients() {
+		return clientDataAccess.getAllClients();
+	}
+	
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
 	public void updateClient(Client client) {
 		clientDataAccess.updateClient(client);
 	}
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
-	public void removeClient(int clientID) {
-		clientDataAccess.removeClient(clientID);
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
+	public void removeClient(Client client) {
+		clientDataAccess.removeClient(client);
 	}
 }

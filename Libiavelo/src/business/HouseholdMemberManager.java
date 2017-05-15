@@ -7,22 +7,23 @@ import dao.derby.HouseholdMemberDerbyDataAccess;
 import model.HouseholdMember;
 
 public class HouseholdMemberManager {
-	HouseholdMemberDataAccess householdMemberDataAccess;
+	
+	private HouseholdMemberDataAccess householdMemberDataAccess;
 	
 	public HouseholdMemberManager () {
 		householdMemberDataAccess = new HouseholdMemberDerbyDataAccess();
 	}
 	
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
 	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
 		householdMemberDataAccess.addHouseholdMember(householdMember, clientID);
 	}
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
 	public HouseholdMember getHouseholdMember(String nationalNumber) {
 		return householdMemberDataAccess.getHouseholdMember(nationalNumber);
 	}
@@ -31,16 +32,16 @@ public class HouseholdMemberManager {
 		return householdMemberDataAccess.getAllHouseholdMembers(clientID);
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
 	public void updateHouseholdMemebr(HouseholdMember householdMember) {
 		householdMemberDataAccess.updateHouseholdMemebr(householdMember);
 	}
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
 	public void removeHouseholdMember(HouseholdMember householdMember) {
 		householdMemberDataAccess.removeHouseholdMember(householdMember);
 	}

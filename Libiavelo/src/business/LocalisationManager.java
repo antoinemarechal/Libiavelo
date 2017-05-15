@@ -7,41 +7,42 @@ import dao.derby.LocalisationDerbyDataAccess;
 import model.Localisation;
 
 public class LocalisationManager {
-	LocalisationDataAccess localisationDataAccess;
+	
+	private LocalisationDataAccess localisationDataAccess;
 	
 	public LocalisationManager() {
 		localisationDataAccess = new LocalisationDerbyDataAccess();
 	}
 	
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
-	public void addLocalisation() {
-		localisationDataAccess.addLocalisation();
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
+	public void addLocalisation(Localisation localisation) {
+		localisationDataAccess.addLocalisation(localisation);
 	}
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
 	public Localisation getLocalisation(int bikeID) {
 		return localisationDataAccess.getLocalisation(bikeID);
 	}
 	
-	public ArrayList<Localisation> getAllLocalisation() {
-		return localisationDataAccess.getAllLocalisation();
+	public ArrayList<Localisation> getAllLocalisations() {
+		return localisationDataAccess.getAllLocalisations();
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
 	public void updateLocalisation(Localisation localisation) {
 		localisationDataAccess.updateLocalisation(localisation);
 	}
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
-	public void removeLocalisation() {
-		localisationDataAccess.removeLocalisation();
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
+	public void removeLocalisation(Localisation localisation) {
+		localisationDataAccess.removeLocalisation(localisation);
 	}
 }

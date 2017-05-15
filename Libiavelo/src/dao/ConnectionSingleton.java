@@ -11,11 +11,12 @@ public class ConnectionSingleton {
 	public static  Connection getInstance() {
 		if (connection == null) {
 			try {
-					connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/libiavelo", "root", "");
-				} catch (SQLException e) { 
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				};
+				connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/libiavelo", "root", "");
+			}
+			catch (SQLException e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
 		}
 		return connection;
 	}

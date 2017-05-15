@@ -2,28 +2,29 @@ package dao;
 
 import java.util.ArrayList;
 
-import model.Garage;
+import model.Subscription;
+import model.SubscriptionType;
 
-public interface GarageDataAccess {
-	
+public interface SubscriptionTypeDataAccess {
+
 	// ===============================================================================================
 	// CREATE
 	// ===============================================================================================
-	public void addGarage(Garage Garage);
-	
+	public void addSubscription(SubscriptionType subscriptionType);
+
 	// ===============================================================================================
 	// READ
 	// ===============================================================================================
-	public Garage getGarage(int garageID);
-	public ArrayList<Garage> getAllGarages();
-	
+	public SubscriptionType getSubscriptionType(SubscriptionType subscriptionType); 
+	public ArrayList<Subscription> getAllSubscriptionTypes();
+
 	// ===============================================================================================
 	// UPDATE
 	// ===============================================================================================
-	public void updateGarage(Garage garage);
-	
+	public void updateSubscriptionType(SubscriptionType subscriptionType); 
+
 	// ===============================================================================================
 	// DELETE
 	// ===============================================================================================
-	public void removeGarage(Garage garage);
+	public void removeSubscriptionType(SubscriptionType subscriptionType);
 }

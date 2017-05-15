@@ -7,22 +7,23 @@ import dao.derby.TransportationOrderDerbyDataAccess;
 import model.TransportationOrder;
 
 public class TransportationOrderManager {
-	TransportationOrderDataAccess transportationOrderDataAccess;
+	
+	private TransportationOrderDataAccess transportationOrderDataAccess;
 	
 	public TransportationOrderManager() {
 		transportationOrderDataAccess = new TransportationOrderDerbyDataAccess();
 	}
 	
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
 	public void addTransportationOrder(TransportationOrder transportationOrder) {
 		transportationOrderDataAccess.addTransportationOrder(transportationOrder);
 	}
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
 	public TransportationOrder getTransportationOrder(int clientID) {
 		return transportationOrderDataAccess.getTransportationOrder(clientID);
 	}
@@ -31,16 +32,16 @@ public class TransportationOrderManager {
 		return transportationOrderDataAccess.getAllTransportationOrders();
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
 	public void updateClient(TransportationOrder transportationOrder) {
 		transportationOrderDataAccess.updateClient(transportationOrder);
 	}
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
 	public void removeTransportationOrder() {
 		transportationOrderDataAccess.removeTransportationOrder();
 	}

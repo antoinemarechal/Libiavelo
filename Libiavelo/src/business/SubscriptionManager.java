@@ -1,45 +1,48 @@
 package business;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import dao.SubscriptionDataAccess;
 import dao.derby.SubscriptionDerbyDataAccess;
 import model.Subscription;
 
 public class SubscriptionManager {
-	SubscriptionDataAccess subscriptionDataAccess;
+	
+	private SubscriptionDataAccess subscriptionDataAccess;
 	
 	public SubscriptionManager() {
 		subscriptionDataAccess = new SubscriptionDerbyDataAccess();
 	}
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
+	
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
 	public void addSubscription(Subscription subsription) {
 		subscriptionDataAccess.addSubscription(subsription);
 	}
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
-	public Subscription getSubscription(Subscription subscription) {
-		return subscriptionDataAccess.getSubscription(subscription);
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
+	public Subscription getSubscription(int clientId, Date demand) {
+		return subscriptionDataAccess.getSubscription(clientId, demand);
 	}
 	
 	public ArrayList<Subscription> getAllSubscriptions() {
 		return subscriptionDataAccess.getAllSubscriptions();
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
 	public void updateSubscription(Subscription subscription) {
 		subscriptionDataAccess.updateSubscription(subscription);
 	}
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
 	public void removeSubscription(Subscription subscription) {
 		subscriptionDataAccess.removeSubscription(subscription);
 	}

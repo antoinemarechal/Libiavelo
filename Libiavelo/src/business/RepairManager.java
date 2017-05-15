@@ -8,22 +8,23 @@ import dao.derby.RepairDerbyDataAccess;
 import model.Repair;
 
 public class RepairManager {
-	RepairDataAccess repairDerbyDataAccess;
+	
+	private RepairDataAccess repairDerbyDataAccess;
 	
 	public RepairManager() {
 		repairDerbyDataAccess = new RepairDerbyDataAccess();
 	}
 	
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
 	public void addRepair(Repair repair) {
 		repairDerbyDataAccess.addRepair(repair);
 	}
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
 	public Repair getRepair(int repairID, Date entryDate) {
 		return repairDerbyDataAccess.getRepair(repairID, entryDate);
 	}
@@ -32,9 +33,9 @@ public class RepairManager {
 		return repairDerbyDataAccess.getAllRepairs();
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
 	public void updateRepair(Repair repair) {
 		repairDerbyDataAccess.updateRepair(repair);
 	}

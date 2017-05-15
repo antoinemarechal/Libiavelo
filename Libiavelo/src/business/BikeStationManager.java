@@ -7,22 +7,23 @@ import dao.derby.BikeStationDerbyDataAccess;
 import model.BikeStation;
 
 public class BikeStationManager {
-	BikeStationDataAccess bikeStationDataAccess;
+	
+	private BikeStationDataAccess bikeStationDataAccess;
 	
 	public BikeStationManager() {
 		bikeStationDataAccess = new BikeStationDerbyDataAccess();
 	}
 	
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
 	public void addBikeStation(BikeStation bikeStation) {
 		bikeStationDataAccess.addBikeStation(bikeStation);
 	}
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
 	public BikeStation getBikeStation(int bikeStationID) {
 		return bikeStationDataAccess.getBikeStation(bikeStationID);
 	}
@@ -31,16 +32,16 @@ public class BikeStationManager {
 		return bikeStationDataAccess.getAllBikeStations();
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
 	public void updateBikeStation(BikeStation bikeStation) {
 		bikeStationDataAccess.updateBikeStation(bikeStation);
 	}
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
 	public void removeBikeStation() {
 		bikeStationDataAccess.removeBikeStation();
 	}

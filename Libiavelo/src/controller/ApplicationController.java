@@ -20,14 +20,9 @@ import model.Repair;
 import model.enumerations.BikeState;
 
 public class ApplicationController {
-	ClientManager clientManager;
-	HouseholdMemberManager householdMemberManager;
-	LocalityManager localityManager;
-	BikeManager bikeManager;
 	
 	public void addClient(Client client) {
-		clientManager = new ClientManager();
-		clientManager.addClient(client);
+		new ClientManager().addClient(client);
 	}
 	
 	public void updateClient(Client client) {
@@ -35,33 +30,28 @@ public class ApplicationController {
 	}
 	
 	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
-		householdMemberManager = new HouseholdMemberManager();
-		householdMemberManager.addHouseholdMember(householdMember, clientID);
+		new HouseholdMemberManager().addHouseholdMember(householdMember, clientID);
 	}
 	
 	public void addLocality(Locality locality) {
-		localityManager = new LocalityManager();
-		localityManager.addLocality(locality);
+		new LocalityManager().addLocality(locality);
 	}
 	
 	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable) {
-		bikeManager = new BikeManager();
-		return bikeManager.getSearch1Data(date, isExceptionnal, isAvailable);
+		return new BikeManager().getSearch1Data(date, isExceptionnal, isAvailable);
 	}
 	
 	public ArrayList<ArrayList<Object>> getSearch2Data(Date startDate, Date endDate, BikeState state) {
-		bikeManager = new BikeManager();
-		return bikeManager.getSearch2Data(startDate, endDate, state);
+		return new BikeManager().getSearch2Data(startDate, endDate, state);
 	}
 	
 	public ArrayList<ArrayList<Object>> getSearch3Data(Boolean isValid, Date dateThreshold, Float minimumAmount) {
-		bikeManager = new BikeManager();
-		return bikeManager.getSearch3Data(isValid, dateThreshold, minimumAmount);
+		return new BikeManager().getSearch3Data(isValid, dateThreshold, minimumAmount);
 	}
 	
 	public PersonnelMember getPersonnelMember(String matricule, String password)
 	{
-		return new PersonnelMemberManager().getPersonnelMember(matricule);//FIXME:
+		return new PersonnelMemberManager().getPersonnelMember(matricule, password);
 	}
 
 	public ArrayList<Client> getAllClients() 
@@ -71,7 +61,7 @@ public class ApplicationController {
 
 	public void removeClient(Client client) 
 	{
-		new ClientManager().removeClient(client.getClientNumber());		
+		new ClientManager().removeClient(client);		
 	}
 
 	public ArrayList<Locality> getAllLocalities() 
