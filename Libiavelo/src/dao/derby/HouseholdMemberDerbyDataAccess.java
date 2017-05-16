@@ -98,7 +98,7 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 		ArrayList<HouseholdMember> household = new ArrayList<HouseholdMember>();
 				
 		try {
-			PreparedStatement selectComposition = connection.prepareStatement("SELECT * FROM Membre_Menage WHERE NumeroNational IN (SELECT NumeroNationalMembre FROM COMPOSITION where NumeroClient = 1)");
+			PreparedStatement selectComposition = connection.prepareStatement("SELECT * FROM Membre_Menage WHERE NumeroNational IN (SELECT NumeroNationalMembre FROM COMPOSITION WHERE NumeroClient = 1)");
 			selectComposition.setInt(1, clientID);
 			
 			ResultSet queryResult = selectComposition.executeQuery();
@@ -129,8 +129,22 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 			editCompositionStatement.setInt(3, client.getClientNumber());
 			editCompositionStatement.executeUpdate();
 			
-			PreparedStatement editHouseholdMemberStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL = ");
-			editHouseholdMemberStatement.setString(1, householdMember.getNationalNumber());
+			PreparedStatement editHouseholdMemberStatement = connection.prepareStatement("UPDATE Membre_Menage SET Nom = ?, Prenom1 = ?, Prenom2 = ?, Prenom3 = ?, Prenom4 = ?, Prenom5 = ?, DateNaissance = ? WHERE NUMERONATIONAL = ?");
+			editHouseholdMemberStatement.setString(1, householdMember.getSurname());
+			
+			String[] firstNames = householdMember.getFirstNames();
+			editHouseholdMemberStatement.setString(2, firstNames[1]);
+			if (firstNames[2] != "")
+				editHouseholdMemberStatement.setString(3, firstNames[2]);
+			if (firstNames[3] != "")
+				editHouseholdMemberStatement.setString(4, firstNames[3]);
+			if (firstNames[4] != "")
+				editHouseholdMemberStatement.setString(5, firstNames[4]);
+			if (firstNames[5] != "")
+				editHouseholdMemberStatement.setString(6, firstNames[5]);
+			
+			editHouseholdMemberStatement.setDate(7, new Date(householdMember.getBirthDate().getTime()));
+			
 			editHouseholdMemberStatement.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -147,7 +161,7 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 			removeAllCompositionsStatement.setInt(1, client.getClientNumber());
 			removeAllCompositionsStatement.executeUpdate();
 			
-			PreparedStatement removeAllHouseholdMembersStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL NOT IN (SELECT NUMERONATIONALMEMBRE FROM COMPOSITION c)");
+			PreparedStatement removeAllHouseholdMembersStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL NOT IN (SELECT NUMERONATIONALMEMBRE FROM COMPOSITION)");
 			removeAllHouseholdMembersStatement.executeUpdate();
 			
 			HouseholdMember householdMember;

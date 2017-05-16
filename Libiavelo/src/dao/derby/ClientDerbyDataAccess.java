@@ -162,6 +162,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 				Iterator<HouseholdMember> houseHoldIterator = household.iterator();
 				while(houseHoldIterator.hasNext())
 					client.addHouseholdMember(houseHoldIterator.next());
+				
 				clients.add(client);
 			}
 		} catch (SQLException e) {
