@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import dao.BikeDataAccess;
@@ -25,7 +26,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		Connection connection = ConnectionSingleton.getInstance();
 		
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Velo(CodeEtat) VALUES(?)");
+			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Velo(CodeEtat) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, bike.getState().getStateID());
 			preparedStatement.executeUpdate();
 			

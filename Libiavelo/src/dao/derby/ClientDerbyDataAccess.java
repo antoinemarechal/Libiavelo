@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import dao.ClientDataAccess;
 import dao.ConnectionSingleton;
@@ -16,6 +17,7 @@ import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
 import model.Client;
+import model.HouseholdMember;
 import model.Locality;
 
 public class ClientDerbyDataAccess implements ClientDataAccess {
@@ -78,7 +80,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 		Client client = null;
 		
 		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
-		
+		HouseholdMemberDerbyDataAccess householdMemberDerbyDataAccess = new HouseholdMemberDerbyDataAccess();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Client WHERE NumeroClient = ?");
 			preparedStatement.setInt(1, clientID);
@@ -106,6 +108,12 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 				Locality locality = localityDerbyDataAccess.getLocality(queryResult.getInt("CodeLocalite"));
 				
 				client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, streetNumber, streetName, locality, subscriptionDate);
+				client.setClientNumber(queryResult.getInt("NumeroClient"));
+				
+				ArrayList<HouseholdMember> household = householdMemberDerbyDataAccess.getAllHouseholdMembers(client.getClientNumber());
+				Iterator<HouseholdMember> houseHoldIterator = household.iterator();
+				while(houseHoldIterator.hasNext())
+					client.addHouseholdMember(houseHoldIterator.next());
 			}
 		} 
 		catch (SQLException e) {
@@ -123,7 +131,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 		Client client = null;
 		
 		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
-		
+		HouseholdMemberDerbyDataAccess householdMemberDerbyDataAccess = new HouseholdMemberDerbyDataAccess();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Client");
 			ResultSet queryResult = preparedStatement.executeQuery();
@@ -148,7 +156,12 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 				Locality locality = localityDerbyDataAccess.getLocality(queryResult.getInt("CodeLocalite"));
 				
 				client = new Client(nationalNumber, homeNumber, phoneNumber, clientSurname, clientFirstNames, subscriptionValidated, depositAmount, streetNumber, streetName, locality, subscriptionDate);
+				client.setClientNumber(queryResult.getInt("NumeroClient"));
 				
+				ArrayList<HouseholdMember> household = householdMemberDerbyDataAccess.getAllHouseholdMembers(client.getClientNumber());
+				Iterator<HouseholdMember> houseHoldIterator = household.iterator();
+				while(houseHoldIterator.hasNext())
+					client.addHouseholdMember(houseHoldIterator.next());
 				clients.add(client);
 			}
 		} catch (SQLException e) {
