@@ -129,7 +129,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 		
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.libelle, r.DescriptionProbleme, r.NumeroVelo, e.Libelle FROM Reparation r INNER JOIN Velo v ON r.NumeroVelo = v.NumeroVelo and r.DATEENTREEGARAGE >= ? and r.DATEFINREPARATION <= ?  and v.CodeEtat = ? INNER JOIN EtatVelo e on v.CodeEtat = e.Code  INNER JOIN Garage g ON r.CodeGarage = g.CODE INNER JOIN Propriete p on g.CODE = p.code");			
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.libelle, r.DescriptionProbleme, r.NumeroVelo, e.Libelle FROM Reparation r INNER JOIN Velo v ON r.NumeroVelo = v.NumeroVelo AND r.DATEENTREEGARAGE >= ? AND r.DATEFINREPARATION <= ?   INNER JOIN EtatVelo e ON v.CodeEtat = e.Code AND v.CodeEtat = ? INNER JOIN Garage g ON r.CodeGarage = g.CODE INNER JOIN Propriete p ON g.CODE = p.CODE");			
 			preparedStatement.setDate(1, new Date(startDate.getTime()));
 			preparedStatement.setDate(2, new Date(endDate.getTime()));
 			preparedStatement.setInt(3, state.ordinal());
@@ -161,7 +161,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 		
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT c.NomDemandeur, c.Prenom1, l.NomVille, a.DateDemande, A.SoldeRestantAPayer, c.InscriptionValidee FROM Client c INNER JOIN Localite l ON c.CodeLocalite = l.Code and c.InscriptionValidee = ? INNER JOIN Abonnement a on c.NumeroClient = a.Client and a.DateDemaned >= ? and a.SoldeRestantAPayer >= ?");				
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT c.NomDemandeur, c.Prenom1, l.NomVille, a.DateDemande, a.SoldeRestantAPayer, c.InscriptionValidee FROM Client c INNER JOIN Localite l ON c.CodeLocalite = l.Code and c.InscriptionValidee = ? INNER JOIN Abonnement a on c.NumeroClient = a.Client and a.DateDemande >= ? and a.SoldeRestantAPayer >= ?");				
 			preparedStatement.setBoolean(1, isValid);
 			preparedStatement.setDate(2, new Date(dateThreshold.getTime()));
 			preparedStatement.setFloat(3, minimumAmount);
