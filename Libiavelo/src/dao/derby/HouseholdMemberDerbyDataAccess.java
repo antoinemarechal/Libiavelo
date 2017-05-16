@@ -24,27 +24,32 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 	// CREATE
 	// ===============================================================================================
 	@Override
-	public void addHouseholdMember(HouseholdMember householdMember, int clientID) throws DataAccessConnectionException, DataAccessOperationException {
+	public void addHouseholdMember(HouseholdMember householdMember, Client client) throws DataAccessConnectionException, DataAccessOperationException {
 		Connection connection = ConnectionSingleton.getInstance();
 		
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Membre_Menage VALUES (?,?,?,?,?,?,?) ");
-			String nationalNumber = "" + householdMember.getNationalNumber();
-			preparedStatement.setString(1, nationalNumber);
-			preparedStatement.setString(2, householdMember.getSurname());
+			PreparedStatement addHouseholdMemberStatement = connection.prepareStatement("INSERT INTO Membre_Menage VALUES (?,?,?,?,?,?,?) ");
+			String nationalNumber = householdMember.getNationalNumber();
+			addHouseholdMemberStatement.setString(1, nationalNumber);
+			addHouseholdMemberStatement.setString(2, householdMember.getSurname());
 			
 			String[] firstNames = householdMember.getFirstNames();
-			preparedStatement.setString(3, firstNames[1]);
+			addHouseholdMemberStatement.setString(3, firstNames[1]);
 			if (firstNames[2] != "")
-				preparedStatement.setString(4, firstNames[2]);
+				addHouseholdMemberStatement.setString(4, firstNames[2]);
 			if (firstNames[3] != "")
-				preparedStatement.setString(5, firstNames[3]);
+				addHouseholdMemberStatement.setString(5, firstNames[3]);
 			if (firstNames[4] != "")
-				preparedStatement.setString(6, firstNames[4]);
+				addHouseholdMemberStatement.setString(6, firstNames[4]);
 			if (firstNames[5] != "")
-				preparedStatement.setString(7, firstNames[5]);	
+				addHouseholdMemberStatement.setString(7, firstNames[5]);	
 			
-			preparedStatement.executeUpdate();
+			addHouseholdMemberStatement.executeUpdate();
+			
+			PreparedStatement addCompositionStatement = connection.prepareStatement("INSERT INTO COMPOSITION VALUES (?,?,?) ");
+			addCompositionStatement.setString(1, nationalNumber);
+			// addCompositionStatement.setDate(2, x); FIXME client.latestHouseHoldRenewal
+			addCompositionStatement.setInt(3, client.getClientNumber());
 		} 
 		catch (SQLException e) {
 			throw new DataAccessOperationException(getClass().getName() + ".addHouseholdMember(HouseholdMember, int)", e.getMessage());
@@ -93,7 +98,7 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 		ArrayList<HouseholdMember> household = new ArrayList<HouseholdMember>();
 				
 		try {
-			PreparedStatement selectComposition = connection.prepareStatement("SELECT * FROM Composition WHERE NumeroClient = ?");
+			PreparedStatement selectComposition = connection.prepareStatement("SELECT * FROM Membre_Menage WHERE NumeroNational IN (SELECT NumeroNationalMembre FROM COMPOSITION where NumeroClient = 1)");
 			selectComposition.setInt(1, clientID);
 			
 			ResultSet queryResult = selectComposition.executeQuery();
@@ -145,12 +150,11 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 			PreparedStatement removeAllHouseholdMembersStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL NOT IN (SELECT NUMERONATIONALMEMBRE FROM COMPOSITION c)");
 			removeAllHouseholdMembersStatement.executeUpdate();
 			
-			int clientID = client.getClientNumber();
 			HouseholdMember householdMember;
 			Iterator<HouseholdMember> householdIterator= client.getHousehold().iterator();
 			while (householdIterator.hasNext()) {
 				householdMember = householdIterator.next();
-				this.addHouseholdMember(householdMember, clientID);
+				this.addHouseholdMember(householdMember, client);
 			}
 		 }catch (SQLException e) {
 			throw new DataAccessOperationException(getClass().getName() + ".updateHousehold(Client)", e.getMessage());

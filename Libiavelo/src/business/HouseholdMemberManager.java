@@ -23,8 +23,8 @@ public class HouseholdMemberManager {
 	// ===============================================================================================
 	// CREATE
 	// ===============================================================================================
-	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) throws DataAccessConnectionException, DataAccessOperationException {
-		householdMemberDataAccess.addHouseholdMember(householdMember, clientID);
+	public void addHouseholdMember(HouseholdMember householdMember, Client client) throws DataAccessConnectionException, DataAccessOperationException {
+		householdMemberDataAccess.addHouseholdMember(householdMember, client);
 	}
 	
 	// ===============================================================================================

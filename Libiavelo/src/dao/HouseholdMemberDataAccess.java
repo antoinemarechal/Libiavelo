@@ -15,7 +15,7 @@ public interface HouseholdMemberDataAccess {
 	// ===============================================================================================
 	// CREATE
 	// ===============================================================================================
-	public void addHouseholdMember(HouseholdMember householdMember, int clientID) throws DataAccessConnectionException, DataAccessOperationException;
+	public void addHouseholdMember(HouseholdMember householdMember, Client client) throws DataAccessConnectionException, DataAccessOperationException;
 	
 	// ===============================================================================================
 	// READ

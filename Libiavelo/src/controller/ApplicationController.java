@@ -35,8 +35,8 @@ public class ApplicationController {
 		new ClientManager().updateClient(client);
 	}
 	
-	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) throws DataAccessConnectionException, DataAccessOperationException {
-		new HouseholdMemberManager().addHouseholdMember(householdMember, clientID);
+	public void addHouseholdMember(HouseholdMember householdMember, Client client) throws DataAccessConnectionException, DataAccessOperationException {
+		new HouseholdMemberManager().addHouseholdMember(householdMember, client);
 	}
 	
 	public void addLocality(Locality locality) throws DataAccessConnectionException, DataAccessOperationException {
