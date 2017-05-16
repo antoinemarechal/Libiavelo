@@ -24,7 +24,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Velo(CodeEtat) VALUES(?)");
-			preparedStatement.setInt(1, bike.getState().ordinal());
+			preparedStatement.setInt(1, bike.getState().getStateID());
 			preparedStatement.executeUpdate();
 			
 			ResultSet queryResults = preparedStatement.getGeneratedKeys();
@@ -116,7 +116,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.libelle, r.DescriptionProbleme, r.NumeroVelo, e.Libelle FROM Reparation r INNER JOIN Velo v ON r.NumeroVelo = v.NumeroVelo AND r.DATEENTREEGARAGE >= ? AND r.DATEFINREPARATION <= ?   INNER JOIN EtatVelo e ON v.CodeEtat = e.Code AND v.CodeEtat = ? INNER JOIN Garage g ON r.CodeGarage = g.CODE INNER JOIN Propriete p ON g.CODE = p.CODE");			
 			preparedStatement.setDate(1, startDate);
 			preparedStatement.setDate(2, endDate);
-			preparedStatement.setInt(3, state.ordinal());
+			preparedStatement.setInt(3, state.getStateID());
 			
 			ResultSet queryResult = preparedStatement.executeQuery();
 			ResultSetMetaData metaData = queryResult.getMetaData();
@@ -140,7 +140,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT c.NomDemandeur, c.Prenom1, l.NomVille, a.DateDemande, a.SoldeRestantAPayer, c.InscriptionValidee FROM Client c INNER JOIN Localite l ON c.CodeLocalite = l.Code and c.InscriptionValidee = ? INNER JOIN Abonnement a on c.NumeroClient = a.Client and a.DateDemande >= ? and a.SoldeRestantAPayer >= ?");				
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT c.NomDemandeur, c.Prenom1, l.Libelle, a.DateDemande, a.SoldeRestantAPayer, c.InscriptionValidee FROM Client c INNER JOIN Localite l ON c.CodeLocalite = l.Code and c.InscriptionValidee = ? INNER JOIN Abonnement a on c.NumeroClient = a.NumeroClient and a.DateDemande >= ? and a.SoldeRestantAPayer >= ?");				
 			
 			preparedStatement.setBoolean(1, isValid);
 			preparedStatement.setDate(2, dateThreshold);
@@ -170,7 +170,7 @@ public class BikeDerbyDataAccess implements BikeDataAccess {
 		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Velo SET CodeEtat = ? WHERE NumeroVelo = ?");
-			preparedStatement.setInt(1, bike.getState().ordinal());
+			preparedStatement.setInt(1, bike.getState().getStateID());
 			preparedStatement.setInt(2, bike.getId());
 			
 			preparedStatement.executeUpdate();
