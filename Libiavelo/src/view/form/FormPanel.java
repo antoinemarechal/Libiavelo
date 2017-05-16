@@ -5,10 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import view.PreviousPanel;
 import controller.ApplicationController;
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
 import model.Client;
 import model.Locality;
 import model.Repair;
@@ -66,7 +69,14 @@ public class FormPanel extends JPanel implements ActionListener {
 					case ADD_CLIENT :
 						Client client = (Client) form.getFormGeneratedObject();
 						
-						appController.addClient(client);
+						try 
+						{
+							appController.addClient(client);
+						} 
+						catch (DataAccessConnectionException | DataAccessOperationException e) 
+						{
+							JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+						}
 						
 						previous.goBackTo();
 						break;
@@ -74,7 +84,14 @@ public class FormPanel extends JPanel implements ActionListener {
 					case EDIT_CLIENT :
 						Client clientBis = (Client) form.getFormGeneratedObject();
 						
-						appController.updateClient(clientBis);
+						try 
+						{
+							appController.updateClient(clientBis);
+						} 
+						catch (DataAccessConnectionException | DataAccessOperationException e) 
+						{
+							JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+						}
 						
 						previous.goBackTo();
 						break;
@@ -82,7 +99,14 @@ public class FormPanel extends JPanel implements ActionListener {
 					case ADD_LOCALITY :
 						Locality locality = (Locality) form.getFormGeneratedObject();
 						
-						appController.addLocality(locality);
+						try 
+						{
+							appController.addLocality(locality);
+						} 
+						catch (DataAccessConnectionException | DataAccessOperationException e) 
+						{
+							JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+						}
 						
 						previous.goBackTo();
 						break;
@@ -95,7 +119,14 @@ public class FormPanel extends JPanel implements ActionListener {
 					case ADD_REPAIR :
 						Repair repair = (Repair) form.getFormGeneratedObject();
 						
-						appController.addRepair(repair);
+						try 
+						{
+							appController.addRepair(repair);
+						} 
+						catch (DataAccessConnectionException | DataAccessOperationException e) 
+						{
+							JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+						}
 						
 						previous.goBackTo();
 						break;
@@ -103,8 +134,15 @@ public class FormPanel extends JPanel implements ActionListener {
 					case EDIT_REPAIR :
 						Repair repairBis = (Repair) form.getFormGeneratedObject();
 						
-						appController.updateRepair(repairBis);
-						appController.updateBike(repairBis.getBike());
+						try 
+						{
+							appController.updateRepair(repairBis);
+							appController.updateBike(repairBis.getBike());
+						} 
+						catch (DataAccessConnectionException | DataAccessOperationException e) 
+						{
+							JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+						}
 						
 						previous.goBackTo();
 						break;

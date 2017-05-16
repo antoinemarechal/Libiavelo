@@ -2,27 +2,32 @@ package dao;
 
 import java.util.ArrayList;
 
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
+import exception.InvalidNumberException;
+import exception.NoDataException;
 import model.BikeStation;
 
 public interface BikeStationDataAccess {
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
-	public void addBikeStation(BikeStation bikeStation);
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
-	public BikeStation getBikeStation(int bikeStationID);
-	public ArrayList<BikeStation> getAllBikeStations();
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
+	public void addBikeStation(BikeStation bikeStation) throws DataAccessConnectionException, DataAccessOperationException;
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
-	public void updateBikeStation(BikeStation bikeStation);
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
+	public BikeStation getBikeStation(int bikeStationID) throws DataAccessConnectionException, DataAccessOperationException, InvalidNumberException, NoDataException;
+	public ArrayList<BikeStation> getAllBikeStations() throws DataAccessConnectionException, DataAccessOperationException, InvalidNumberException, NoDataException;
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
-	public void removeBikeStation();
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
+	public void updateBikeStation(BikeStation bikeStation) throws DataAccessConnectionException, DataAccessOperationException;
+	
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
+	public void removeBikeStation() throws DataAccessConnectionException, DataAccessOperationException;
 }

@@ -9,21 +9,21 @@ import java.util.ArrayList;
 
 import dao.ConnectionSingleton;
 import dao.LocalityDataAccess;
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
-import model.Client;
-import model.Estate;
 import model.Locality;
 
 public class LocalityDerbyDataAccess implements LocalityDataAccess {
-	public LocalityDerbyDataAccess() {
-	}
-	
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
-	public void addLocality(Locality locality) {
+		
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
+	@Override
+	public void addLocality(Locality locality) throws DataAccessConnectionException, DataAccessOperationException {
 		Connection connection = ConnectionSingleton.getInstance();
+		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Localite(CodePostal, Libelle) VALUES (?,?) ", Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setInt(1, locality.getPostalCode());
@@ -34,93 +34,74 @@ public class LocalityDerbyDataAccess implements LocalityDataAccess {
 			queryResults.next();
 
 			locality.setId(queryResults.getInt(1));	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} 
+		catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".addLocality(Locality)", e.getMessage());
 		}
 	}
 	
-	public void addEstateLocality(Estate estate, Locality locality) {
-	}
-	
-	public void addClientLocality(Client client, Locality locality) {
-	}
-	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
-	public Locality getLocality(int localityID) {
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
+	@Override
+	public Locality getLocality(int localityID) throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException {
+		Connection connexion = ConnectionSingleton.getInstance();
+		
 		Locality locality = null;
 		
-		Connection connexion = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localite WHERE Code = ?");
 			preparedStatement.setInt(1, localityID);
 			
 			ResultSet queryResult = preparedStatement.executeQuery();
-			queryResult.next();
-			locality = new Locality(queryResult.getInt("Code"), queryResult.getString("Libelle"), queryResult.getInt("CodePostal"));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoDataException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidNumberException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			if(queryResult.next())			
+				locality = new Locality(queryResult.getInt("Code"), queryResult.getString("Libelle"), queryResult.getInt("CodePostal"));
+		} 
+		catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".getLocality(int)", e.getMessage());
 		}
+		
 		return locality;
 	}
 	
-	public ArrayList<Locality> getAllLocalities() {
-		Locality locality = null;
-		ArrayList<Locality> localities = new ArrayList<Locality>();
-		
+	@Override
+	public ArrayList<Locality> getAllLocalities() throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException {
 		Connection connexion = ConnectionSingleton.getInstance();
+		
+		ArrayList<Locality> localities = new ArrayList<Locality>();
+		Locality locality = null;
+		
 		try {
 			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Localite");
 			ResultSet queryResult = preparedStatement.executeQuery();
+			
 			while(queryResult.next()) {
 				locality = new Locality(queryResult.getInt("Code"), queryResult.getString("Libelle"), queryResult.getInt("CodePostal"));
 
 				localities.add(locality);
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoDataException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidNumberException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} 
+		catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".getAllLocalities()", e.getMessage());
 		}
+		
 		return localities;
 	}
 	
-	
-	
-	public Locality getClientLocality(Client client) {
-		return null;
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
+	@Override
+	public void updateLocality(Locality locality) throws DataAccessConnectionException, DataAccessOperationException {
+		
 	}
-	
-	public Locality getEstateLocality(Estate estate) {
-		return null;
-	}
-	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
-	public void updateClientLocality(Client client, Locality locality) {
-	}
-	
-	public void updateEstateLocality(Estate estate, Locality locality) {
-	}
-	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
-	public void removeLocality(Client client, Locality locality) {
+
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
+	@Override
+	public void removeLocality(Locality locality) throws DataAccessConnectionException, DataAccessOperationException {
+		
 	}
 }

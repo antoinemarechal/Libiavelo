@@ -8,76 +8,78 @@ import java.util.ArrayList;
 
 import dao.BikeStationDataAccess;
 import dao.ConnectionSingleton;
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
 import exception.InvalidNumberException;
+import exception.NoDataException;
 import model.BikeStation;
 import model.Locality;
 
 public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
-	public BikeStationDerbyDataAccess() {
+	
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
+	@Override
+	public void addBikeStation(BikeStation bikeStation) throws DataAccessConnectionException, DataAccessOperationException {
+		
 	}
 	
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
-	public void addBikeStation(BikeStation bikeStation) {
-	}
-	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
-	public BikeStation getBikeStation(int bikeStationID) {
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
+	@Override
+	public BikeStation getBikeStation(int bikeStationID) throws DataAccessConnectionException, DataAccessOperationException, InvalidNumberException, NoDataException {
+		Connection connection = ConnectionSingleton.getInstance();
+		
 		BikeStation bikeStation = null;
 		
 		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
 		
-		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement selectStationStatement = connection.prepareStatement("SELECT * FROM Station WHERE Code = ?");
 			selectStationStatement.setInt(1, bikeStationID);
 			ResultSet selectStationResult = selectStationStatement.executeQuery();
-			selectStationResult.next();
 			
-			Integer lowerBikeSoftLimit = selectStationResult.getInt("LimiteBasseNbrVelos");
-			Integer lowerBikeHardLimit = selectStationResult.getInt("LimiteBasseExtremeNbrVelos");
-			Integer upperBikeSoftLimit = selectStationResult.getInt("LimiteHauteNbrVelos");
-			Integer upperBikeHardLimit = selectStationResult.getInt("LimiteHauteExtremeNbrVelos");
-			
-			PreparedStatement selectEstateStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code = ?");
-			selectEstateStatement.setInt(1, bikeStationID);
-			ResultSet selectEstateResult = selectEstateStatement.executeQuery();					
-			selectEstateResult.next();
-			
-			
-			Locality locality = localityDerbyDataAccess.getLocality(selectEstateResult.getInt("CodeLocalite"));
-			String streetName = selectEstateResult.getString("NomRue");
-			String streetNumber = selectEstateResult.getString("Numero");
-			String description = selectEstateResult.getString("Libelle");
-			
-			bikeStation = new BikeStation(bikeStationID, locality, streetName, streetNumber, description, lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidNumberException e) {
-			// not supposed to happen
-			e.printStackTrace();
-		}
-		catch (NullPointerException e) {
-			// not supposed to happen
-			e.printStackTrace();
-		}
+			if(selectStationResult.next()) {
+				Integer lowerBikeSoftLimit = selectStationResult.getInt("LimiteBasseNbrVelos");
+				Integer lowerBikeHardLimit = selectStationResult.getInt("LimiteBasseExtremeNbrVelos");
+				Integer upperBikeSoftLimit = selectStationResult.getInt("LimiteHauteNbrVelos");
+				Integer upperBikeHardLimit = selectStationResult.getInt("LimiteHauteExtremeNbrVelos");
+				
+				PreparedStatement selectEstateStatement = connection.prepareStatement("SELECT * FROM Propriete WHERE Code = ?");
+				selectEstateStatement.setInt(1, bikeStationID);
+				ResultSet selectEstateResult = selectEstateStatement.executeQuery();					
+				selectEstateResult.next();
+				
+				Locality locality = localityDerbyDataAccess.getLocality(selectEstateResult.getInt("CodeLocalite"));
+				String streetName = selectEstateResult.getString("NomRue");
+				String streetNumber = selectEstateResult.getString("Numero");
+				String description = selectEstateResult.getString("Libelle");
+				
+				bikeStation = new BikeStation(bikeStationID, locality, streetName, streetNumber, description, lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
+			}
+		} 
+		catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".getBikeStation(int)", e.getMessage());
+		} 
+		
 		return bikeStation;
 	}
 	
-	public ArrayList<BikeStation> getAllBikeStations() {
-		BikeStation bikeStation = null;
+	@Override
+	public ArrayList<BikeStation> getAllBikeStations() throws DataAccessConnectionException, DataAccessOperationException, InvalidNumberException, NoDataException {
+		Connection connection = ConnectionSingleton.getInstance();
+		
 		ArrayList<BikeStation> bikeStations = new ArrayList<BikeStation>();
+		BikeStation bikeStation = null;
 		
 		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
 		
-		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement selectStationStatement = connection.prepareStatement("SELECT * FROM Station");
 			ResultSet selectStationResult = selectStationStatement.executeQuery();
+			
 			while(selectStationResult.next()) {
 				Integer lowerBikeSoftLimit = selectStationResult.getInt("LimiteBasseNbrVelos");
 				Integer lowerBikeHardLimit = selectStationResult.getInt("LimiteBasseExtremeNbrVelos");
@@ -99,28 +101,27 @@ public class BikeStationDerbyDataAccess implements BikeStationDataAccess {
 				bikeStation = new BikeStation(bikeStationID, locality, streetName, streetNumber, description, lowerBikeSoftLimit, lowerBikeHardLimit, upperBikeSoftLimit, upperBikeHardLimit);
 				bikeStations.add(bikeStation);
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidNumberException e) {
-			// not supposed to happen
-			e.printStackTrace();
-		} catch (NullPointerException e) {
-			// not supposed to happen
-			e.printStackTrace();
-		}
+		} 
+		catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".getAllBikeStations()", e.getMessage());
+		} 
+		
 		return bikeStations;
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
-	public void updateBikeStation(BikeStation bikeStation) {
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
+	@Override
+	public void updateBikeStation(BikeStation bikeStation) throws DataAccessConnectionException, DataAccessOperationException {
+		
 	}
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
-	public void removeBikeStation() {
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
+	@Override
+	public void removeBikeStation() throws DataAccessConnectionException, DataAccessOperationException {
+		
 	}
 }

@@ -1,8 +1,14 @@
 package controller;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
+import exception.DataAccessOperationException;
+import exception.DataAccessConnectionException;
+import exception.DataLengthException;
+import exception.InvalidDateException;
+import exception.InvalidNumberException;
+import exception.NoDataException;
 import business.BikeManager;
 import business.ClientManager;
 import business.GarageManager;
@@ -20,96 +26,86 @@ import model.Repair;
 import model.enumerations.BikeState;
 
 public class ApplicationController {
-	ClientManager clientManager;
-	HouseholdMemberManager householdMemberManager;
-	LocalityManager localityManager;
-	BikeManager bikeManager;
 	
-	public void addClient(Client client) {
-		clientManager = new ClientManager();
-		clientManager.addClient(client);
+	public void addClient(Client client) throws DataAccessConnectionException, DataAccessOperationException {
+		new ClientManager().addClient(client);
 	}
 	
-	public void updateClient(Client client) {
+	public void updateClient(Client client) throws DataAccessConnectionException, DataAccessOperationException {
 		new ClientManager().updateClient(client);
 	}
 	
-	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) {
-		householdMemberManager = new HouseholdMemberManager();
-		householdMemberManager.addHouseholdMember(householdMember, clientID);
+	public void addHouseholdMember(HouseholdMember householdMember, Integer clientID) throws DataAccessConnectionException, DataAccessOperationException {
+		new HouseholdMemberManager().addHouseholdMember(householdMember, clientID);
 	}
 	
-	public void addLocality(Locality locality) {
-		localityManager = new LocalityManager();
-		localityManager.addLocality(locality);
+	public void addLocality(Locality locality) throws DataAccessConnectionException, DataAccessOperationException {
+		new LocalityManager().addLocality(locality);
 	}
 	
-	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable) {
-		bikeManager = new BikeManager();
-		return bikeManager.getSearch1Data(date, isExceptionnal, isAvailable);
+	public ArrayList<ArrayList<Object>> getSearch1Data(Date date, Boolean isExceptionnal, Boolean isAvailable) throws DataAccessConnectionException, DataAccessOperationException {
+		return new BikeManager().getSearch1Data(date, isExceptionnal, isAvailable);
 	}
 	
-	public ArrayList<ArrayList<Object>> getSearch2Data(Date startDate, Date endDate, BikeState state) {
-		bikeManager = new BikeManager();
-		return bikeManager.getSearch2Data(startDate, endDate, state);
+	public ArrayList<ArrayList<Object>> getSearch2Data(Date startDate, Date endDate, BikeState state) throws DataAccessConnectionException, DataAccessOperationException {
+		return new BikeManager().getSearch2Data(startDate, endDate, state);
 	}
 	
-	public ArrayList<ArrayList<Object>> getSearch3Data(Boolean isValid, Date dateThreshold, Float minimumAmount) {
-		bikeManager = new BikeManager();
-		return bikeManager.getSearch3Data(isValid, dateThreshold, minimumAmount);
+	public ArrayList<ArrayList<Object>> getSearch3Data(Boolean isValid, Date dateThreshold, Float minimumAmount) throws DataAccessConnectionException, DataAccessOperationException {
+		return new BikeManager().getSearch3Data(isValid, dateThreshold, minimumAmount);
 	}
 	
-	public PersonnelMember getPersonnelMember(String matricule, String password)
+	public PersonnelMember getPersonnelMember(String matricule, String password) throws DataAccessConnectionException, DataAccessOperationException, NoDataException, DataLengthException
 	{
-		return new PersonnelMemberManager().getPersonnelMember(matricule);//FIXME:
+		return new PersonnelMemberManager().getPersonnelMember(matricule, password);
 	}
 
-	public ArrayList<Client> getAllClients() 
+	public ArrayList<Client> getAllClients() throws DataAccessConnectionException, DataAccessOperationException, InvalidNumberException, NoDataException, DataLengthException
 	{
 		return new ClientManager().getAllClients();
 	}
 
-	public void removeClient(Client client) 
+	public void removeClient(Client client)  throws DataAccessConnectionException, DataAccessOperationException
 	{
-		new ClientManager().removeClient(client.getClientNumber());		
+		new ClientManager().removeClient(client);		
 	}
 
-	public ArrayList<Locality> getAllLocalities() 
+	public ArrayList<Locality> getAllLocalities()  throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException
 	{
 		return new LocalityManager().getAllLocalities();
 	}
 
-	public ArrayList<Repair> getAllRepairs() 
+	public ArrayList<Repair> getAllRepairs()  throws DataAccessConnectionException, DataAccessOperationException, NoDataException, DataLengthException, InvalidDateException, InvalidNumberException
 	{
 		return new RepairManager().getAllRepairs();
 	}
 
-	public ArrayList<PersonnelMember> getAllPersonnelMembers() 
+	public ArrayList<PersonnelMember> getAllPersonnelMembers() throws DataAccessConnectionException, DataAccessOperationException, NoDataException, DataLengthException
 	{
 		return new PersonnelMemberManager().getAllPersonnelMembers();
 	}
 
-	public ArrayList<Garage> getAllGarages() 
+	public ArrayList<Garage> getAllGarages()  throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException
 	{
 		return new GarageManager().getAllGarages();
 	}
 
-	public ArrayList<Bike> getAllBikes() 
+	public ArrayList<Bike> getAllBikes()  throws DataAccessConnectionException, DataAccessOperationException
 	{
 		return new BikeManager().getAllBikes();
 	}
 
-	public void addRepair(Repair repair) 
+	public void addRepair(Repair repair)  throws DataAccessConnectionException, DataAccessOperationException
 	{
 		new RepairManager().addRepair(repair);	
 	}
 
-	public void updateRepair(Repair repair) 
+	public void updateRepair(Repair repair)  throws DataAccessConnectionException, DataAccessOperationException
 	{
 		new RepairManager().updateRepair(repair);
 	}
 
-	public void updateBike(Bike bike) 
+	public void updateBike(Bike bike)  throws DataAccessConnectionException, DataAccessOperationException
 	{
 		new BikeManager().updateBike(bike);
 	}

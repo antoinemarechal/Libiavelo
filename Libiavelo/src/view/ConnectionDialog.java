@@ -24,6 +24,10 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import controller.ApplicationController;
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
+import exception.DataLengthException;
+import exception.NoDataException;
 import model.PersonnelMember;
 
 @SuppressWarnings("serial")
@@ -125,10 +129,23 @@ public class ConnectionDialog extends JDialog implements ActionListener, ItemLis
 			JOptionPane.showMessageDialog(this, "Le mot de passe doit compter au moins un caractère.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);
 			
 			this.setVisible(true);
-		}		else		{			ApplicationController appController = new ApplicationController();						PersonnelMember member = appController.getPersonnelMember(usernameField.getText(), hashPassword(String.valueOf(passwordField.getPassword())));						if(member == null)			{				this.setVisible(false);								JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe invalide.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);								this.setVisible(true);			}			else			{					
-				this.dispose();
-				
-				mainWindow.onConnectionSet(member);
+		}		else		{			ApplicationController appController = new ApplicationController();						PersonnelMember member = null;
+			
+			try 
+			{
+				member = appController.getPersonnelMember(usernameField.getText(), hashPassword(String.valueOf(passwordField.getPassword())));							if(member == null)				{					this.setVisible(false);										JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe invalide.", "Mot de passe invalide", JOptionPane.ERROR_MESSAGE);										this.setVisible(true);				}				else				{					
+					this.dispose();
+					
+					mainWindow.onConnectionSet(member);
+				}
+			} 
+			catch (DataAccessConnectionException | DataAccessOperationException e) 
+			{
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur d'accès aux données", JOptionPane.ERROR_MESSAGE);
+			} 
+			catch (NoDataException | DataLengthException e) 
+			{
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Erreur de récupération", JOptionPane.ERROR_MESSAGE);
 			}		}
 	}
 	

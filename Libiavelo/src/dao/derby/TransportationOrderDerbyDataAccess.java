@@ -9,19 +9,23 @@ import java.util.ArrayList;
 
 import dao.ConnectionSingleton;
 import dao.TransportationOrderDataAccess;
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
+import exception.InvalidNumberException;
+import exception.NoDataException;
 import model.Bike;
 import model.Estate;
 import model.TransportationOrder;
 
 public class TransportationOrderDerbyDataAccess implements TransportationOrderDataAccess {
-	public TransportationOrderDerbyDataAccess() { 
-	}
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
-	
-	public void addTransportationOrder(TransportationOrder transportationOrder) {
-		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
+
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
+	@Override
+	public void addTransportationOrder(TransportationOrder transportationOrder) throws DataAccessConnectionException, DataAccessOperationException {
+		Connection connection = ConnectionSingleton.getInstance();
+		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Transport VALUES(?,?,?,?,?)");
 			preparedStatement.setInt(1, transportationOrder.getDestination().getId());
@@ -33,31 +37,35 @@ public class TransportationOrderDerbyDataAccess implements TransportationOrderDa
 			preparedStatement.executeUpdate();
 		}
 		catch (SQLException e) {
-			// TODO: handle exception
+			throw new DataAccessOperationException(getClass().getName() + ".addTransportationOrder(TransportationOrder)", e.getMessage());
 		}
 	}
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
-	public TransportationOrder getTransportationOrder(int bikeID) {
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
+	public TransportationOrder getTransportationOrder(int bikeID) throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException {
+		Connection connection = ConnectionSingleton.getInstance();
+		
 		TransportationOrder transportationOrder = null;
 		
 		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
 		GarageDerbyDataAccess garageDerbyDataAccess = new GarageDerbyDataAccess();
 		BikeStationDerbyDataAccess bikeStationDerbyDataAccess = new BikeStationDerbyDataAccess();
 		
-		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Transport where NumeroVelo is ?");
 			preparedStatement.setInt(1, bikeID);
+			
 			ResultSet queryResult = preparedStatement.executeQuery();
 			queryResult.next();
+			
 			Boolean exceptionnal = queryResult.getBoolean("EstExceptionnel ");
 			Date date =  new Date(queryResult.getDate("DateDemande").getTime());
 			Bike bike = bikeDerbyDataAccess.getBike(queryResult.getInt("NumeroVelo"));
 				
-			Integer sourceID = queryResult.getInt("CodeEmission");	
+			Integer sourceID = queryResult.getInt("CodeEmission");
+			
 			Estate source = garageDerbyDataAccess.getGarage(sourceID);
 			if (source == null)
 				source = bikeStationDerbyDataAccess.getBikeStation(sourceID);
@@ -66,27 +74,30 @@ public class TransportationOrderDerbyDataAccess implements TransportationOrderDa
 			Estate destination = garageDerbyDataAccess.getGarage(destinationID);
 			if (source == null)
 				source = bikeStationDerbyDataAccess.getBikeStation(sourceID);
-				
+			
 			transportationOrder = new TransportationOrder(exceptionnal, date, bike, source, destination);
 		}
 		catch (SQLException e) {
-				
+			throw new DataAccessOperationException(getClass().getName() + ".getTransportationOrder(int)", e.getMessage());
 		}
+		
 		return transportationOrder;
 	}
 	
-	public ArrayList<TransportationOrder> getAllTransportationOrders() {
-		TransportationOrder transportationOrder = null;
+	public ArrayList<TransportationOrder> getAllTransportationOrders() throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException {
+		Connection connection = ConnectionSingleton.getInstance();
+		
 		ArrayList<TransportationOrder> transportationOrders = new ArrayList<TransportationOrder>();
+		TransportationOrder transportationOrder = null;
 		
 		BikeDerbyDataAccess bikeDerbyDataAccess = new BikeDerbyDataAccess();
 		GarageDerbyDataAccess garageDerbyDataAccess = new GarageDerbyDataAccess();
 		BikeStationDerbyDataAccess bikeStationDerbyDataAccess = new BikeStationDerbyDataAccess();
 		
-		Connection connection = ConnectionSingleton.getInstance();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Transport");
 			ResultSet queryResult = preparedStatement.executeQuery();
+			
 			while(queryResult.next()) {
 				Boolean exceptionnal = queryResult.getBoolean("EstExceptionnel ");
 				Date date =  new Date(queryResult.getDate("DateDemande").getTime());
@@ -107,21 +118,23 @@ public class TransportationOrderDerbyDataAccess implements TransportationOrderDa
 			}
 		}
 		catch (SQLException e) {
-				
+			throw new DataAccessOperationException(getClass().getName() + ".getAllTransportationOrders()", e.getMessage());
 		}
+		
 		return transportationOrders;
 	}
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
-	public void updateClient(TransportationOrder transportationOrder) {
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
+	public void updateClient(TransportationOrder transportationOrder) throws DataAccessConnectionException, DataAccessOperationException {
+		
 	}
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
-	public void removeTransportationOrder() {
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
+	public void removeTransportationOrder() throws DataAccessConnectionException, DataAccessOperationException {
 		
 	}
 }

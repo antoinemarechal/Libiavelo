@@ -1,20 +1,20 @@
 package dao.derby;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import dao.SubscriptionDataAccess;
+import model.Subscription;
+import model.SubscriptionType;
+import dao.SubscriptionTypeDataAccess;
 import exception.DataAccessConnectionException;
 import exception.DataAccessOperationException;
-import model.Subscription;
 
-public class SubscriptionDerbyDataAccess implements SubscriptionDataAccess {
-	
+public class SubscriptionTypeDerbyDataAccess implements SubscriptionTypeDataAccess {
+
 	// ===============================================================================================
 	// CREATE
 	// ===============================================================================================
 	@Override
-	public void addSubscription(Subscription subsription) throws DataAccessConnectionException, DataAccessOperationException {
+	public void addSubscription(SubscriptionType subscriptionType) throws DataAccessConnectionException, DataAccessOperationException {
 		
 	}
 	
@@ -22,12 +22,12 @@ public class SubscriptionDerbyDataAccess implements SubscriptionDataAccess {
 	// READ
 	// ===============================================================================================
 	@Override
-	public Subscription getSubscription(int clientId, Date demand) throws DataAccessConnectionException, DataAccessOperationException {
+	public SubscriptionType getSubscriptionType(SubscriptionType subscriptionType) throws DataAccessConnectionException, DataAccessOperationException {
 		return null;
 	}
-	
+
 	@Override
-	public ArrayList<Subscription> getAllSubscriptions() throws DataAccessConnectionException, DataAccessOperationException {
+	public ArrayList<Subscription> getAllSubscriptionTypes() throws DataAccessConnectionException, DataAccessOperationException {
 		return null;
 	}
 	
@@ -35,7 +35,7 @@ public class SubscriptionDerbyDataAccess implements SubscriptionDataAccess {
 	// UPDATE
 	// ===============================================================================================
 	@Override
-	public void updateSubscription(Subscription subscription) throws DataAccessConnectionException, DataAccessOperationException {
+	public void updateSubscriptionType(SubscriptionType subscriptionType) throws DataAccessConnectionException, DataAccessOperationException {
 		
 	}
 	
@@ -43,7 +43,8 @@ public class SubscriptionDerbyDataAccess implements SubscriptionDataAccess {
 	// DELETE
 	// ===============================================================================================
 	@Override
-	public void removeSubscription(Subscription subscription) throws DataAccessConnectionException, DataAccessOperationException {
+	public void removeSubscriptionType(SubscriptionType subscriptionType) throws DataAccessConnectionException, DataAccessOperationException {
 		
 	}
+
 }

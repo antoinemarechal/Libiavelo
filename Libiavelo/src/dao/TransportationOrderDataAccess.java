@@ -2,27 +2,32 @@ package dao;
 
 import java.util.ArrayList;
 
+import exception.DataAccessConnectionException;
+import exception.DataAccessOperationException;
+import exception.InvalidNumberException;
+import exception.NoDataException;
 import model.TransportationOrder;
 
 public interface TransportationOrderDataAccess {
-	/*************************************************************************************************
-	 CREATE
-	 *************************************************************************************************/
-	public void addTransportationOrder(TransportationOrder transportationOrder);
 	
-	/*************************************************************************************************
-	 READ
-	 *************************************************************************************************/
-	public TransportationOrder getTransportationOrder(int clientID);
-	public ArrayList<TransportationOrder> getAllTransportationOrders();
+	// ===============================================================================================
+	// CREATE
+	// ===============================================================================================
+	public void addTransportationOrder(TransportationOrder transportationOrder) throws DataAccessConnectionException, DataAccessOperationException;
 	
-	/*************************************************************************************************
-	 UPDATE
-	 *************************************************************************************************/
-	public void updateClient(TransportationOrder transportationOrder);
+	// ===============================================================================================
+	// READ
+	// ===============================================================================================
+	public TransportationOrder getTransportationOrder(int clientID) throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException;
+	public ArrayList<TransportationOrder> getAllTransportationOrders() throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException;
 	
-	/*************************************************************************************************
-	 DELETE
-	 *************************************************************************************************/
-	public void removeTransportationOrder();
+	// ===============================================================================================
+	// UPDATE
+	// ===============================================================================================
+	public void updateClient(TransportationOrder transportationOrder) throws DataAccessConnectionException, DataAccessOperationException;
+	
+	// ===============================================================================================
+	// DELETE
+	// ===============================================================================================
+	public void removeTransportationOrder() throws DataAccessConnectionException, DataAccessOperationException;
 }

@@ -4,30 +4,29 @@ import java.util.ArrayList;
 
 import exception.DataAccessConnectionException;
 import exception.DataAccessOperationException;
-import exception.InvalidNumberException;
-import exception.NoDataException;
-import model.Locality;
+import model.Subscription;
+import model.SubscriptionType;
 
-public interface LocalityDataAccess {
-	
+public interface SubscriptionTypeDataAccess {
+
 	// ===============================================================================================
 	// CREATE
 	// ===============================================================================================
-	public void addLocality(Locality locality) throws DataAccessConnectionException, DataAccessOperationException;
-	
+	public void addSubscription(SubscriptionType subscriptionType) throws DataAccessConnectionException, DataAccessOperationException;
+
 	// ===============================================================================================
 	// READ
 	// ===============================================================================================
-	public Locality getLocality(int localityCode) throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException;
-	public ArrayList<Locality> getAllLocalities() throws DataAccessConnectionException, DataAccessOperationException, NoDataException, InvalidNumberException;
-		
+	public SubscriptionType getSubscriptionType(SubscriptionType subscriptionType) throws DataAccessConnectionException, DataAccessOperationException; 
+	public ArrayList<Subscription> getAllSubscriptionTypes() throws DataAccessConnectionException, DataAccessOperationException;
+
 	// ===============================================================================================
 	// UPDATE
 	// ===============================================================================================
-	public void updateLocality(Locality locality) throws DataAccessConnectionException, DataAccessOperationException;
-	
+	public void updateSubscriptionType(SubscriptionType subscriptionType) throws DataAccessConnectionException, DataAccessOperationException; 
+
 	// ===============================================================================================
 	// DELETE
 	// ===============================================================================================
-	public void removeLocality(Locality locality) throws DataAccessConnectionException, DataAccessOperationException;
+	public void removeSubscriptionType(SubscriptionType subscriptionType) throws DataAccessConnectionException, DataAccessOperationException;
 }
