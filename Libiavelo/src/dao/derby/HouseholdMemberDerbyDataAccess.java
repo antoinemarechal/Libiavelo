@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import dao.ConnectionSingleton;
 import dao.HouseholdMemberDataAccess;
@@ -14,6 +15,7 @@ import exception.DataAccessOperationException;
 import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
+import model.Client;
 import model.HouseholdMember;
 
 public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess {
@@ -112,8 +114,47 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 	// UPDATE
 	// ===============================================================================================
 	@Override
-	public void updateHouseholdMemebr(HouseholdMember householdMember) throws DataAccessConnectionException, DataAccessOperationException {
+	public void updateHouseholdMember(Client client, HouseholdMember householdMember) throws DataAccessConnectionException, DataAccessOperationException {
+		Connection connection = ConnectionSingleton.getInstance();
 		
+		try {
+			PreparedStatement editCompositionStatement = connection.prepareStatement("UPDATE COMPOSITION SET DateDernierRenouvellement = ? WHERE NUMERONATIONALMEMBRE = ? AND  NumeroClient = ?");
+			//editCompositionStatement.setDate(1, client.); FIXME client.latestHouseHoldRenewal
+			editCompositionStatement.setString(2, householdMember.getNationalNumber());
+			editCompositionStatement.setInt(3, client.getClientNumber());
+			editCompositionStatement.executeUpdate();
+			
+			PreparedStatement editHouseholdMemberStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL = ");
+			editHouseholdMemberStatement.setString(1, householdMember.getNationalNumber());
+			editHouseholdMemberStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".updateHouseholdMember(HouseholdMember)", e.getMessage());
+		}	
+	}
+	
+	@Override
+	public void updateHousehold(Client client) throws DataAccessConnectionException, DataAccessOperationException {
+		Connection connection = ConnectionSingleton.getInstance();
+		
+		try {
+			PreparedStatement removeAllCompositionsStatement = connection.prepareStatement("DELETE FROM COMPOSITION WHERE NUMEROCLIENT = ?");
+			removeAllCompositionsStatement.setInt(1, client.getClientNumber());
+			removeAllCompositionsStatement.executeUpdate();
+			
+			PreparedStatement removeAllHouseholdMembersStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL NOT IN (SELECT NUMERONATIONALMEMBRE FROM COMPOSITION c)");
+			removeAllHouseholdMembersStatement.executeUpdate();
+			
+			int clientID = client.getClientNumber();
+			HouseholdMember householdMember;
+			Iterator<HouseholdMember> householdIterator= client.getHousehold().iterator();
+			while (householdIterator.hasNext()) {
+				householdMember = householdIterator.next();
+				this.addHouseholdMember(householdMember, clientID);
+			}
+		 }catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".updateHousehold(Client)", e.getMessage());
+		}
 	}
 	
 	// ===============================================================================================
@@ -121,6 +162,19 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 	// ===============================================================================================
 	@Override
 	public void removeHouseholdMember(HouseholdMember householdMember) throws DataAccessConnectionException, DataAccessOperationException {
+		Connection connection = ConnectionSingleton.getInstance();
 		
+		try {
+			PreparedStatement removeCompositionStatement = connection.prepareStatement("DELETE FROM COMPOSITION WHERE NUMERONATIONALMEMBRE = ?");
+			removeCompositionStatement.setString(1, householdMember.getNationalNumber());
+			removeCompositionStatement.executeUpdate();
+			
+			PreparedStatement removeHouseholdMemberStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL = ");
+			removeCompositionStatement.setString(1, householdMember.getNationalNumber());
+			removeHouseholdMemberStatement.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".removeHouseholdMember(HouseholdMember)", e.getMessage());
+		}
 	}
 }

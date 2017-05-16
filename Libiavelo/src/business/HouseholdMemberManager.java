@@ -9,6 +9,7 @@ import exception.DataAccessOperationException;
 import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
+import model.Client;
 import model.HouseholdMember;
 
 public class HouseholdMemberManager {
@@ -40,8 +41,8 @@ public class HouseholdMemberManager {
 	// ===============================================================================================
 	// UPDATE
 	// ===============================================================================================
-	public void updateHouseholdMemebr(HouseholdMember householdMember) throws DataAccessConnectionException, DataAccessOperationException {
-		householdMemberDataAccess.updateHouseholdMemebr(householdMember);
+	public void updateHouseholdMemebr(Client client, HouseholdMember householdMember) throws DataAccessConnectionException, DataAccessOperationException {
+		householdMemberDataAccess.updateHouseholdMember(client, householdMember);
 	}
 	
 	// ===============================================================================================

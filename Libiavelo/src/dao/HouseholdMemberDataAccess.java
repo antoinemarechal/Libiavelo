@@ -7,6 +7,7 @@ import exception.DataAccessOperationException;
 import exception.DataLengthException;
 import exception.InvalidNumberException;
 import exception.NoDataException;
+import model.Client;
 import model.HouseholdMember;
 
 public interface HouseholdMemberDataAccess {
@@ -25,8 +26,8 @@ public interface HouseholdMemberDataAccess {
 	// ===============================================================================================
 	// UPDATE
 	// ===============================================================================================
-	public void updateHouseholdMemebr(HouseholdMember householdMember) throws DataAccessConnectionException, DataAccessOperationException;
-	
+	public void updateHouseholdMember(Client client, HouseholdMember householdMember) throws DataAccessConnectionException, DataAccessOperationException;
+	public void updateHousehold(Client client) throws DataAccessConnectionException, DataAccessOperationException;
 	// ===============================================================================================
 	// DELETE
 	// ===============================================================================================

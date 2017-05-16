@@ -165,6 +165,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	public void updateClient(Client client) throws DataAccessConnectionException, DataAccessOperationException {
 		Connection connection = ConnectionSingleton.getInstance();
 		
+		HouseholdMemberDerbyDataAccess householdMemberDerbyDataAccess = new HouseholdMemberDerbyDataAccess();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Client SET NomDemandeur = ?, Prenom1 = ?, Prenom2 = ?, Prenom3 = ?, Prenom4 = ?, Prenom5 = ?, NumeroNational = ?, NomRue = ?, Numero = ?, NumeroTel = ?, Gsm = ?, DateInscription = ?, InscriptionValidee = ?, MontantCaution = ?, CodeLocalite = ? WHERE NumeroClient = ?");
 			preparedStatement.setString(1, client.getSurname());
@@ -196,6 +197,8 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			preparedStatement.setInt(16, client.getClientNumber());
 			
 			preparedStatement.executeUpdate();
+			
+			householdMemberDerbyDataAccess.updateHousehold(client);
 		}
 		catch (SQLException e) {
 			throw new DataAccessOperationException(getClass().getName() + ".updateClient(Client)", e.getMessage());
@@ -207,7 +210,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	// ===============================================================================================
 	@Override
 	public void removeClient(Client client) throws DataAccessConnectionException, DataAccessOperationException {
-Connection connection = ConnectionSingleton.getInstance();
+		Connection connection = ConnectionSingleton.getInstance();
 		
 		try {
 			
