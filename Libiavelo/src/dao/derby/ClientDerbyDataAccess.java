@@ -232,7 +232,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			removeAllCompositionsStatement.setInt(1, client.getClientNumber());
 			removeAllCompositionsStatement.executeUpdate();
 			
-			PreparedStatement removeAllHouseholdMembersStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL NOT IN (SELECT NUMERONATIONALMEMBRE FROM COMPOSITION c)");
+			PreparedStatement removeAllHouseholdMembersStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL NOT IN (SELECT NUMERONATIONALMEMBRE FROM COMPOSITION)");
 			removeAllHouseholdMembersStatement.executeUpdate();
 	
 			PreparedStatement removeSubscritionStatement = connection.prepareStatement("DELETE FROM ABONNEMENT WHERE NUMEROCLIENT = ?");

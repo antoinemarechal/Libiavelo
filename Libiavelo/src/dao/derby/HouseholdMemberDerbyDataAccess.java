@@ -187,7 +187,7 @@ public class HouseholdMemberDerbyDataAccess implements HouseholdMemberDataAccess
 			removeCompositionStatement.setString(1, householdMember.getNationalNumber());
 			removeCompositionStatement.executeUpdate();
 			
-			PreparedStatement removeHouseholdMemberStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL = ");
+			PreparedStatement removeHouseholdMemberStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL = ?");
 			removeCompositionStatement.setString(1, householdMember.getNationalNumber());
 			removeHouseholdMemberStatement.executeUpdate();
 		}
