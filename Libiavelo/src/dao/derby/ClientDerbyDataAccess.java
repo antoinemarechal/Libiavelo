@@ -25,7 +25,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	// ===============================================================================================
 	@Override
 	public void addClient(Client client) throws DataAccessConnectionException, DataAccessOperationException {
-		Connection connection = (Connection)  (ConnectionSingleton.getInstance());
+		Connection connection = ConnectionSingleton.getInstance();
 		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Client VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -54,7 +54,6 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 			preparedStatement.setDate(12, new Date(client.getSubscriptionDate().getTime()));
 			preparedStatement.setBoolean(13, client.isSubsriptionValidated());
 			preparedStatement.setFloat(14, client.getDepositAmount());
-
 			preparedStatement.setInt(15, client.getLocality().getId());
 			
 			preparedStatement.executeUpdate();
@@ -118,7 +117,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	
 	@Override
 	public ArrayList<Client> getAllClients() throws DataAccessConnectionException, DataAccessOperationException, InvalidNumberException, NoDataException, DataLengthException {
-		Connection connexion = ConnectionSingleton.getInstance();
+		Connection connection = ConnectionSingleton.getInstance();
 		
 		ArrayList<Client> clients = new ArrayList<Client>();
 		Client client = null;
@@ -126,7 +125,7 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 		LocalityDerbyDataAccess localityDerbyDataAccess = new LocalityDerbyDataAccess();
 		
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("SELECT * FROM Client");
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Client");
 			ResultSet queryResult = preparedStatement.executeQuery();
 			
 			while(queryResult.next()) {
@@ -164,7 +163,43 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	// ===============================================================================================
 	@Override
 	public void updateClient(Client client) throws DataAccessConnectionException, DataAccessOperationException {
-		// FIXME :
+		Connection connection = ConnectionSingleton.getInstance();
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE Client SET NomDemandeur = ?, Prenom1 = ?, Prenom2 = ?, Prenom3 = ?, Prenom4 = ?, Prenom5 = ?, NumeroNational = ?, NomRue = ?, Numero = ?, NumeroTel = ?, Gsm = ?, DateInscription = ?, InscriptionValidee = ?, MontantCaution = ?, CodeLocalite = ? WHERE NumeroClient = ?");
+			preparedStatement.setString(1, client.getSurname());
+			
+			String[] firstNames = client.getFirstNames();
+			preparedStatement.setString(2, firstNames[0]);
+			if (firstNames[1] != "")
+				preparedStatement.setString(3, firstNames[1]);
+			if (firstNames[2] != "")
+				preparedStatement.setString(4, firstNames[2]);
+			if (firstNames[3] != "")
+				preparedStatement.setString(5, firstNames[3]);
+			if (firstNames[4] != "")
+				preparedStatement.setString(6, firstNames[4]);		
+			
+			preparedStatement.setString(7, client.getNationalNumber());
+			preparedStatement.setString(8, client.getStreetName());
+			preparedStatement.setString(9, client.getStreetNumber());
+			
+			if (client.getHomeNumber() != null)
+				preparedStatement.setString(10, client.getHomeNumber());
+			if (client.getPhoneNumber() != null)
+				preparedStatement.setString(11, client.getPhoneNumber());
+			
+			preparedStatement.setDate(12, new Date(client.getSubscriptionDate().getTime()));
+			preparedStatement.setBoolean(13, client.isSubsriptionValidated());
+			preparedStatement.setFloat(14, client.getDepositAmount());
+			preparedStatement.setInt(15, client.getLocality().getId());
+			preparedStatement.setInt(16, client.getClientNumber());
+			
+			preparedStatement.executeUpdate();
+		}
+		catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".updateClient(Client)", e.getMessage());
+		}
 	}
 	
 	// ===============================================================================================
@@ -172,6 +207,27 @@ public class ClientDerbyDataAccess implements ClientDataAccess {
 	// ===============================================================================================
 	@Override
 	public void removeClient(Client client) throws DataAccessConnectionException, DataAccessOperationException {
-		// FIXME :
+Connection connection = ConnectionSingleton.getInstance();
+		
+		try {
+			
+			PreparedStatement removeAllCompositionsStatement = connection.prepareStatement("DELETE FROM COMPOSITION WHERE NUMEROCLIENT = ?");
+			removeAllCompositionsStatement.setInt(1, client.getClientNumber());
+			removeAllCompositionsStatement.executeUpdate();
+			
+			PreparedStatement removeAllHouseholdMembersStatement = connection.prepareStatement("DELETE FROM Membre_Menage WHERE NUMERONATIONAL NOT IN (SELECT NUMERONATIONALMEMBRE FROM COMPOSITION c)");
+			removeAllHouseholdMembersStatement.executeUpdate();
+	
+			PreparedStatement removeSubscritionStatement = connection.prepareStatement("DELETE FROM ABONNEMENT WHERE NUMEROCLIENT = ?");
+			removeSubscritionStatement.setInt(1, client.getClientNumber());
+			removeSubscritionStatement.executeUpdate();
+			
+			PreparedStatement removeClientStatement = connection.prepareStatement("DELETE FROM CLIENT WHERE NUMEROCLIENT = ?");
+			removeClientStatement.setInt(1, client.getClientNumber());
+			removeClientStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DataAccessOperationException(getClass().getName() + ".remove(Client)", e.getMessage());
+		}
 	}
 }
